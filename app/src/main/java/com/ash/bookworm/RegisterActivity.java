@@ -116,6 +116,7 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         // check if the request code is same as what is passed, here it is 2
         if (requestCode == 2) {
             latitude = data.getDoubleExtra("LATITUDE", 0.0f);
@@ -125,7 +126,8 @@ public class RegisterActivity extends AppCompatActivity {
             String locationName = Util.getLocationName(this.getApplicationContext(), latitude, longitude);
             locationBtn.setText(locationName);
         }
-        if (requestCode == ImagePicker.REQUEST_CODE) {
+
+        if (requestCode == ImagePicker.REQUEST_CODE && resultCode == RESULT_OK) {
             imagePath = data.getData();
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imagePath);
@@ -133,16 +135,8 @@ public class RegisterActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            if (resultCode == Activity.RESULT_OK) {
-                //Image Uri will not be null for RESULT_OK
-                imagePath = data.getData();
-                userImage.setImageURI(imagePath);
-            } else {
-                Toast.makeText(this, "Error choosing image. Please try again.", Toast.LENGTH_SHORT).show();
-            }
+            Toast.makeText(this, "Error choosing image. Please try again.", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     @Override
@@ -221,31 +215,13 @@ public class RegisterActivity extends AppCompatActivity {
                             GeoFire geoFire = new GeoFire(mDatabase.child("geofire"));
                             geoFire.setLocation(user.getUid(), new GeoLocation(latitude, longitude));
 
-                            final ProgressDialog progressDialog = new ProgressDialog(RegisterActivity.this);
-                            progressDialog.setTitle("Uploading...");
-                            progressDialog.show();
+                            if (imagePath != null) {
+                                // Adding user image to database
+                                StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+                                StorageReference userImageRef = storageRef.child("images/" + user.getUid());
 
-                            // Adding user image to database
-                            StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-                            StorageReference userImageRef = storageRef.child("images/" + user.getUid());
-
-                            userImageRef.putFile(imagePath)
-                                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                        @Override
-                                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                            // Image uploaded successfully
-                                            // Dismiss dialog
-                                            progressDialog.dismiss();
-                                        }
-                                    })
-                                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                                        @Override
-                                        public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
-                                            double progress = (100.0 * taskSnapshot.getBytesTransferred()
-                                                    / taskSnapshot.getTotalByteCount());
-                                            progressDialog.setMessage("Uploaded " + (int)progress + "%");
-                                        }
-                                    });
+                                userImageRef.putFile(imagePath);
+                            }
 
                             startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
                         } else {
