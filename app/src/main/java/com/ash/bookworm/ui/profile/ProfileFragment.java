@@ -13,11 +13,13 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.ash.bookworm.LoginActivity;
 import com.ash.bookworm.R;
+import com.ash.bookworm.ui.profile.profile_options.InventoryFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ProfileFragment extends Fragment {
@@ -45,6 +47,15 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
                 switch(pos) {
+                    case 0:
+                        break;
+                    case 1:
+                        Fragment fragment = new InventoryFragment();
+                        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                        transaction.replace(R.id.nav_host_fragment, fragment);
+                        transaction.addToBackStack("Profile");
+                        transaction.commit();
+                        break;
                     case 2:
                         FirebaseAuth.getInstance().signOut();
                         startActivity(new Intent(getContext(), LoginActivity.class));
@@ -55,7 +66,7 @@ public class ProfileFragment extends Fragment {
                 }
             }
         });
-        
+
         return root;
     }
 
