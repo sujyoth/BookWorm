@@ -8,18 +8,18 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.ash.bookworm.ui.explore.ExploreFragment"
-        android:label="@string/title_home"
+        android:label="@string/title_explore"
         tools:layout="@layout/fragment_explore" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.ash.bookworm.ui.chats.ChatsFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_chats"
         tools:layout="@layout/fragment_chats" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.ash.bookworm.ui.profile.ProfileFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>
