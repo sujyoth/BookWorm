@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">BookWorm</string>
+    <string name="confirm">Confirm</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="has_registered">Already have an account? Login here.</string>
+    <string name="not_registered">Do not have an account? Register here.</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+</resources>
