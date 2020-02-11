@@ -87,6 +87,7 @@ public class LoginActivity extends AppCompatActivity {
         if (currentUser != null) {
             // Comment out the below line for testing login and register activities
             startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+            finish();
         }
     }
 

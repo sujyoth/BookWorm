@@ -28,6 +28,15 @@ public final class Util {
         return pat.matcher(email).matches();
     }
 
+    public static String getExtension(String string) {
+        for(int i=string.length()-1; i >= 0; i--) {
+            if (string.charAt(i) == '.') {
+                return string.substring(i);
+            }
+        }
+        return "";
+    }
+
     public static String getLocationName(android.content.Context context, Double latitude, Double longitude) {
         try {
             Geocoder geo = new Geocoder(context, Locale.getDefault());

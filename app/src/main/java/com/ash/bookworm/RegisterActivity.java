@@ -1,13 +1,19 @@
 
 package com.ash.bookworm;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +25,10 @@ import com.ash.bookworm.Utilities.Util;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.LocationCallback;
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,6 +36,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.List;
@@ -36,13 +49,15 @@ import java.util.regex.Pattern;
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText fNameEt, lNameEt, emailEt, passwordEt;
-    private Button registerBtn, locationBtn;
+    private Button registerBtn, locationBtn, imageBtn;
     private TextView hasRegisteredTv;
+    private ImageView userImage;
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
     private Double latitude, longitude;
+    private Uri imagePath;
 
 
     @Override
@@ -54,35 +69,46 @@ public class RegisterActivity extends AppCompatActivity {
 
         findViews();
 
+        imageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ImagePicker.Companion.with(RegisterActivity.this)
+                        .crop(1f, 1f)
+                        .compress(1024)
+                        .maxResultSize(1080, 1080)
+                        .start();
+            }
+        });
+
         locationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(RegisterActivity.this, MapsActivity.class);
-                startActivityForResult(i, 2); // Arbitrarily selected 2 as request code
+            Intent intent = new Intent(RegisterActivity.this, MapsActivity.class);
+            startActivityForResult(intent, 2); // Arbitrarily selected 2 as request code
             }
         });
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!allFieldsValid())
-                    return;
+            if (!allFieldsValid())
+                return;
 
-                final String email = emailEt.getText().toString();
-                final String password = passwordEt.getText().toString();
-                final String fname = fNameEt.getText().toString();
-                final String lname = lNameEt.getText().toString();
+            final String email = emailEt.getText().toString();
+            final String password = passwordEt.getText().toString();
+            final String fname = fNameEt.getText().toString();
+            final String lname = lNameEt.getText().toString();
 
-                writeNewUser(email, password, fname, lname, latitude, longitude);
+            writeNewUser(email, password, fname, lname, latitude, longitude);
             }
         });
 
         hasRegisteredTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(i);
-                finish();
+            Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
+            startActivity(i);
+            finish();
             }
         });
     }
@@ -99,6 +125,24 @@ public class RegisterActivity extends AppCompatActivity {
             String locationName = Util.getLocationName(this.getApplicationContext(), latitude, longitude);
             locationBtn.setText(locationName);
         }
+        if (requestCode == ImagePicker.REQUEST_CODE) {
+            imagePath = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imagePath);
+                userImage.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if (resultCode == Activity.RESULT_OK) {
+                //Image Uri will not be null for RESULT_OK
+                imagePath = data.getData();
+                userImage.setImageURI(imagePath);
+            } else {
+                Toast.makeText(this, "Error choosing image. Please try again.", Toast.LENGTH_SHORT).show();
+            }
+        }
+
     }
 
     @Override
@@ -116,6 +160,9 @@ public class RegisterActivity extends AppCompatActivity {
 
         registerBtn = findViewById(R.id.btn_register);
         locationBtn = findViewById(R.id.btn_location);
+        imageBtn = findViewById(R.id.btn_image);
+
+        userImage = findViewById(R.id.user_image);
 
         hasRegisteredTv = findViewById(R.id.tv_has_registered);
     }
@@ -173,6 +220,32 @@ public class RegisterActivity extends AppCompatActivity {
 
                             GeoFire geoFire = new GeoFire(mDatabase.child("geofire"));
                             geoFire.setLocation(user.getUid(), new GeoLocation(latitude, longitude));
+
+                            final ProgressDialog progressDialog = new ProgressDialog(RegisterActivity.this);
+                            progressDialog.setTitle("Uploading...");
+                            progressDialog.show();
+
+                            // Adding user image to database
+                            StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+                            StorageReference userImageRef = storageRef.child("images/" + user.getUid());
+
+                            userImageRef.putFile(imagePath)
+                                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                            // Image uploaded successfully
+                                            // Dismiss dialog
+                                            progressDialog.dismiss();
+                                        }
+                                    })
+                                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+                                            double progress = (100.0 * taskSnapshot.getBytesTransferred()
+                                                    / taskSnapshot.getTotalByteCount());
+                                            progressDialog.setMessage("Uploaded " + (int)progress + "%");
+                                        }
+                                    });
 
                             startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
                         } else {

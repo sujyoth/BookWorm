@@ -19,4 +19,6 @@
         <item>Edit Inventory</item>
         <item>Log Out</item>
     </string-array>
+    <string name="profile_photo">User Profile Photo</string>
+    <string name="choose_image">Choose Image</string>
 </resources>
