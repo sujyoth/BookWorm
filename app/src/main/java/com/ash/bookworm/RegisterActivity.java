@@ -96,23 +96,8 @@ public class RegisterActivity extends AppCompatActivity {
             longitude = data.getDoubleExtra("LONGITUDE", 0.0f);
             Toast.makeText(RegisterActivity.this, latitude.toString() + longitude.toString(), Toast.LENGTH_SHORT).show();
 
-            try {
-                Geocoder geo = new Geocoder(this.getApplicationContext(), Locale.getDefault());
-                List<Address> addresses = null;
-
-                addresses = geo.getFromLocation(latitude, longitude, 1);
-                if (addresses.isEmpty()) {
-                    locationBtn.setText("Waiting for Location");
-                } else {
-                    if (addresses.size() > 0) {
-                        String locationName = addresses.get(0).getFeatureName() + ", " + addresses.get(0).getLocality() + ", " + addresses.get(0).getAdminArea() + ", " + addresses.get(0).getCountryName();
-                        locationBtn.setText(locationName);
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+            String locationName = Util.getLocationName(this.getApplicationContext(), latitude, longitude);
+            locationBtn.setText(locationName);
         }
     }
 

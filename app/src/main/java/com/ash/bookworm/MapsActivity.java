@@ -9,11 +9,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import com.ash.bookworm.Utilities.Util;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -34,6 +36,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Button confirmBtn;
     private Marker locationMarker;
     private ImageView markerImg;
+    private TextView locationNameTV;
 
     private GoogleMap mMap;
     private FusedLocationProviderClient fusedLocationClient;
@@ -107,27 +110,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                 });
 
-        mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
-            @Override
-            public void onMarkerDragStart(Marker marker) {
-            }
-
-            @Override
-            public void onMarkerDrag(Marker marker) {
-            }
-
-            @Override
-            public void onMarkerDragEnd(Marker marker) {
-                LatLng latLng = marker.getPosition();
-                Geocoder geocoder = new Geocoder(MapsActivity.this, Locale.getDefault());
-                try {
-                    android.location.Address address = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1).get(0);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
         mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
             @Override
             public void onCameraMove() {
@@ -142,6 +124,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 locationMarker.setPosition(mMap.getCameraPosition().target);
                 markerImg.setVisibility(View.INVISIBLE);
                 locationMarker.setVisible(true);
+                locationNameTV.setText(Util.getLocationName(MapsActivity.this, mMap.getCameraPosition().target.latitude, mMap.getCameraPosition().target.longitude));
             }
         });
 
@@ -166,5 +149,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void findViews() {
         confirmBtn = findViewById(R.id.btn_confirm);
         markerImg = findViewById(R.id.marker_placeholder);
+        locationNameTV = findViewById(R.id.et_location_name);
     }
 }

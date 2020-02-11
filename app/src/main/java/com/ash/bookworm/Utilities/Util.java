@@ -1,7 +1,12 @@
 package com.ash.bookworm.Utilities;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.widget.EditText;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 public final class Util {
@@ -21,5 +26,41 @@ public final class Util {
         if (email == null)
             return false;
         return pat.matcher(email).matches();
+    }
+
+    public static String getLocationName(android.content.Context context, Double latitude, Double longitude) {
+        try {
+            Geocoder geo = new Geocoder(context, Locale.getDefault());
+            List<Address> addresses = null;
+
+            addresses = geo.getFromLocation(latitude, longitude, 1);
+            if (addresses.isEmpty()) {
+                return "Waiting for Location";
+            } else {
+                String featureName = addresses.get(0).getFeatureName();
+                String localityName = addresses.get(0).getLocality();
+                String adminAreaName = addresses.get(0).getAdminArea();
+                String countryName = addresses.get(0).getCountryName();
+                String locationName = "";
+
+                if (featureName != null) {
+                    locationName += featureName;
+                }
+                if (localityName != null) {
+                    locationName += ", " + localityName;
+                }
+                if (adminAreaName != null) {
+                    locationName += ", " + adminAreaName;
+                }
+                if (localityName != null) {
+                    locationName += ", " + countryName;
+                }
+
+                return locationName;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "Waiting for Location";
     }
 }
