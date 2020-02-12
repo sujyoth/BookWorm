@@ -74,8 +74,8 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 ImagePicker.Companion.with(RegisterActivity.this)
                         .crop(1f, 1f)
-                        .compress(1024)
-                        .maxResultSize(1080, 1080)
+                        .compress(400)
+                        .maxResultSize(300, 300)
                         .start();
             }
         });
