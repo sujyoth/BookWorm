@@ -50,10 +50,10 @@ public class BooksUtil {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            JSONArray books = response.getJSONArray("items");
+                            JSONArray data = response.getJSONArray("items");
 
-                            for (int i = 0; i < books.length(); i++) {
-                                JSONObject book = books.getJSONObject(i);
+                            for (int i = 0; i < data.length(); i++) {
+                                JSONObject book = data.getJSONObject(i);
                                 try {
                                     String bookId = book.getJSONObject("volumeInfo")
                                             .getJSONArray("industryIdentifiers")

@@ -7,6 +7,7 @@ public class Book {
     private String authorName;
     private String imageUrl;
 
+    public Book() {}
 
     public Book(String bookId, String bookName, String authorName, String imageUrl) {
         this.bookId = bookId;

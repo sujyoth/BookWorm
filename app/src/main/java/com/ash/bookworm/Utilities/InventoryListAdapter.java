@@ -12,28 +12,29 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ash.bookworm.R;
-import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolder> {
+public class InventoryListAdapter extends RecyclerView.Adapter<InventoryListAdapter.ViewHolder> {
     private List<Book> books;
 
-    public SearchListAdapter(List<Book> books) {
+    public InventoryListAdapter(List<Book> books) {
         this.books = books;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public InventoryListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View searchItem= layoutInflater.inflate(R.layout.search_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(searchItem);
+        InventoryListAdapter.ViewHolder viewHolder = new InventoryListAdapter.ViewHolder(searchItem);
         return viewHolder;
     }
 
+    // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         final Book book = books.get(position);
         if (books.get(position) == null)
             return;
@@ -49,7 +50,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
             @Override
             public void onClick(View view) {
                 FirebaseUtil.addBookToInventory(book);
-                Snackbar.make(view, book.getBookName() + " by " + book.getAuthorName() + " added to inventory", Snackbar.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(),"click on item: "+ book.getBookId(),Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -73,12 +74,19 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         }
     }
 
-    public void updateList(List<Book> newBooks) {
-        BooksDiffCallback booksDiffCallback = new BooksDiffCallback(this.books, newBooks);
-        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(booksDiffCallback);
-
-        this.books.clear();
-        this.books.addAll(newBooks);
-        diffResult.dispatchUpdatesTo(this);
+    public void removeBook(int position) {
+        books.remove(position);
+        notifyItemRemoved(position);
     }
+
+    public void restoreBook(Book book, int position) {
+        books.add(position, book);
+        notifyItemInserted(position);
+    }
+
+    public List<Book> getData() {
+        return books;
+    }
+
+
 }

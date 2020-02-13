@@ -35,8 +35,8 @@ public class AddBookFragment extends Fragment {
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Add Books");
         findViews();
 
-        final List<Book> searchListData = new ArrayList<>();
-        final SearchListAdapter adapter = new SearchListAdapter(searchListData);
+        final List<Book> books = new ArrayList<>();
+        final SearchListAdapter adapter = new SearchListAdapter(books);
         resultsRv.setHasFixedSize(true);
         resultsRv.setLayoutManager(new LinearLayoutManager(getContext()));
         resultsRv.setAdapter(adapter);
@@ -51,7 +51,8 @@ public class AddBookFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                BooksUtil.searchBooks(getActivity().getApplicationContext(), adapter, s.trim());
+                if (!s.trim().equals(""))
+                    BooksUtil.searchBooks(getContext(), adapter, s.trim());
                 return false;
             }
         });
