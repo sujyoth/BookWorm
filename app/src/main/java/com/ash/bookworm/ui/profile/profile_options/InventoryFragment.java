@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,6 +49,11 @@ public class InventoryFragment extends Fragment {
         booksRv.setHasFixedSize(true);
         booksRv.setLayoutManager(new LinearLayoutManager(getContext()));
         booksRv.setAdapter(adapter);
+
+        DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(booksRv.getContext(),
+                DividerItemDecoration.VERTICAL);
+        booksRv.addItemDecoration(mDividerItemDecoration);
+
         enableSwipeToDeleteAndUndo();
 
         FirebaseUtil.getBooksFromInventory(FirebaseAuth.getInstance().getUid(), adapter, books);
