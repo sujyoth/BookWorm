@@ -1,9 +1,7 @@
 package com.ash.bookworm.Utilities;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,10 +50,14 @@ public class BooksUtil {
                         //Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
                         try {
                             JSONArray books = response.getJSONArray("items");
-                            SearchListData[] searchListData = new SearchListData[books.length()];
+                            Book[] searchListData = new Book[books.length()];
 
                             for (int i = 0; i < books.length(); i++) {
                                 JSONObject book = books.getJSONObject(i);
+
+                                String bookId = book.getJSONObject("volumeInfo")
+                                        .getJSONArray("industryIdentifiers")
+                                        .getJSONObject(1).getString("identifier");
 
                                 String bookName = book.getJSONObject("volumeInfo")
                                         .getString("title");
@@ -68,7 +70,7 @@ public class BooksUtil {
                                         .getJSONObject("imageLinks")
                                         .getString("thumbnail");
 
-                                searchListData[i] = new SearchListData(bookName, authorName, imageUrl);
+                                searchListData[i] = new Book(bookId, bookName, authorName, imageUrl);
                             }
                             SearchListAdapter adapter = new SearchListAdapter(searchListData);
                             resultsRv.setHasFixedSize(true);

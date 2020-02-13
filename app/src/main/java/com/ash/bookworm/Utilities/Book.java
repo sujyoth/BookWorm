@@ -1,14 +1,28 @@
 package com.ash.bookworm.Utilities;
 
-public class SearchListData {
+public class Book {
+
+    private String bookId;
     private String bookName;
     private String authorName;
+    private String imageUrl;
 
-    public SearchListData(String bookName, String authorName, String imageUrl) {
+
+    public Book(String bookId, String bookName, String authorName, String imageUrl) {
+        this.bookId = bookId;
         this.bookName = bookName;
         this.authorName = authorName;
         this.imageUrl = imageUrl;
     }
+
+    public String getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(String bookId) {
+        this.bookId = bookId;
+    }
+
 
     public String getBookName() {
         return bookName;
@@ -33,7 +47,5 @@ public class SearchListData {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
-
-    private String imageUrl;
 
 }

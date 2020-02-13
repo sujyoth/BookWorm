@@ -1,6 +1,5 @@
 package com.ash.bookworm.Utilities;
 
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,16 +8,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ash.bookworm.R;
 import com.squareup.picasso.Picasso;
 
 public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolder> {
-    private SearchListData[] listData;
+    private Book[] listData;
 
     // RecyclerView recyclerView;
-    public SearchListAdapter(SearchListData[] listData) {
+    public SearchListAdapter(Book[] listData) {
         this.listData = listData;
     }
     @Override
@@ -30,18 +30,21 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        final SearchListData searchListData = listData[position];
+    public void onBindViewHolder(final ViewHolder holder, int position) {
+        final Book book = listData[position];
+        //holder.bookNameTv.setTag(R.string.TAG_BOOK_ID, listData[position].getBookId());
         holder.bookNameTv.setText(listData[position].getBookName());
         holder.authorNameTv.setText(listData[position].getAuthorName());
         Picasso.get()
                 .load(listData[position].getImageUrl().replace("http","https"))
                 .placeholder(R.drawable.book_placeholder)
                 .into(holder.bookImage);
+
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(),"click on item: "+searchListData.getBookName(),Toast.LENGTH_SHORT).show();
+                FirebaseUtil.addBookToInventory(book);
+                Toast.makeText(view.getContext(),"click on item: "+ book.getBookId(),Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -55,6 +58,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         public ImageView bookImage;
         public TextView bookNameTv, authorNameTv;
         public LinearLayout linearLayout;
+
         public ViewHolder(View itemView) {
             super(itemView);
             this.bookImage = itemView.findViewById(R.id.book_image);
