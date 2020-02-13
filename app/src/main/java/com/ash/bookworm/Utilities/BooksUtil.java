@@ -4,9 +4,6 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.android.volley.Cache;
 import com.android.volley.Network;
 import com.android.volley.Request;
@@ -22,13 +19,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.android.volley.VolleyLog.TAG;
 
 public class BooksUtil {
     private static String key = "AIzaSyDmfcF65dp6RZGVluwTaPiVR2t2NcR9u-E";
 
-    public static void searchBooks(final Context context, final RecyclerView resultsRv, String searchTerm) {
+    public static void searchBooks(final Context context, final SearchListAdapter adapter, String searchTerm) {
         RequestQueue requestQueue;
+        final List<Book> newBooks = new ArrayList<>();
 
         // Instantiate the cache
         Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024 * 10); // 10MB cap
@@ -42,44 +43,44 @@ public class BooksUtil {
         // Start the queue
         requestQueue.start();
 
-        String url = String.format("https://www.googleapis.com/books/v1/volumes?q=%s&key=%s", searchTerm, key);
+        String url = String.format("https://www.googleapis.com/books/v1/volumes?q=%s&key=%s&prettyPrint=true", searchTerm, key);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
                         try {
                             JSONArray books = response.getJSONArray("items");
-                            Book[] searchListData = new Book[books.length()];
 
                             for (int i = 0; i < books.length(); i++) {
                                 JSONObject book = books.getJSONObject(i);
+                                try {
+                                    String bookId = book.getJSONObject("volumeInfo")
+                                            .getJSONArray("industryIdentifiers")
+                                            .getJSONObject(0).getString("identifier");
 
-                                String bookId = book.getJSONObject("volumeInfo")
-                                        .getJSONArray("industryIdentifiers")
-                                        .getJSONObject(1).getString("identifier");
+                                    String bookName = book.getJSONObject("volumeInfo")
+                                            .getString("title");
 
-                                String bookName = book.getJSONObject("volumeInfo")
-                                        .getString("title");
+                                    String authorName = book.getJSONObject("volumeInfo")
+                                            .getJSONArray("authors")
+                                            .getString(0);
 
-                                String authorName = book.getJSONObject("volumeInfo")
-                                        .getJSONArray("authors")
-                                        .getString(0);
+                                    String imageUrl = book.getJSONObject("volumeInfo")
+                                            .getJSONObject("imageLinks")
+                                            .getString("thumbnail");
 
-                                String imageUrl = book.getJSONObject("volumeInfo")
-                                        .getJSONObject("imageLinks")
-                                        .getString("thumbnail");
+                                    newBooks.add(new Book(bookId, bookName, authorName, imageUrl));
 
-                                searchListData[i] = new Book(bookId, bookName, authorName, imageUrl);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             }
-                            SearchListAdapter adapter = new SearchListAdapter(searchListData);
-                            resultsRv.setHasFixedSize(true);
-                            resultsRv.setLayoutManager(new LinearLayoutManager(context));
-                            resultsRv.setAdapter(adapter);
+                            adapter.updateList(newBooks);
 
                         } catch (JSONException e) {
-                            //e.printStackTrace();
+                            Log.d(TAG, response.toString());
+                            e.printStackTrace();
                         }
 
                     }

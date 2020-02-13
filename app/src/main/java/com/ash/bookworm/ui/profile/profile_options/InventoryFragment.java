@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ash.bookworm.R;
-import com.google.android.gms.common.api.Response;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class InventoryFragment extends Fragment {
@@ -39,6 +38,11 @@ public class InventoryFragment extends Fragment {
             }
         });
         return root;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 
     private void findViews() {

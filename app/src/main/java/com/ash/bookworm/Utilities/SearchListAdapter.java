@@ -8,17 +8,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ash.bookworm.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolder> {
-    private Book[] listData;
+    private List<Book> books;
 
     // RecyclerView recyclerView;
-    public SearchListAdapter(Book[] listData) {
-        this.listData = listData;
+    public SearchListAdapter(List<Book> books) {
+        this.books = books;
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -30,12 +33,14 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        final Book book = listData[position];
-        //holder.bookNameTv.setTag(R.string.TAG_BOOK_ID, listData[position].getBookId());
-        holder.bookNameTv.setText(listData[position].getBookName());
-        holder.authorNameTv.setText(listData[position].getAuthorName());
+        final Book book = books.get(position);
+        if (books.get(position) == null)
+            return;
+        //holder.bookNameTv.setTag(R.string.TAG_BOOK_ID, books[position].getBookId());
+        holder.bookNameTv.setText(books.get(position).getBookName());
+        holder.authorNameTv.setText(books.get(position).getAuthorName());
         Picasso.get()
-                .load(listData[position].getImageUrl().replace("http","https"))
+                .load(books.get(position).getImageUrl().replace("http","https"))
                 .placeholder(R.drawable.book_placeholder)
                 .into(holder.bookImage);
 
@@ -50,7 +55,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return listData.length;
+        return books.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -67,4 +72,12 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         }
     }
 
+    public void updateList(List<Book> newBooks) {
+        BooksDiffCallback booksDiffCallback = new BooksDiffCallback(this.books, newBooks);
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(booksDiffCallback);
+
+        this.books.clear();
+        this.books.addAll(newBooks);
+        diffResult.dispatchUpdatesTo(this);
+    }
 }

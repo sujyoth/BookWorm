@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.SearchView;
 
@@ -12,7 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ash.bookworm.R;
+import com.ash.bookworm.Utilities.Book;
 import com.ash.bookworm.Utilities.BooksUtil;
+import com.ash.bookworm.Utilities.SearchListAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddBookFragment extends Fragment {
 
@@ -29,6 +35,12 @@ public class AddBookFragment extends Fragment {
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Add Books");
         findViews();
 
+        final List<Book> searchListData = new ArrayList<>();
+        final SearchListAdapter adapter = new SearchListAdapter(searchListData);
+        resultsRv.setHasFixedSize(true);
+        resultsRv.setLayoutManager(new LinearLayoutManager(getContext()));
+        resultsRv.setAdapter(adapter);
+
         searchBar.setActivated(true);
         searchBar.onActionViewExpanded();
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -39,9 +51,7 @@ public class AddBookFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                if (!s.trim().equals("")) {
-                    BooksUtil.searchBooks(getContext(), resultsRv, s.trim());
-                }
+                BooksUtil.searchBooks(getActivity().getApplicationContext(), adapter, s.trim());
                 return false;
             }
         });
