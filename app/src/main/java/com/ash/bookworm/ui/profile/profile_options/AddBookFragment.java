@@ -39,7 +39,9 @@ public class AddBookFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                BooksUtil.searchBooks(getContext(), resultsRv, s);
+                if (!s.trim().equals("")) {
+                    BooksUtil.searchBooks(getContext(), resultsRv, s.trim());
+                }
                 return false;
             }
         });

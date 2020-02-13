@@ -2,6 +2,7 @@ package com.ash.bookworm.Utilities;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,7 +31,7 @@ public class BooksUtil {
         RequestQueue requestQueue;
 
         // Instantiate the cache
-        Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
+        Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024 * 10); // 10MB cap
 
         // Set up the network to use HttpURLConnection as the HTTP client.
         Network network = new BasicNetwork(new HurlStack());
@@ -47,7 +48,7 @@ public class BooksUtil {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        //Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
                         try {
                             JSONArray books = response.getJSONArray("items");
                             Book[] searchListData = new Book[books.length()];
