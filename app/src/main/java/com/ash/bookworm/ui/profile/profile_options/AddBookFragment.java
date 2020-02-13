@@ -2,8 +2,8 @@ package com.ash.bookworm.ui.profile.profile_options;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.SearchView;
 
@@ -12,8 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ash.bookworm.R;
-import com.ash.bookworm.Utilities.SearchListAdapter;
-import com.ash.bookworm.Utilities.SearchListData;
+import com.ash.bookworm.Utilities.BooksUtil;
 
 public class AddBookFragment extends Fragment {
 
@@ -27,6 +26,7 @@ public class AddBookFragment extends Fragment {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_add_book, container, false);
 
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Add Books");
         findViews();
 
         searchBar.setActivated(true);
@@ -39,28 +39,10 @@ public class AddBookFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String s) {
+                BooksUtil.searchBooks(getContext(), resultsRv, s);
                 return false;
             }
         });
-
-        SearchListData searchListData[] = new SearchListData[] {
-            new SearchListData("Hola","b", "https://2uiipg1ex7ap1ro233smnm15-wpengine.netdna-ssl.com/wp-content/uploads/2015/04/google-analytics-ghost-referrals-150x150.jpg"),
-            new SearchListData("Bola","b", "https://2uiipg1ex7ap1ro233smnm15-wpengine.netdna-ssl.com/wp-content/uploads/2015/04/google-analytics-ghost-referrals-150x150.jpg"),
-            new SearchListData("Cola","b", "https://2uiipg1ex7ap1ro233smnm15-wpengine.netdna-ssl.com/wp-content/uploads/2015/04/google-analytics-ghost-referrals-150x150.jpg"),
-            new SearchListData("Sola","b", "https://2uiipg1ex7ap1ro233smnm15-wpengine.netdna-ssl.com/wp-content/uploads/2015/04/google-analytics-ghost-referrals-150x150.jpg"),
-            new SearchListData("Mola","b", "https://2uiipg1ex7ap1ro233smnm15-wpengine.netdna-ssl.com/wp-content/uploads/2015/04/google-analytics-ghost-referrals-150x150.jpg"),
-            new SearchListData("Lola","b", "https://2uiipg1ex7ap1ro233smnm15-wpengine.netdna-ssl.com/wp-content/uploads/2015/04/google-analytics-ghost-referrals-150x150.jpg"),
-            new SearchListData("Rola","b", "https://2uiipg1ex7ap1ro233smnm15-wpengine.netdna-ssl.com/wp-content/uploads/2015/04/google-analytics-ghost-referrals-150x150.jpg"),
-            new SearchListData("Nola","b", "https://2uiipg1ex7ap1ro233smnm15-wpengine.netdna-ssl.com/wp-content/uploads/2015/04/google-analytics-ghost-referrals-150x150.jpg"),
-            new SearchListData("Kola","b", "https://2uiipg1ex7ap1ro233smnm15-wpengine.netdna-ssl.com/wp-content/uploads/2015/04/google-analytics-ghost-referrals-150x150.jpg"),
-            new SearchListData("Pola","b", "https://2uiipg1ex7ap1ro233smnm15-wpengine.netdna-ssl.com/wp-content/uploads/2015/04/google-analytics-ghost-referrals-150x150.jpg"),
-            new SearchListData("Dola","b", "https://2uiipg1ex7ap1ro233smnm15-wpengine.netdna-ssl.com/wp-content/uploads/2015/04/google-analytics-ghost-referrals-150x150.jpg")
-        };
-
-        SearchListAdapter adapter = new SearchListAdapter(searchListData);
-        resultsRv.setHasFixedSize(true);
-        resultsRv.setLayoutManager(new LinearLayoutManager(getContext()));
-        resultsRv.setAdapter(adapter);
 
         return root;
     }

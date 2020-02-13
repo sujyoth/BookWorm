@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ash.bookworm.R;
+import com.squareup.picasso.Picasso;
 
 public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolder> {
     private SearchListData[] listData;
@@ -33,11 +34,14 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         final SearchListData searchListData = listData[position];
         holder.bookNameTv.setText(listData[position].getBookName());
         holder.authorNameTv.setText(listData[position].getAuthorName());
-        //holder.bookImage.setImageURI(Uri.parse(listData[position].getImageUrl()));
+        Picasso.get()
+                .load(listData[position].getImageUrl().replace("http","https"))
+                .placeholder(R.drawable.book_placeholder)
+                .into(holder.bookImage);
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(),"click on item: "+searchListData.getBookName(),Toast.LENGTH_LONG).show();
+                Toast.makeText(view.getContext(),"click on item: "+searchListData.getBookName(),Toast.LENGTH_SHORT).show();
             }
         });
     }

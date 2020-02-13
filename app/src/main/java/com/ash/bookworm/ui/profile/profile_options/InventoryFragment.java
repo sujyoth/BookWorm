@@ -2,6 +2,7 @@ package com.ash.bookworm.ui.profile.profile_options;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -24,6 +25,7 @@ public class InventoryFragment extends Fragment {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_inventory, container, false);
 
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Inventory");
         findViews();
 
         fab.setOnClickListener(new View.OnClickListener() {

@@ -45,5 +45,5 @@ dependencies {
 
     implementation 'com.firebase:geofire-android:3.0.0'
     implementation 'com.github.dhaval2404:imagepicker:1.6'
-
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
