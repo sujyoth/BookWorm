@@ -84,7 +84,7 @@ public class InventoryFragment extends Fragment {
                 adapter.removeBook(position);
 
                 Snackbar snackbar = Snackbar
-                        .make(getView(), "Item was removed from the list.", Snackbar.LENGTH_LONG);
+                        .make(getView(), book.getBookName() + " by " + book.getAuthorName() + " was removed from inventory.", Snackbar.LENGTH_LONG);
                 snackbar.setAction("UNDO", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
