@@ -3,38 +3,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
     android:orientation="vertical"
-    >
+    tools:context=".LoginActivity">
 
     <EditText
+        android:id="@+id/et_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/email"
-        android:id="@+id/et_email"
-        android:inputType="textEmailAddress"
-        />
+        android:inputType="textEmailAddress" />
 
     <EditText
+        android:id="@+id/et_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/password"
-        android:id="@+id/et_password"
-        android:inputType="textPassword"
-        />
+        android:inputType="textPassword" />
 
     <Button
+        android:id="@+id/btn_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/login"
-        android:id="@+id/btn_login"
-        />
+        android:text="@string/login" />
 
     <TextView
+        android:id="@+id/tv_not_registered"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/not_registered"
-        android:id="@+id/tv_not_registered"
-        />
+        android:text="@string/not_registered" />
 
 </LinearLayout>

@@ -2,16 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/user_image"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        android:padding="10dp"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/user_placeholder"
-        />
+        android:padding="10dp"
+        android:src="@drawable/user_placeholder" />
 
     <ListView
         android:id="@+id/lv_profile"

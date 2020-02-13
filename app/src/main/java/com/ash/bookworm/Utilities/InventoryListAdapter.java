@@ -8,13 +8,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ash.bookworm.R;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class InventoryListAdapter extends RecyclerView.Adapter<InventoryListAdapter.ViewHolder> {
@@ -27,7 +25,7 @@ public class InventoryListAdapter extends RecyclerView.Adapter<InventoryListAdap
     @Override
     public InventoryListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View searchItem= layoutInflater.inflate(R.layout.search_item, parent, false);
+        View searchItem = layoutInflater.inflate(R.layout.search_item, parent, false);
         InventoryListAdapter.ViewHolder viewHolder = new InventoryListAdapter.ViewHolder(searchItem);
         return viewHolder;
     }
@@ -42,7 +40,7 @@ public class InventoryListAdapter extends RecyclerView.Adapter<InventoryListAdap
         holder.bookNameTv.setText(books.get(position).getBookName());
         holder.authorNameTv.setText(books.get(position).getAuthorName());
         Picasso.get()
-                .load(books.get(position).getImageUrl().replace("http","https"))
+                .load(books.get(position).getImageUrl().replace("http", "https"))
                 .placeholder(R.drawable.book_placeholder)
                 .into(holder.bookImage);
 
@@ -50,7 +48,7 @@ public class InventoryListAdapter extends RecyclerView.Adapter<InventoryListAdap
             @Override
             public void onClick(View view) {
                 FirebaseUtil.addBookToInventory(book);
-                Toast.makeText(view.getContext(),"click on item: "+ book.getBookId(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "click on item: " + book.getBookId(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -58,20 +56,6 @@ public class InventoryListAdapter extends RecyclerView.Adapter<InventoryListAdap
     @Override
     public int getItemCount() {
         return books.size();
-    }
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView bookImage;
-        public TextView bookNameTv, authorNameTv;
-        public LinearLayout linearLayout;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-            this.bookImage = itemView.findViewById(R.id.book_image);
-            this.bookNameTv = itemView.findViewById(R.id.tv_book_name);
-            this.authorNameTv = itemView.findViewById(R.id.tv_author_name);
-            linearLayout = itemView.findViewById(R.id.linear_layout);
-        }
     }
 
     public void removeBook(int position) {
@@ -86,6 +70,20 @@ public class InventoryListAdapter extends RecyclerView.Adapter<InventoryListAdap
 
     public List<Book> getData() {
         return books;
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public ImageView bookImage;
+        public TextView bookNameTv, authorNameTv;
+        public LinearLayout linearLayout;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+            this.bookImage = itemView.findViewById(R.id.book_image);
+            this.bookNameTv = itemView.findViewById(R.id.tv_book_name);
+            this.authorNameTv = itemView.findViewById(R.id.tv_author_name);
+            linearLayout = itemView.findViewById(R.id.linear_layout);
+        }
     }
 
 

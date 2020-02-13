@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,7 +26,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View searchItem= layoutInflater.inflate(R.layout.search_item, parent, false);
+        View searchItem = layoutInflater.inflate(R.layout.search_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(searchItem);
         return viewHolder;
     }
@@ -41,7 +40,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         holder.bookNameTv.setText(books.get(position).getBookName());
         holder.authorNameTv.setText(books.get(position).getAuthorName());
         Picasso.get()
-                .load(books.get(position).getImageUrl().replace("http","https"))
+                .load(books.get(position).getImageUrl().replace("http", "https"))
                 .placeholder(R.drawable.book_placeholder)
                 .into(holder.bookImage);
 
@@ -59,6 +58,15 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         return books.size();
     }
 
+    public void updateList(List<Book> newBooks) {
+        BooksDiffCallback booksDiffCallback = new BooksDiffCallback(this.books, newBooks);
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(booksDiffCallback);
+
+        this.books.clear();
+        this.books.addAll(newBooks);
+        diffResult.dispatchUpdatesTo(this);
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView bookImage;
         public TextView bookNameTv, authorNameTv;
@@ -71,14 +79,5 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
             this.authorNameTv = itemView.findViewById(R.id.tv_author_name);
             linearLayout = itemView.findViewById(R.id.linear_layout);
         }
-    }
-
-    public void updateList(List<Book> newBooks) {
-        BooksDiffCallback booksDiffCallback = new BooksDiffCallback(this.books, newBooks);
-        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(booksDiffCallback);
-
-        this.books.clear();
-        this.books.addAll(newBooks);
-        diffResult.dispatchUpdatesTo(this);
     }
 }

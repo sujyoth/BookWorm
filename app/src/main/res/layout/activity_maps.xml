@@ -2,23 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/et_location_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/green"
-        android:textSize="30sp"
-        android:textColor="@color/white"
-        android:padding="10dp"
         android:lines="2"
-        />
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <fragment xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/map"

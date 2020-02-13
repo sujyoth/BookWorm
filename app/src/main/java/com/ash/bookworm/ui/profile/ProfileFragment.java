@@ -2,7 +2,6 @@ package com.ash.bookworm.ui.profile;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,15 +9,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.ash.bookworm.LoginActivity;
 import com.ash.bookworm.R;
@@ -27,7 +21,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.squareup.picasso.Picasso;
 
 public class ProfileFragment extends Fragment {
 
@@ -45,7 +38,7 @@ public class ProfileFragment extends Fragment {
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
         StorageReference userImageRef = storageRef.child("images/" + FirebaseAuth.getInstance().getUid());
 
-        userImageRef.getBytes(2048*2048).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+        userImageRef.getBytes(2048 * 2048).addOnSuccessListener(new OnSuccessListener<byte[]>() {
             @Override
             public void onSuccess(byte[] bytes) {
                 userImage.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
@@ -55,7 +48,7 @@ public class ProfileFragment extends Fragment {
         profileLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-                switch(pos) {
+                switch (pos) {
                     case 0:
                         break;
                     case 1:

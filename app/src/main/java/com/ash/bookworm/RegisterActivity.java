@@ -1,4 +1,3 @@
-
 package com.ash.bookworm;
 
 import android.content.Intent;
@@ -69,32 +68,32 @@ public class RegisterActivity extends AppCompatActivity {
         locationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            Intent intent = new Intent(RegisterActivity.this, MapsActivity.class);
-            startActivityForResult(intent, 2); // Arbitrarily selected 2 as request code
+                Intent intent = new Intent(RegisterActivity.this, MapsActivity.class);
+                startActivityForResult(intent, 2); // Arbitrarily selected 2 as request code
             }
         });
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            if (!allFieldsValid())
-                return;
+                if (!allFieldsValid())
+                    return;
 
-            final String email = emailEt.getText().toString();
-            final String password = passwordEt.getText().toString();
-            final String fname = fNameEt.getText().toString();
-            final String lname = lNameEt.getText().toString();
+                final String email = emailEt.getText().toString();
+                final String password = passwordEt.getText().toString();
+                final String fname = fNameEt.getText().toString();
+                final String lname = lNameEt.getText().toString();
 
-            writeNewUser(email, password, fname, lname, latitude, longitude);
+                writeNewUser(email, password, fname, lname, latitude, longitude);
             }
         });
 
         hasRegisteredTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
-            startActivity(i);
-            finish();
+                Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(i);
+                finish();
             }
         });
     }

@@ -10,14 +10,15 @@ import java.util.Locale;
 import java.util.regex.Pattern;
 
 public final class Util {
-    private Util() {}
+    private Util() {
+    }
 
     public static boolean isEmpty(EditText et) {
         return et.getText().toString().trim().length() == 0;
     }
 
     public static boolean isValidEmail(String email) {
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
                 "[a-zA-Z0-9_+&*-]+)*@" +
                 "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
                 "A-Z]{2,7}$";
@@ -29,7 +30,7 @@ public final class Util {
     }
 
     public static String getExtension(String string) {
-        for(int i=string.length()-1; i >= 0; i--) {
+        for (int i = string.length() - 1; i >= 0; i--) {
             if (string.charAt(i) == '.') {
                 return string.substring(i);
             }

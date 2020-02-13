@@ -3,76 +3,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity"
     android:orientation="vertical"
-    >
+    tools:context=".RegisterActivity">
 
     <EditText
         android:id="@+id/et_first_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/first_name"
-        android:inputType="textPersonName"
-        />
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/et_last_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/last_name"
-        android:inputType="textPersonName"
-        />
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/et_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        />
+        android:inputType="textEmailAddress" />
 
     <EditText
+        android:id="@+id/et_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/password"
-        android:id="@+id/et_password"
-        android:inputType="textPassword"
-        />
+        android:inputType="textPassword" />
 
     <ImageView
         android:id="@+id/user_image"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        android:src="@drawable/user_placeholder"
         android:contentDescription="@string/profile_photo"
-        />
+        android:src="@drawable/user_placeholder" />
 
     <Button
         android:id="@+id/btn_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/choose_image"
-        />
+        android:text="@string/choose_image" />
 
     <Button
         android:id="@+id/btn_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select Location"
-        />
+        android:text="Select Location" />
 
     <Button
         android:id="@+id/btn_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/register"
-        />
+        android:text="@string/register" />
 
     <TextView
         android:id="@+id/tv_has_registered"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/has_registered"
-        />
+        android:text="@string/has_registered" />
 
 </LinearLayout>

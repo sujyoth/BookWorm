@@ -1,16 +1,15 @@
 package com.ash.bookworm;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.ash.bookworm.Utilities.Util;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!allFieldsValid())
+                if (!allFieldsValid())
                     return;
 
                 final String email = emailEt.getText().toString();

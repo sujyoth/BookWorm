@@ -1,17 +1,15 @@
 package com.ash.bookworm.ui.profile.profile_options;
 
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.SearchView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.ash.bookworm.R;
 import com.ash.bookworm.Utilities.Book;
@@ -33,7 +31,7 @@ public class AddBookFragment extends Fragment {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_add_book, container, false);
 
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Add Books");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Add Books");
         findViews();
 
         final List<Book> books = new ArrayList<>();
