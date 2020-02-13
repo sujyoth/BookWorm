@@ -26,21 +26,11 @@ public class ExploreFragment extends Fragment {
     private View root;
     private SearchView searchBar;
     private RecyclerView resultsRv;
-    private String bookId, bookName, authorName, imageUrl;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_explore, container, false);
 
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            bookId = bundle.getString("bookId");
-            bookName = bundle.getString("bookName");
-            authorName = bundle.getString("authorName");
-            imageUrl = bundle.getString("imageUrl");
-        }
-
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Nearby users with " + bookName);
         findViews();
 
         final List<Book> books = new ArrayList<>();
