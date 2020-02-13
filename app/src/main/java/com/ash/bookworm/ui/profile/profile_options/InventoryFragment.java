@@ -97,13 +97,10 @@ public class InventoryFragment extends Fragment {
                         booksRv.scrollToPosition(position);
                     }
                 });
-
                 snackbar.setActionTextColor(Color.YELLOW);
                 snackbar.show();
-
             }
         };
-
         ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeToDeleteCallback);
         itemTouchhelper.attachToRecyclerView(booksRv);
     }

@@ -1,5 +1,6 @@
 package com.ash.bookworm.Utilities;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,10 +8,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ash.bookworm.R;
+import com.ash.bookworm.ui.explore.NearbyFragment;
+import com.ash.bookworm.ui.profile.profile_options.InventoryFragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
@@ -18,9 +24,18 @@ import java.util.List;
 
 public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolder> {
     private List<Book> books;
+    private Integer listenerType;
+    private FragmentManager fragmentManager;
 
-    public SearchListAdapter(List<Book> books) {
+    public SearchListAdapter(List<Book> books, Integer listenerType) {
         this.books = books;
+        this.listenerType = listenerType;
+    }
+
+    public SearchListAdapter(List<Book> books, Integer listenerType, FragmentManager fragmentManager) {
+        this.books = books;
+        this.listenerType = listenerType;
+        this.fragmentManager = fragmentManager;
     }
 
     @Override
@@ -44,13 +59,34 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
                 .placeholder(R.drawable.book_placeholder)
                 .into(holder.bookImage);
 
-        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseUtil.addBookToInventory(book);
-                Snackbar.make(view, book.getBookName() + " by " + book.getAuthorName() + " added to inventory", Snackbar.LENGTH_SHORT).show();
-            }
-        });
+        if (listenerType == 1) {
+            holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    FirebaseUtil.addBookToInventory(book);
+                    Snackbar.make(view, book.getBookName() + " by " + book.getAuthorName() + " added to inventory", Snackbar.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Fragment fragment = new NearbyFragment();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("bookId", book.getBookId());
+                    bundle.putString("bookName", book.getBookName());
+                    bundle.putString("authorName", book.getAuthorName());
+                    bundle.putString("imageUrl", book.getImageUrl());
+
+                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+                    transaction.replace(R.id.nav_host_fragment, fragment);
+                    transaction.addToBackStack("Explore");
+                    transaction.commit();
+                }
+            });
+        }
+
     }
 
     @Override

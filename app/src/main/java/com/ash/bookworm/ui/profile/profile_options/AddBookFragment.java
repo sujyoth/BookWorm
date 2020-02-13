@@ -36,7 +36,7 @@ public class AddBookFragment extends Fragment {
         findViews();
 
         final List<Book> books = new ArrayList<>();
-        final SearchListAdapter adapter = new SearchListAdapter(books);
+        final SearchListAdapter adapter = new SearchListAdapter(books, 1);
         resultsRv.setHasFixedSize(true);
         resultsRv.setLayoutManager(new LinearLayoutManager(getContext()));
         resultsRv.setAdapter(adapter);
