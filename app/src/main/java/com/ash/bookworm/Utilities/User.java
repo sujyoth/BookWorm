@@ -5,16 +5,19 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class User {
 
-    public String fname, lname;
+    public String fname;
+    public String lname;
+    public String uId;
     public Double latitude, longitude;
 
     public User() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public User(String fname, String lname, Double latitude, Double longitude) {
+    public User(String fname, String lname, String uId, Double latitude, Double longitude) {
         this.fname = fname;
         this.lname = lname;
+        this.uId = uId;
         this.latitude = latitude;
         this.longitude = longitude;
     }
@@ -33,6 +36,14 @@ public class User {
 
     public void setLname(String lname) {
         this.lname = lname;
+    }
+
+    public String getuId() {
+        return uId;
+    }
+
+    public void setuId(String uId) {
+        this.uId = uId;
     }
 
     public Double getLatitude() {

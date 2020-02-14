@@ -60,7 +60,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ViewHo
         holder.userDistanceTv.setText(String.format("%.1f kms away", distance));
 
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-        StorageReference userImageRef = storageRef.child("images/" + FirebaseAuth.getInstance().getUid());
+        StorageReference userImageRef = storageRef.child("images/" + user.getuId());
 
         userImageRef.getBytes(2048 * 2048).addOnSuccessListener(new OnSuccessListener<byte[]>() {
             @Override

@@ -195,7 +195,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                             // Adding user details to database
                             mDatabase = FirebaseDatabase.getInstance().getReference();
-                            mDatabase.child("users").child(user.getUid()).setValue(new User(fname, lname, latitude, longitude));
+                            mDatabase.child("users").child(user.getUid()).setValue(new User(fname, lname, user.getUid(), latitude, longitude));
 
                             GeoFire geoFire = new GeoFire(mDatabase.child("geofire"));
                             geoFire.setLocation(user.getUid(), new GeoLocation(latitude, longitude));
