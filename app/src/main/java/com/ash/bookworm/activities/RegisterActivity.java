@@ -19,7 +19,6 @@ import com.ash.bookworm.helpers.utilities.Util;
 import com.ash.bookworm.R;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.io.IOException;
 
@@ -30,8 +29,6 @@ public class RegisterActivity extends AppCompatActivity {
     private TextView hasRegisteredTv;
     private ImageView userImage;
 
-    private FirebaseAuth mAuth;
-
     private Double latitude, longitude;
     private Uri imagePath;
 
@@ -39,8 +36,6 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
-        mAuth = FirebaseAuth.getInstance();
 
         findViews();
 
@@ -112,13 +107,6 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(this, "Error choosing image. Please try again." + requestCode, Toast.LENGTH_SHORT).show();
             }
         }
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
     }
 
     private void findViews() {
