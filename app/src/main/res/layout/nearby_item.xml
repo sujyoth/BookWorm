@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/linear_layout"
     android:layout_width="match_parent"
-    android:layout_height="?android:attr/listPreferredItemHeightLarge"
+    android:layout_height="74dp"
     android:orientation="horizontal"
-    android:paddingHorizontal="10dp">
+    android:paddingHorizontal="16dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/user_image"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_gravity="center_vertical"
         android:contentDescription="Icon"
         android:src="@drawable/user_placeholder" />
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:orientation="vertical"
-        android:paddingHorizontal="@dimen/activity_horizontal_margin">
+        android:paddingLeft="16dp">
 
         <TextView
             android:id="@+id/tv_user_name"
@@ -27,7 +27,8 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:lines="1"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_distance"

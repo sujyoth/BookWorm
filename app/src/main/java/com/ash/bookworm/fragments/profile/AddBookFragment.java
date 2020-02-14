@@ -1,6 +1,7 @@
 package com.ash.bookworm.fragments.profile;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,10 @@ public class AddBookFragment extends Fragment {
     private View root;
     private SearchView searchBar;
     private RecyclerView resultsRv;
+
+    private int waitingTime = 200;
+    private CountDownTimer timer;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,9 +59,22 @@ public class AddBookFragment extends Fragment {
             }
 
             @Override
-            public boolean onQueryTextChange(String s) {
-                if (!s.trim().equals(""))
-                    BooksUtil.searchBooks(getContext(), adapter, s.trim());
+            public boolean onQueryTextChange(final String s) {
+                if (!s.trim().equals("") && s.trim().length() > 2) {
+                    if(timer != null){
+                        timer.cancel();
+                    }
+                    timer = new CountDownTimer(waitingTime, 500) {
+
+                        public void onTick(long millisUntilFinished) {
+                        }
+
+                        public void onFinish() {
+                            BooksUtil.searchBooks(getContext(), adapter, s.trim());
+                        }
+                    };
+                    timer.start();
+                }
                 return false;
             }
         });
