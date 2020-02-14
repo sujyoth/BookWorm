@@ -1,4 +1,4 @@
-package com.ash.bookworm.Helpers.Utilities;
+package com.ash.bookworm.helpers.utilities;
 
 import android.content.Context;
 import android.util.Log;
@@ -13,8 +13,8 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.ash.bookworm.Helpers.ListAdapters.SearchListAdapter;
-import com.ash.bookworm.Helpers.Models.Book;
+import com.ash.bookworm.helpers.list_adapters.SearchListAdapter;
+import com.ash.bookworm.helpers.models.Book;
 
 import org.json.JSONArray;
 import org.json.JSONException;

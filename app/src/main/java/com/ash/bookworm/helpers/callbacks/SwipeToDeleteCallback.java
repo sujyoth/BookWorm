@@ -1,4 +1,4 @@
-package com.ash.bookworm.Helpers.Callbacks;
+package com.ash.bookworm.helpers.callbacks;
 
 import android.content.Context;
 import android.graphics.Canvas;

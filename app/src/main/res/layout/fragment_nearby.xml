@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.explore.NearbyFragment">
+    tools:context=".fragments.explore.NearbyFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_nearby"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rv_nearby"
         android:scrollbars="vertical" />
 
 </FrameLayout>

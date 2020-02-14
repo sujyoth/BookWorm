@@ -1,4 +1,4 @@
-package com.ash.bookworm.Activities;
+package com.ash.bookworm.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.ash.bookworm.Helpers.Utilities.Util;
+import com.ash.bookworm.helpers.utilities.Util;
 import com.ash.bookworm.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

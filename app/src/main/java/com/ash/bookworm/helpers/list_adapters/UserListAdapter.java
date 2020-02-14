@@ -1,4 +1,4 @@
-package com.ash.bookworm.Helpers.ListAdapters;
+package com.ash.bookworm.helpers.list_adapters;
 
 import android.graphics.BitmapFactory;
 import android.location.Location;
@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ash.bookworm.Helpers.Models.User;
-import com.ash.bookworm.Helpers.Utilities.FirebaseUtil;
+import com.ash.bookworm.helpers.models.User;
+import com.ash.bookworm.helpers.utilities.FirebaseUtil;
 import com.ash.bookworm.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;

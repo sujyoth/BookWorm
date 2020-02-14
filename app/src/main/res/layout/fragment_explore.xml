@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragments.profile.AddBookFragment">
+    tools:context=".fragments.profile.AddBookFragment">
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_bar"

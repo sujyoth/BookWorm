@@ -1,4 +1,4 @@
-package com.ash.bookworm.Activities;
+package com.ash.bookworm.activities;
 
 import android.Manifest;
 import android.content.Intent;
@@ -14,7 +14,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import com.ash.bookworm.Helpers.Utilities.Util;
+import com.ash.bookworm.helpers.utilities.Util;
 import com.ash.bookworm.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;

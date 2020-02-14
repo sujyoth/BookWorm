@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activities.HomeActivity"
+            android:name=".activities.HomeActivity"
             android:label="@string/title_activity_home"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -34,10 +34,10 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".Activities.MapsActivity"
+            android:name=".activities.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".Activities.RegisterActivity" />
-        <activity android:name=".Activities.LoginActivity">
+        <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

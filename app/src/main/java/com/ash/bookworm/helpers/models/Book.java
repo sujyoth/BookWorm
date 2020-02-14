@@ -1,4 +1,4 @@
-package com.ash.bookworm.Helpers.Models;
+package com.ash.bookworm.helpers.models;
 
 public class Book {
 

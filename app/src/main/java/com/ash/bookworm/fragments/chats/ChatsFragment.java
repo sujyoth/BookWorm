@@ -1,4 +1,4 @@
-package com.ash.bookworm.Fragments.chats;
+package com.ash.bookworm.fragments.chats;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

@@ -1,4 +1,4 @@
-package com.ash.bookworm.Activities;
+package com.ash.bookworm.activities;
 
 import android.os.Bundle;
 

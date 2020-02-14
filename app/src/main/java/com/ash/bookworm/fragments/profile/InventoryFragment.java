@@ -1,4 +1,4 @@
-package com.ash.bookworm.Fragments.profile;
+package com.ash.bookworm.fragments.profile;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,10 +15,10 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ash.bookworm.Helpers.Callbacks.SwipeToDeleteCallback;
-import com.ash.bookworm.Helpers.ListAdapters.InventoryListAdapter;
-import com.ash.bookworm.Helpers.Models.Book;
-import com.ash.bookworm.Helpers.Utilities.FirebaseUtil;
+import com.ash.bookworm.helpers.callbacks.SwipeToDeleteCallback;
+import com.ash.bookworm.helpers.list_adapters.InventoryListAdapter;
+import com.ash.bookworm.helpers.models.Book;
+import com.ash.bookworm.helpers.utilities.FirebaseUtil;
 import com.ash.bookworm.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;

@@ -3,8 +3,8 @@
     android:id="@+id/linear_layout"
     android:layout_width="match_parent"
     android:layout_height="?android:attr/listPreferredItemHeightLarge"
-    android:paddingHorizontal="10dp"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:paddingHorizontal="10dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/user_image"
@@ -26,16 +26,16 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:textSize="16sp"
-            android:lines="1" />
+            android:lines="1"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tv_distance"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:textSize="14sp"
-            android:lines="1" />
+            android:lines="1"
+            android:textSize="14sp" />
 
     </LinearLayout>
 

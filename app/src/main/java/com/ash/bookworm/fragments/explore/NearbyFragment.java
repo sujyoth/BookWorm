@@ -1,4 +1,4 @@
-package com.ash.bookworm.Fragments.explore;
+package com.ash.bookworm.fragments.explore;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ash.bookworm.Helpers.ListAdapters.UserListAdapter;
-import com.ash.bookworm.Helpers.Models.User;
-import com.ash.bookworm.Helpers.Utilities.FirebaseUtil;
+import com.ash.bookworm.helpers.list_adapters.UserListAdapter;
+import com.ash.bookworm.helpers.models.User;
+import com.ash.bookworm.helpers.utilities.FirebaseUtil;
 import com.ash.bookworm.R;
 import com.google.firebase.auth.FirebaseAuth;
 

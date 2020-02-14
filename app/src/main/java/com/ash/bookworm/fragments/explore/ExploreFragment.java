@@ -1,10 +1,11 @@
-package com.ash.bookworm.Fragments.profile;
+package com.ash.bookworm.fragments.explore;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
@@ -12,31 +13,29 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ash.bookworm.Helpers.ListAdapters.SearchListAdapter;
-import com.ash.bookworm.Helpers.Models.Book;
-import com.ash.bookworm.Helpers.Utilities.BooksUtil;
+import com.ash.bookworm.helpers.list_adapters.SearchListAdapter;
+import com.ash.bookworm.helpers.models.Book;
+import com.ash.bookworm.helpers.utilities.BooksUtil;
 import com.ash.bookworm.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddBookFragment extends Fragment {
-
+public class ExploreFragment extends Fragment {
     private View root;
     private SearchView searchBar;
     private RecyclerView resultsRv;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        root = inflater.inflate(R.layout.fragment_add_book, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        root = inflater.inflate(R.layout.fragment_explore, container, false);
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Add Books");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Explore");
+
         findViews();
 
         final List<Book> books = new ArrayList<>();
-        final SearchListAdapter adapter = new SearchListAdapter(books, 1);
+        final SearchListAdapter adapter = new SearchListAdapter(books, 2, getParentFragmentManager());
         resultsRv.setHasFixedSize(true);
         resultsRv.setLayoutManager(new LinearLayoutManager(getContext()));
         resultsRv.setAdapter(adapter);
