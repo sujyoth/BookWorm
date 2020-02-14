@@ -1,4 +1,4 @@
-package com.ash.bookworm.Utilities;
+package com.ash.bookworm.Helpers.Models;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 

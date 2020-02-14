@@ -1,4 +1,4 @@
-package com.ash.bookworm.Utilities;
+package com.ash.bookworm.Helpers.Utilities;
 
 import android.location.Address;
 import android.location.Geocoder;

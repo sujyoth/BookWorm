@@ -1,4 +1,4 @@
-package com.ash.bookworm.Utilities;
+package com.ash.bookworm.Helpers.ListAdapters;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,7 +15,10 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ash.bookworm.R;
-import com.ash.bookworm.ui.explore.NearbyFragment;
+import com.ash.bookworm.Helpers.Models.Book;
+import com.ash.bookworm.Helpers.Callbacks.BooksDiffCallback;
+import com.ash.bookworm.Helpers.Utilities.FirebaseUtil;
+import com.ash.bookworm.Fragments.explore.NearbyFragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 

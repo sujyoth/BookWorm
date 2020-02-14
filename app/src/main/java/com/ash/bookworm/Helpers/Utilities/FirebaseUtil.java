@@ -1,4 +1,4 @@
-package com.ash.bookworm.Utilities;
+package com.ash.bookworm.Helpers.Utilities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,13 +9,15 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.ash.bookworm.HomeActivity;
-import com.ash.bookworm.RegisterActivity;
+import com.ash.bookworm.Activities.HomeActivity;
+import com.ash.bookworm.Helpers.Models.Book;
+import com.ash.bookworm.Helpers.ListAdapters.InventoryListAdapter;
+import com.ash.bookworm.Helpers.ListAdapters.UserListAdapter;
+import com.ash.bookworm.Helpers.Models.User;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryEventListener;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

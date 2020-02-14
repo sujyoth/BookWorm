@@ -1,6 +1,8 @@
-package com.ash.bookworm.Utilities;
+package com.ash.bookworm.Helpers.Callbacks;
 
 import androidx.recyclerview.widget.DiffUtil;
+
+import com.ash.bookworm.Helpers.Models.Book;
 
 import java.util.List;
 

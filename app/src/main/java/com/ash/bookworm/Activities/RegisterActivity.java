@@ -1,4 +1,4 @@
-package com.ash.bookworm;
+package com.ash.bookworm.Activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,24 +12,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.ash.bookworm.Utilities.FirebaseUtil;
-import com.ash.bookworm.Utilities.User;
-import com.ash.bookworm.Utilities.Util;
-import com.firebase.geofire.GeoFire;
-import com.firebase.geofire.GeoLocation;
+import com.ash.bookworm.Helpers.Utilities.FirebaseUtil;
+import com.ash.bookworm.Helpers.Utilities.Util;
+import com.ash.bookworm.R;
 import com.github.dhaval2404.imagepicker.ImagePicker;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
 

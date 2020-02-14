@@ -1,10 +1,9 @@
-package com.ash.bookworm.ui.explore;
+package com.ash.bookworm.Fragments.explore;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,9 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ash.bookworm.R;
-import com.ash.bookworm.Utilities.Book;
-import com.ash.bookworm.Utilities.BooksUtil;
-import com.ash.bookworm.Utilities.SearchListAdapter;
+import com.ash.bookworm.Helpers.Models.Book;
+import com.ash.bookworm.Helpers.Utilities.BooksUtil;
+import com.ash.bookworm.Helpers.ListAdapters.SearchListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
