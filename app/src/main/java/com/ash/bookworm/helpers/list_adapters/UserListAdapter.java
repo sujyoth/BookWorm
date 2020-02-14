@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ash.bookworm.R;
 import com.ash.bookworm.helpers.models.User;
 import com.ash.bookworm.helpers.utilities.FirebaseUtil;
-import com.ash.bookworm.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;

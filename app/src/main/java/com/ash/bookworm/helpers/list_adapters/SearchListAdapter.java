@@ -14,11 +14,11 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ash.bookworm.R;
 import com.ash.bookworm.fragments.explore.NearbyFragment;
 import com.ash.bookworm.helpers.callbacks.BooksDiffCallback;
 import com.ash.bookworm.helpers.models.Book;
 import com.ash.bookworm.helpers.utilities.FirebaseUtil;
-import com.ash.bookworm.R;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 

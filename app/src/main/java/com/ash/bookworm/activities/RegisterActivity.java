@@ -14,11 +14,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ash.bookworm.R;
 import com.ash.bookworm.helpers.utilities.FirebaseUtil;
 import com.ash.bookworm.helpers.utilities.Util;
-import com.ash.bookworm.R;
 import com.github.dhaval2404.imagepicker.ImagePicker;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.IOException;
 
