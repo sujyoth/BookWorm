@@ -23,5 +23,7 @@
     </string-array>
     <string name="profile_photo">User Profile Photo</string>
     <string name="choose_image">Choose Image</string>
+    <string name="user_image">User\'s Profile Picture</string>
+    <string name="book_image">Book\'s Cover Picture</string>
 
 </resources>

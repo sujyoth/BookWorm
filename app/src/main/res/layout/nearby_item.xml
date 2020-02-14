@@ -4,14 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="74dp"
     android:orientation="horizontal"
-    android:paddingHorizontal="16dp">
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp" >
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/user_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center_vertical"
-        android:contentDescription="Icon"
+        android:contentDescription="@string/user_image"
         android:src="@drawable/user_placeholder" />
 
     <LinearLayout
@@ -19,7 +20,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:orientation="vertical"
-        android:paddingLeft="16dp">
+        android:paddingStart="16dp"
+        android:paddingEnd="0dp" >
 
         <TextView
             android:id="@+id/tv_user_name"
