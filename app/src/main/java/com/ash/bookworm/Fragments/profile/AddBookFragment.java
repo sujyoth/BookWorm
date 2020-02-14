@@ -12,10 +12,10 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ash.bookworm.R;
+import com.ash.bookworm.Helpers.ListAdapters.SearchListAdapter;
 import com.ash.bookworm.Helpers.Models.Book;
 import com.ash.bookworm.Helpers.Utilities.BooksUtil;
-import com.ash.bookworm.Helpers.ListAdapters.SearchListAdapter;
+import com.ash.bookworm.R;
 
 import java.util.ArrayList;
 import java.util.List;

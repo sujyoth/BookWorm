@@ -20,7 +20,6 @@ import com.ash.bookworm.R;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
 
 import java.io.IOException;
 
@@ -32,7 +31,6 @@ public class RegisterActivity extends AppCompatActivity {
     private ImageView userImage;
 
     private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
 
     private Double latitude, longitude;
     private Uri imagePath;

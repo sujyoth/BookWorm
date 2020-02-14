@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ash.bookworm.R;
-import com.ash.bookworm.Helpers.Utilities.FirebaseUtil;
-import com.ash.bookworm.Helpers.Models.User;
 import com.ash.bookworm.Helpers.ListAdapters.UserListAdapter;
+import com.ash.bookworm.Helpers.Models.User;
+import com.ash.bookworm.Helpers.Utilities.FirebaseUtil;
+import com.ash.bookworm.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;

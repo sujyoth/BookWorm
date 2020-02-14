@@ -10,9 +10,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.ash.bookworm.Activities.HomeActivity;
-import com.ash.bookworm.Helpers.Models.Book;
 import com.ash.bookworm.Helpers.ListAdapters.InventoryListAdapter;
 import com.ash.bookworm.Helpers.ListAdapters.UserListAdapter;
+import com.ash.bookworm.Helpers.Models.Book;
 import com.ash.bookworm.Helpers.Models.User;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
