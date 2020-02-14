@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -22,16 +23,20 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ProfileFragment extends Fragment {
 
 
     private View root;
     private ListView profileLv;
-    private ImageView userImage;
+    private CircleImageView userImage;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Profile");
 
         findViews();
 

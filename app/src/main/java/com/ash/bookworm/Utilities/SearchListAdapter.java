@@ -51,7 +51,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         final Book book = books.get(position);
         if (books.get(position) == null)
             return;
-        //holder.bookNameTv.setTag(R.string.TAG_BOOK_ID, books[position].getBookId());
+        //holder.userNameTv.setTag(R.string.TAG_BOOK_ID, books[position].getBookId());
         holder.bookNameTv.setText(books.get(position).getBookName());
         holder.authorNameTv.setText(books.get(position).getAuthorName());
         Picasso.get()
@@ -73,11 +73,12 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
                 public void onClick(View view) {
                     Fragment fragment = new NearbyFragment();
 
-                    Bundle bundle = new Bundle();
-                    bundle.putString("bookId", book.getBookId());
-                    bundle.putString("bookName", book.getBookName());
-                    bundle.putString("authorName", book.getAuthorName());
-                    bundle.putString("imageUrl", book.getImageUrl());
+                    Bundle args = new Bundle();
+                    args.putString("bookId", book.getBookId());
+                    args.putString("bookName", book.getBookName());
+                    args.putString("authorName", book.getAuthorName());
+                    args.putString("imageUrl", book.getImageUrl());
+                    fragment.setArguments(args);
 
                     FragmentTransaction transaction = fragmentManager.beginTransaction();
                     transaction.replace(R.id.nav_host_fragment, fragment);

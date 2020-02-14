@@ -119,8 +119,8 @@ public class RegisterActivity extends AppCompatActivity {
                 userImage.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
+                Toast.makeText(this, "Error choosing image. Please try again." + requestCode, Toast.LENGTH_SHORT).show();
             }
-            Toast.makeText(this, "Error choosing image. Please try again.", Toast.LENGTH_SHORT).show();
         }
     }
 

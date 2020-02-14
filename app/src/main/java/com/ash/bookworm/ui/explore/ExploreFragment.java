@@ -31,6 +31,8 @@ public class ExploreFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_explore, container, false);
 
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Explore");
+
         findViews();
 
         final List<Book> books = new ArrayList<>();

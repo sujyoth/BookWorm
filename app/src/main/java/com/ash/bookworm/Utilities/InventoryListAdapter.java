@@ -36,7 +36,7 @@ public class InventoryListAdapter extends RecyclerView.Adapter<InventoryListAdap
         final Book book = books.get(position);
         if (books.get(position) == null)
             return;
-        //holder.bookNameTv.setTag(R.string.TAG_BOOK_ID, books[position].getBookId());
+        //holder.userNameTv.setTag(R.string.TAG_BOOK_ID, books[position].getBookId());
         holder.bookNameTv.setText(books.get(position).getBookName());
         holder.authorNameTv.setText(books.get(position).getAuthorName());
         Picasso.get()

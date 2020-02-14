@@ -5,9 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".ui.explore.NearbyFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/rv_nearby"
+        android:scrollbars="vertical" />
 
 </FrameLayout>

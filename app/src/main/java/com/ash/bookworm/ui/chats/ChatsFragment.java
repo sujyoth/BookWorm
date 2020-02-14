@@ -7,17 +7,21 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.ash.bookworm.R;
 
 public class ChatsFragment extends Fragment {
+    private View root;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_chats, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
+        root = inflater.inflate(R.layout.fragment_chats, container, false);
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Chats");
+
         return root;
     }
 }
