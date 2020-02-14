@@ -18,6 +18,8 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ViewHolder> {
     private List<User> users;
 
@@ -65,7 +67,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ViewHo
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView userImage;
+        public CircleImageView userImage;
         public TextView userNameTv, userDistanceTv;
         public LinearLayout linearLayout;
 

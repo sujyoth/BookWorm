@@ -3,15 +3,14 @@
     android:id="@+id/linear_layout"
     android:layout_width="match_parent"
     android:layout_height="?android:attr/listPreferredItemHeightLarge"
-    android:padding="@dimen/activity_horizontal_margin"
+    android:paddingHorizontal="10dp"
     android:orientation="horizontal">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/user_image"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_gravity="center_vertical"
-        android:adjustViewBounds="true"
         android:contentDescription="Icon"
         android:src="@drawable/user_placeholder" />
 
