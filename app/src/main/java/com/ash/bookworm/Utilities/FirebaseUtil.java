@@ -1,5 +1,6 @@
 package com.ash.bookworm.Utilities;
 
+import android.location.Location;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -22,6 +23,26 @@ import java.util.List;
 
 public final class FirebaseUtil {
 
+    public static void getUserLocation(final UserListAdapter adapter, String uId) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        ref.child("users").child(uId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                Location location = new Location("point A");
+                location.setLatitude(user.getLatitude());
+                location.setLongitude(user.getLongitude());
+
+                adapter.setCurrentUserLocation(location);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     public static void addBookToInventory(Book book) {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
@@ -38,7 +59,6 @@ public final class FirebaseUtil {
 
 
     public static void getBooksFromInventory(String uId, final InventoryListAdapter adapter, final List<Book> newBooks) {
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child("users").child(uId).child("inventory").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

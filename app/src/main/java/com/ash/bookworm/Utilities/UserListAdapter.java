@@ -1,6 +1,8 @@
 package com.ash.bookworm.Utilities;
 
+import android.content.res.Resources;
 import android.graphics.BitmapFactory;
+import android.location.Location;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +24,16 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ViewHolder> {
     private List<User> users;
+    private Location currentUserLocation;
 
     public UserListAdapter(List<User> users) {
         this.users = users;
+        this.currentUserLocation = new Location("point A");
+        FirebaseUtil.getUserLocation(this, FirebaseAuth.getInstance().getUid());
+    }
+
+    public void setCurrentUserLocation(Location location) {
+        this.currentUserLocation = location;
     }
 
     @Override
@@ -41,7 +50,14 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ViewHo
             return;
         final User user = users.get(position);
         holder.userNameTv.setText(user.getFname() + " " + user.getLname());
-        holder.userDistanceTv.setText("5 kms away");
+
+        Location userLocation = new Location("point B");
+        userLocation.setLatitude(user.getLatitude());
+        userLocation.setLongitude(user.getLongitude());
+
+        float distance = userLocation.distanceTo(this.currentUserLocation) / 1000;
+
+        holder.userDistanceTv.setText(String.format("%.1f kms away", distance));
 
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
         StorageReference userImageRef = storageRef.child("images/" + FirebaseAuth.getInstance().getUid());
