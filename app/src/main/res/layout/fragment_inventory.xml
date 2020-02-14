@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.profile.profile_options.InventoryFragment">
+    tools:context=".ui.profile.InventoryFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_books"

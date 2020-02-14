@@ -1,4 +1,4 @@
-package com.ash.bookworm.ui.profile.profile_options;
+package com.ash.bookworm.ui.profile;
 
 import android.graphics.Color;
 import android.os.Bundle;

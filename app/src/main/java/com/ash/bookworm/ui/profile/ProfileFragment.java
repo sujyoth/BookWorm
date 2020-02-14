@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -17,7 +16,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.ash.bookworm.LoginActivity;
 import com.ash.bookworm.R;
-import com.ash.bookworm.ui.profile.profile_options.InventoryFragment;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;

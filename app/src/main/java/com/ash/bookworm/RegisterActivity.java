@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ash.bookworm.Utilities.FirebaseUtil;
 import com.ash.bookworm.Utilities.User;
 import com.ash.bookworm.Utilities.Util;
 import com.firebase.geofire.GeoFire;
@@ -84,7 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
                 final String fname = fNameEt.getText().toString();
                 final String lname = lNameEt.getText().toString();
 
-                writeNewUser(email, password, fname, lname, latitude, longitude);
+                FirebaseUtil.writeNewUser(RegisterActivity.this, email, password, fname, lname, latitude, longitude, imagePath);
             }
         });
 
@@ -179,42 +180,5 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         return true;
-    }
-
-    private void writeNewUser(String email, String password, final String fname, final String lname, final Double latitude, final Double longitude) {
-
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(RegisterActivity.this, "Registration successful.",
-                                    Toast.LENGTH_SHORT).show();
-                            FirebaseUser user = mAuth.getCurrentUser();
-
-                            // Adding user details to database
-                            mDatabase = FirebaseDatabase.getInstance().getReference();
-                            mDatabase.child("users").child(user.getUid()).setValue(new User(fname, lname, user.getUid(), latitude, longitude));
-
-                            GeoFire geoFire = new GeoFire(mDatabase.child("geofire"));
-                            geoFire.setLocation(user.getUid(), new GeoLocation(latitude, longitude));
-
-                            if (imagePath != null) {
-                                // Adding user image to database
-                                StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-                                StorageReference userImageRef = storageRef.child("images/" + user.getUid());
-
-                                userImageRef.putFile(imagePath);
-                            }
-
-                            startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(RegisterActivity.this, "Registration failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
     }
 }

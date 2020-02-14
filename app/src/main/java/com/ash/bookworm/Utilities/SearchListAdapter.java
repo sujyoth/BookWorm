@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ash.bookworm.R;
 import com.ash.bookworm.ui.explore.NearbyFragment;
-import com.ash.bookworm.ui.profile.profile_options.InventoryFragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 

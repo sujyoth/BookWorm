@@ -1,16 +1,24 @@
 package com.ash.bookworm.Utilities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.ash.bookworm.HomeActivity;
+import com.ash.bookworm.RegisterActivity;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryEventListener;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -18,10 +26,52 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
 public final class FirebaseUtil {
+
+    public static void writeNewUser(final Context context, String email, String password, final String fname, final String lname, final Double latitude, final Double longitude, final Uri imagePath) {
+
+        final FirebaseAuth mAuth;
+        mAuth = FirebaseAuth.getInstance();
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Toast.makeText(context, "Registration successful.",
+                                    Toast.LENGTH_SHORT).show();
+                            FirebaseUser user = mAuth.getCurrentUser();
+
+                            // Adding user details to database
+                            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                            mDatabase.child("users").child(user.getUid()).setValue(new User(fname, lname, user.getUid(), latitude, longitude));
+
+                            GeoFire geoFire = new GeoFire(mDatabase.child("geofire"));
+                            geoFire.setLocation(user.getUid(), new GeoLocation(latitude, longitude));
+
+                            if (imagePath != null) {
+                                // Adding user image to database
+                                StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+                                StorageReference userImageRef = storageRef.child("images/" + user.getUid());
+
+                                userImageRef.putFile(imagePath);
+                            }
+
+                            context.startActivity(new Intent(context, HomeActivity.class));
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(context, "Registration failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
 
     public static void getUserLocation(final UserListAdapter adapter, String uId) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
