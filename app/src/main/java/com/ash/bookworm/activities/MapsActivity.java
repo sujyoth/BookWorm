@@ -27,10 +27,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    private Button confirmBtn;
+    private FloatingActionButton confirmBtn;
     private Marker locationMarker;
     private ImageView markerImg;
     private TextView locationNameTV;
@@ -49,15 +50,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
-        findViews();
-
-        confirmBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                returnResult();
-            }
-        });
 
     }
 
@@ -88,6 +80,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         locationMarker = mMap.addMarker(new MarkerOptions().position(userLocation).title("User Location Marker").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_placeholder)));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 18f));
 
+        findViews();
+
+        confirmBtn.show();
+        confirmBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                returnResult();
+            }
+        });
+
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(this, new OnSuccessListener<Location>() {
                     @Override
@@ -112,6 +114,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onCameraMove() {
                 locationMarker.setVisible(false);
                 markerImg.setVisibility(View.VISIBLE);
+                confirmBtn.hide();
             }
         });
 
@@ -121,6 +124,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 locationMarker.setPosition(mMap.getCameraPosition().target);
                 markerImg.setVisibility(View.INVISIBLE);
                 locationMarker.setVisible(true);
+                confirmBtn.show();
                 locationNameTV.setText(Util.getLocationName(MapsActivity.this, mMap.getCameraPosition().target.latitude, mMap.getCameraPosition().target.longitude));
             }
         });
