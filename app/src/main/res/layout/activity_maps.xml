@@ -4,14 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/et_location_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/green"
+        android:background="@color/colorPrimary"
         android:lines="2"
         android:padding="10dp"
-        android:textColor="@color/white"
         android:textSize="30sp" />
 
     <RelativeLayout
@@ -42,14 +41,13 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_margin="5dp"
-            android:padding="8dp"
+            android:layout_margin="@dimen/horizontal_margin_half"
             android:text="@string/confirm"
             android:textColor="#ffffff" />
 
