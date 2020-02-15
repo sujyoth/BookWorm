@@ -9,9 +9,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
+        android:textAllCaps="true"
+        android:textColor="@color/colorOnPrimary"
         android:lines="2"
-        android:padding="10dp"
-        android:textSize="30sp" />
+        android:paddingTop="@dimen/vertical_margin_half"
+        android:paddingBottom="@dimen/vertical_margin_half"
+        android:paddingStart="@dimen/horizontal_margin"
+        android:paddingEnd="@dimen/horizontal_margin"
+        android:textSize="20sp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
