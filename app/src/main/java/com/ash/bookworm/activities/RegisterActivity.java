@@ -90,7 +90,6 @@ public class RegisterActivity extends AppCompatActivity {
         if (requestCode == 2) {
             latitude = data.getDoubleExtra("LATITUDE", 0.0f);
             longitude = data.getDoubleExtra("LONGITUDE", 0.0f);
-            Toast.makeText(RegisterActivity.this, latitude.toString() + longitude.toString(), Toast.LENGTH_SHORT).show();
 
             String locationName = Util.getLocationName(this.getApplicationContext(), latitude, longitude);
             locationBtn.setText(locationName);
