@@ -5,13 +5,16 @@ import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
 import android.util.Log;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.ash.bookworm.activities.HomeActivity;
 import com.ash.bookworm.helpers.list_adapters.InventoryListAdapter;
 import com.ash.bookworm.helpers.list_adapters.UserListAdapter;
+import com.ash.bookworm.helpers.models.BaseFragment;
 import com.ash.bookworm.helpers.models.Book;
 import com.ash.bookworm.helpers.models.User;
 import com.firebase.geofire.GeoFire;
@@ -74,6 +77,22 @@ public final class FirebaseUtil {
                 });
     }
 
+    public static void getUserDetails(final BaseFragment fragment, String uId) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        ref.child("users").child(uId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                fragment.updateUI(user);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("getUserDetailsError", databaseError.toString());
+            }
+        });
+    }
+
 
     public static void getUserLocation(final UserListAdapter adapter, String uId) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
@@ -130,13 +149,14 @@ public final class FirebaseUtil {
     }
 
     public static void getNearbyUsersWithBook(String uId, final String searchedBookId, final List<User> nearbyUsers, final UserListAdapter adapter) {
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mDatabase.child("users").child(uId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot ds1) {
                 User user = ds1.getValue(User.class);
+                if (user == null)
+                    return;
 
                 final DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
                 GeoFire geoFire = new GeoFire(ref.child("geofire"));
@@ -151,8 +171,8 @@ public final class FirebaseUtil {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot ds2) {
                                 User nearbyUser = ds2.getValue(User.class);
-                                if (ds2.child("inventory").hasChild(searchedBookId)) {
-                                    Log.d("This user has book", nearbyUser.fname);
+                                if (nearbyUser != null & ds2.child("inventory").hasChild(searchedBookId)) {
+                                    Log.d("This user has book", nearbyUser.getFname());
                                     nearbyUsers.add(nearbyUser);
                                     adapter.notifyDataSetChanged();
                                 }
