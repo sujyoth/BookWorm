@@ -23,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText emailEt, passwordEt;
     private Button loginBtn;
-    private TextView notRegisteredTv;
+    private Button notRegisteredTv;
 
     private FirebaseAuth mAuth;
 

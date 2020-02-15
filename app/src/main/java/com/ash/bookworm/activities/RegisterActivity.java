@@ -25,7 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private EditText fNameEt, lNameEt, emailEt, passwordEt;
     private Button registerBtn, locationBtn, imageBtn;
-    private TextView hasRegisteredTv;
+    private Button hasRegisteredTv;
     private ImageView userImage;
 
     private Double latitude, longitude;
