@@ -93,27 +93,6 @@ public final class FirebaseUtil {
         });
     }
 
-
-    public static void getUserLocation(final UserListAdapter adapter, String uId) {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        ref.child("users").child(uId).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                Location location = new Location("point A");
-                location.setLatitude(user.getLatitude());
-                location.setLongitude(user.getLongitude());
-
-                adapter.setCurrentUserLocation(location);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
     public static void addBookToInventory(Book book) {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();

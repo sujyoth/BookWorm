@@ -26,11 +26,11 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ViewHo
     private List<User> users;
     private Location currentUserLocation;
 
-    public UserListAdapter(List<User> users) {
+    public UserListAdapter(Location currentUserLocation, List<User> users) {
+        this.currentUserLocation = currentUserLocation;
         this.users = users;
-        this.currentUserLocation = new Location("point A");
-        FirebaseUtil.getUserLocation(this, FirebaseAuth.getInstance().getUid());
     }
+
 
     public void setCurrentUserLocation(Location location) {
         this.currentUserLocation = location;

@@ -1,5 +1,6 @@
 package com.ash.bookworm.fragments.explore;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ash.bookworm.R;
 import com.ash.bookworm.helpers.list_adapters.UserListAdapter;
+import com.ash.bookworm.helpers.models.BaseFragment;
 import com.ash.bookworm.helpers.models.User;
 import com.ash.bookworm.helpers.utilities.FirebaseUtil;
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,11 +22,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NearbyFragment extends Fragment {
+public class NearbyFragment extends BaseFragment {
     private View root;
     private RecyclerView nearbyRv;
     private String bookId, bookName, authorName, imageUrl;
 
+    private User currentUser;
     private UserListAdapter adapter;
 
     @Override
@@ -43,9 +46,22 @@ public class NearbyFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Nearby users who have " + bookName);
 
         findViews();
+        FirebaseUtil.getUserDetails(this, FirebaseAuth.getInstance().getUid());
+
+
+        return root;
+    }
+
+    @Override
+    public void updateUI(User currentUser) {
+        this.currentUser = currentUser;
+
+        Location currentUserLocation = new Location("point A");
+        currentUserLocation.setLatitude(currentUser.getLatitude());
+        currentUserLocation.setLongitude(currentUser.getLongitude());
 
         List<User> nearbyUsers = new ArrayList<>();
-        adapter = new UserListAdapter(nearbyUsers);
+        adapter = new UserListAdapter(currentUserLocation, nearbyUsers);
         nearbyRv.setHasFixedSize(true);
         nearbyRv.setLayoutManager(new LinearLayoutManager(getContext()));
         nearbyRv.setAdapter(adapter);
@@ -56,7 +72,6 @@ public class NearbyFragment extends Fragment {
 
         FirebaseUtil.getNearbyUsersWithBook(FirebaseAuth.getInstance().getUid(), bookId, nearbyUsers, adapter);
 
-        return root;
     }
 
     private void findViews() {
