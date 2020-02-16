@@ -2,6 +2,7 @@ package com.ash.bookworm.fragments.explore;
 
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,12 +66,20 @@ public class NearbyFragment extends BaseFragment {
 
     @Override
     public void updateUI() {
-        listContainer.setVisibility(View.GONE);
         if (!nearbyUsers.isEmpty()) {
+            listContainer.setVisibility(View.GONE);
             noNearbyUsersTv.setVisibility(View.GONE);
             nearbyRv.setVisibility(View.VISIBLE);
         } else {
-            noNearbyUsersTv.setVisibility(View.VISIBLE);
+            (new Handler()).postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (nearbyUsers.isEmpty()) {
+                        listContainer.setVisibility(View.GONE);
+                        noNearbyUsersTv.setVisibility(View.VISIBLE);
+                    }
+                }
+            }, 2000);
         }
     }
 
