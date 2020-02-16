@@ -31,10 +31,10 @@
         android:layout_marginStart="@dimen/horizontal_margin"
         android:layout_marginEnd="@dimen/horizontal_margin" >
 
-        <View
+        <include
+            layout="@layout/placeholder_view"
             android:layout_width="200dp"
-            android:layout_height="20dp"
-            android:background="#dddddddd" />
+            android:layout_height="20dp" />
 
     </com.facebook.shimmer.ShimmerFrameLayout>
 

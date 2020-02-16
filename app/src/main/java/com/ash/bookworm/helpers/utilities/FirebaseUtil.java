@@ -108,7 +108,7 @@ public final class FirebaseUtil {
     }
 
 
-    public static void getBooksFromInventory(String uId, final InventoryListAdapter adapter, final List<Book> newBooks) {
+    public static void getBooksFromInventory(String uId, final BaseFragment fragment, final InventoryListAdapter adapter, final List<Book> newBooks) {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child("users").child(uId).child("inventory").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -117,6 +117,7 @@ public final class FirebaseUtil {
                 for (DataSnapshot ds2 : ds1.getChildren()) {
                     newBooks.add(ds2.getValue(Book.class));
                 }
+                fragment.updateUI(new User());
                 adapter.notifyDataSetChanged();
             }
 

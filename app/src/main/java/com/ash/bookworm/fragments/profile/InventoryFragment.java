@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,8 +19,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ash.bookworm.R;
 import com.ash.bookworm.helpers.callbacks.SwipeToDeleteCallback;
 import com.ash.bookworm.helpers.list_adapters.InventoryListAdapter;
+import com.ash.bookworm.helpers.models.BaseFragment;
 import com.ash.bookworm.helpers.models.Book;
+import com.ash.bookworm.helpers.models.User;
 import com.ash.bookworm.helpers.utilities.FirebaseUtil;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,13 +31,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InventoryFragment extends Fragment {
+public class InventoryFragment extends BaseFragment {
 
     private View root;
     private FloatingActionButton fab;
     private RecyclerView booksRv;
+    private List<Book> books = new ArrayList<>();
+    private TextView noBooksTv;
 
     private InventoryListAdapter adapter;
+    private ShimmerFrameLayout listContainer;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,7 +52,6 @@ public class InventoryFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Inventory");
         findViews();
 
-        List<Book> books = new ArrayList<>();
         adapter = new InventoryListAdapter(books);
         booksRv.setHasFixedSize(true);
         booksRv.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -56,7 +63,7 @@ public class InventoryFragment extends Fragment {
 
         enableSwipeToDeleteAndUndo();
 
-        FirebaseUtil.getBooksFromInventory(FirebaseAuth.getInstance().getUid(), adapter, books);
+        FirebaseUtil.getBooksFromInventory(FirebaseAuth.getInstance().getUid(), this, adapter, books);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +108,7 @@ public class InventoryFragment extends Fragment {
 
                 FirebaseUtil.removeBookFromInventory(adapter.getData().get(position));
                 adapter.removeBook(position);
+                updateUI(new User());
 
                 Snackbar snackbar = Snackbar
                         .make(getView(), book.getBookName() + " by " + book.getAuthorName() + " was removed from inventory.", Snackbar.LENGTH_LONG);
@@ -120,10 +128,22 @@ public class InventoryFragment extends Fragment {
         itemTouchhelper.attachToRecyclerView(booksRv);
     }
 
+    @Override
+    public void updateUI(User user) {
+        listContainer.setVisibility(View.GONE);
+        if (!books.isEmpty()) {
+            booksRv.setVisibility(View.VISIBLE);
+        } else {
+            noBooksTv.setVisibility(View.VISIBLE);
+        }
+    }
+
 
     private void findViews() {
         fab = root.findViewById(R.id.fab);
         booksRv = root.findViewById(R.id.rv_books);
+        noBooksTv = root.findViewById(R.id.tv_no_books);
+        listContainer = root.findViewById(R.id.shimmer_list_container);
     }
 
 }
