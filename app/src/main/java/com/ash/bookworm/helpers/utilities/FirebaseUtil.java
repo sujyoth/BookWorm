@@ -128,7 +128,7 @@ public final class FirebaseUtil {
         });
     }
 
-    public static void getNearbyUsersWithBook(String uId, final String searchedBookId, final BaseFragment fragment, final List<User> nearbyUsers, final UserListAdapter adapter) {
+    public static void getNearbyUsersWithBook(final String uId, final String searchedBookId, final BaseFragment fragment, final List<User> nearbyUsers, final UserListAdapter adapter) {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mDatabase.child("users").child(uId).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -151,7 +151,7 @@ public final class FirebaseUtil {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot ds2) {
                                 User nearbyUser = ds2.getValue(User.class);
-                                if (nearbyUser != null & ds2.child("inventory").hasChild(searchedBookId)) {
+                                if (nearbyUser != null && ds2.child("inventory").hasChild(searchedBookId) && !uId.equals(nearbyUser.getuId())) {
                                     Log.d("This user has book", nearbyUser.getFname());
                                     nearbyUsers.add(nearbyUser);
                                     fragment.updateUI();
