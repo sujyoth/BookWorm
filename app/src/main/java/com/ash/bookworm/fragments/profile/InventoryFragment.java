@@ -129,7 +129,7 @@ public class InventoryFragment extends BaseFragment {
     }
 
     @Override
-    public void updateUI(User user) {
+    public void updateUI() {
         listContainer.setVisibility(View.GONE);
         if (!books.isEmpty()) {
             booksRv.setVisibility(View.VISIBLE);
@@ -137,6 +137,9 @@ public class InventoryFragment extends BaseFragment {
             noBooksTv.setVisibility(View.VISIBLE);
         }
     }
+
+    @Override
+    public void updateUI(User user) { }
 
 
     private void findViews() {

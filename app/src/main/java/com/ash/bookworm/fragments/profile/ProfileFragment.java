@@ -75,6 +75,9 @@ public class ProfileFragment extends BaseFragment {
     }
 
     @Override
+    public void updateUI() { }
+
+    @Override
     public void updateUI(User user) {
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
         StorageReference userImageRef = storageRef.child("images/" + user.getuId());

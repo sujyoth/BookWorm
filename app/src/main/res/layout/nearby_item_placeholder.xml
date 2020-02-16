@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linear_layout"
     android:layout_width="match_parent"
     android:layout_height="74dp"
     android:orientation="horizontal"
     android:paddingStart="16dp"
     android:paddingEnd="16dp" >
 
-    <ImageView
-        android:layout_width="@dimen/book_image"
-        android:layout_height="@dimen/book_image"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/user_image"
+        android:layout_width="@dimen/user_image"
+        android:layout_height="@dimen/user_image"
         android:layout_gravity="center_vertical"
-        android:adjustViewBounds="true"
-        android:src="@drawable/book_placeholder"
-        android:contentDescription="@string/book_image" />
+        android:contentDescription="@string/user_image"
+        android:src="@drawable/user_placeholder" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,16 +25,15 @@
 
         <include
             layout="@layout/text_placeholder"
-            android:layout_width="200dp"
+            android:layout_width="270dp"
             android:layout_height="16dp" />
 
         <include
             layout="@layout/text_placeholder"
-            android:layout_width="270dp"
+            android:layout_width="200dp"
             android:layout_height="14dp"
             android:layout_marginTop="@dimen/vertical_margin_half" />
 
     </LinearLayout>
-
 
 </LinearLayout>

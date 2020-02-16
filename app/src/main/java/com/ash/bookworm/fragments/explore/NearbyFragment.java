@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,7 @@ import com.ash.bookworm.helpers.list_adapters.UserListAdapter;
 import com.ash.bookworm.helpers.models.BaseFragment;
 import com.ash.bookworm.helpers.models.User;
 import com.ash.bookworm.helpers.utilities.FirebaseUtil;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -26,8 +28,12 @@ public class NearbyFragment extends BaseFragment {
     private View root;
     private RecyclerView nearbyRv;
     private String bookId, bookName, authorName, imageUrl;
+    private TextView noNearbyUsersTv;
+    private ShimmerFrameLayout listContainer;
 
     private UserListAdapter adapter;
+
+    private List<User> nearbyUsers;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,20 +64,33 @@ public class NearbyFragment extends BaseFragment {
     }
 
     @Override
+    public void updateUI() {
+        listContainer.setVisibility(View.GONE);
+        if (!nearbyUsers.isEmpty()) {
+            noNearbyUsersTv.setVisibility(View.GONE);
+            nearbyRv.setVisibility(View.VISIBLE);
+        } else {
+            noNearbyUsersTv.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
     public void updateUI(User currentUser) {
         Location currentUserLocation = new Location("point A");
         currentUserLocation.setLatitude(currentUser.getLatitude());
         currentUserLocation.setLongitude(currentUser.getLongitude());
 
-        List<User> nearbyUsers = new ArrayList<>();
+        nearbyUsers = new ArrayList<>();
         adapter = new UserListAdapter(currentUserLocation, nearbyUsers);
         nearbyRv.setAdapter(adapter);
 
-        FirebaseUtil.getNearbyUsersWithBook(FirebaseAuth.getInstance().getUid(), bookId, nearbyUsers, adapter);
+        FirebaseUtil.getNearbyUsersWithBook(FirebaseAuth.getInstance().getUid(), bookId, this, nearbyUsers, adapter);
     }
 
     private void findViews() {
         nearbyRv = root.findViewById(R.id.rv_nearby);
+        noNearbyUsersTv = root.findViewById(R.id.tv_no_nearby_users);
+        listContainer = root.findViewById(R.id.shimmer_list_container);
     }
 
 }

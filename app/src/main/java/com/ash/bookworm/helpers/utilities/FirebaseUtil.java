@@ -117,7 +117,7 @@ public final class FirebaseUtil {
                 for (DataSnapshot ds2 : ds1.getChildren()) {
                     newBooks.add(ds2.getValue(Book.class));
                 }
-                fragment.updateUI(new User());
+                fragment.updateUI();
                 adapter.notifyDataSetChanged();
             }
 
@@ -128,7 +128,7 @@ public final class FirebaseUtil {
         });
     }
 
-    public static void getNearbyUsersWithBook(String uId, final String searchedBookId, final List<User> nearbyUsers, final UserListAdapter adapter) {
+    public static void getNearbyUsersWithBook(String uId, final String searchedBookId, final BaseFragment fragment, final List<User> nearbyUsers, final UserListAdapter adapter) {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mDatabase.child("users").child(uId).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -154,13 +154,14 @@ public final class FirebaseUtil {
                                 if (nearbyUser != null & ds2.child("inventory").hasChild(searchedBookId)) {
                                     Log.d("This user has book", nearbyUser.getFname());
                                     nearbyUsers.add(nearbyUser);
+                                    fragment.updateUI();
                                     adapter.notifyDataSetChanged();
                                 }
                             }
 
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                                fragment.updateUI();
                             }
                         });
                     }
@@ -177,19 +178,19 @@ public final class FirebaseUtil {
 
                     @Override
                     public void onGeoQueryReady() {
-
+                        fragment.updateUI();
                     }
 
                     @Override
                     public void onGeoQueryError(DatabaseError error) {
-
+                        fragment.updateUI();
                     }
                 });
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                fragment.updateUI();
             }
         });
     }

@@ -1,14 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.explore.NearbyFragment">
+    tools:context=".fragments.explore.NearbyFragment" >
+
+    <TextView
+        android:id="@+id/tv_no_nearby_users"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/horizontal_margin"
+        android:layout_gravity="center"
+        android:text="@string/no_nearby_users"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:visibility="gone" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_list_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <include layout="@layout/nearby_item_placeholder"/>
+            <include layout="@layout/nearby_item_placeholder"/>
+            <include layout="@layout/nearby_item_placeholder"/>
+            <include layout="@layout/nearby_item_placeholder"/>
+            <include layout="@layout/nearby_item_placeholder"/>
+            <include layout="@layout/nearby_item_placeholder"/>
+            <include layout="@layout/nearby_item_placeholder"/>
+            <include layout="@layout/nearby_item_placeholder"/>
+            <include layout="@layout/nearby_item_placeholder"/>
+            <include layout="@layout/nearby_item_placeholder"/>
+            <include layout="@layout/nearby_item_placeholder"/>
+            <include layout="@layout/nearby_item_placeholder"/>
+
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_nearby"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"
+        android:visibility="gone" />
 
-</FrameLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
