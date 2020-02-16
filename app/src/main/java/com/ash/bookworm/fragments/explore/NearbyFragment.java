@@ -27,7 +27,6 @@ public class NearbyFragment extends BaseFragment {
     private RecyclerView nearbyRv;
     private String bookId, bookName, authorName, imageUrl;
 
-    private User currentUser;
     private UserListAdapter adapter;
 
     @Override
@@ -48,30 +47,27 @@ public class NearbyFragment extends BaseFragment {
         findViews();
         FirebaseUtil.getUserDetails(this, FirebaseAuth.getInstance().getUid());
 
+        nearbyRv.setHasFixedSize(true);
+        nearbyRv.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(nearbyRv.getContext(),
+                DividerItemDecoration.VERTICAL);
+        nearbyRv.addItemDecoration(mDividerItemDecoration);
 
         return root;
     }
 
     @Override
     public void updateUI(User currentUser) {
-        this.currentUser = currentUser;
-
         Location currentUserLocation = new Location("point A");
         currentUserLocation.setLatitude(currentUser.getLatitude());
         currentUserLocation.setLongitude(currentUser.getLongitude());
 
         List<User> nearbyUsers = new ArrayList<>();
         adapter = new UserListAdapter(currentUserLocation, nearbyUsers);
-        nearbyRv.setHasFixedSize(true);
-        nearbyRv.setLayoutManager(new LinearLayoutManager(getContext()));
         nearbyRv.setAdapter(adapter);
 
-        DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(nearbyRv.getContext(),
-                DividerItemDecoration.VERTICAL);
-        nearbyRv.addItemDecoration(mDividerItemDecoration);
-
         FirebaseUtil.getNearbyUsersWithBook(FirebaseAuth.getInstance().getUid(), bookId, nearbyUsers, adapter);
-
     }
 
     private void findViews() {

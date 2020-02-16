@@ -4,15 +4,39 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/user_image"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_image_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/vertical_margin_half"
         android:layout_marginStart="@dimen/horizontal_margin"
-        android:layout_marginEnd="@dimen/horizontal_margin"
-        android:src="@drawable/user_placeholder" />
+        android:layout_marginEnd="@dimen/horizontal_margin" >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_image"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:src="@drawable/user_placeholder" />
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_text_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/vertical_margin"
+        android:layout_marginStart="@dimen/horizontal_margin"
+        android:layout_marginEnd="@dimen/horizontal_margin" >
+
+        <View
+            android:layout_width="200dp"
+            android:layout_height="20dp"
+            android:background="#dddddddd" />
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <TextView
         android:id="@+id/tv_user_name"
@@ -24,8 +48,14 @@
         android:layout_marginTop="@dimen/vertical_margin_half"
         android:layout_marginStart="@dimen/horizontal_margin"
         android:layout_marginEnd="@dimen/horizontal_margin"
-        android:lines="1" />
+        android:visibility="gone" />
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
     <ListView
         android:id="@+id/lv_profile"
         android:layout_width="match_parent"

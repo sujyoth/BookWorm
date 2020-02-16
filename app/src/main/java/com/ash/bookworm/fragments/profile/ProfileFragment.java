@@ -20,6 +20,8 @@ import com.ash.bookworm.activities.LoginActivity;
 import com.ash.bookworm.helpers.models.BaseFragment;
 import com.ash.bookworm.helpers.models.User;
 import com.ash.bookworm.helpers.utilities.FirebaseUtil;
+import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
@@ -33,6 +35,8 @@ public class ProfileFragment extends BaseFragment {
     private ListView profileLv;
     private CircleImageView userImage;
     private TextView userNameTv;
+
+    private ShimmerFrameLayout imageContainer, textContainer;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -75,13 +79,24 @@ public class ProfileFragment extends BaseFragment {
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
         StorageReference userImageRef = storageRef.child("images/" + user.getuId());
 
-        userImageRef.getBytes(2048 * 2048).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+        userImageRef.getBytes(2048 * 2048)
+                .addOnSuccessListener(new OnSuccessListener<byte[]>() {
             @Override
             public void onSuccess(byte[] bytes) {
+                imageContainer.hideShimmer();
                 userImage.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                imageContainer.hideShimmer();
             }
         });
 
+        textContainer.hideShimmer();
+        textContainer.setVisibility(View.GONE);
+        userNameTv.setVisibility(View.VISIBLE);
         userNameTv.setText(user.getFname() + " " + user.getLname());
     }
 
@@ -89,5 +104,7 @@ public class ProfileFragment extends BaseFragment {
         profileLv = root.findViewById(R.id.lv_profile);
         userImage = root.findViewById(R.id.user_image);
         userNameTv = root.findViewById(R.id.tv_user_name);
+        imageContainer = root.findViewById(R.id.shimmer_image_container);
+        textContainer = root.findViewById(R.id.shimmer_text_container);
     }
 }
