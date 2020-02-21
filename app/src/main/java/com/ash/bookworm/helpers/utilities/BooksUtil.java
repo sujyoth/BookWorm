@@ -78,7 +78,6 @@ public class BooksUtil {
                                 }
                             }
                             adapter.updateList(newBooks);
-
                         } catch (JSONException e) {
                             Log.d(TAG, response.toString());
                             e.printStackTrace();
