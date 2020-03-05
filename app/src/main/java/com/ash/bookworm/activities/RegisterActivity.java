@@ -1,6 +1,8 @@
 package com.ash.bookworm.activities;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.ash.bookworm.R;
 import com.ash.bookworm.helpers.utilities.FirebaseUtil;
@@ -52,6 +56,15 @@ public class RegisterActivity extends AppCompatActivity {
         locationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (ContextCompat.checkSelfPermission(RegisterActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    // Permission is not granted
+                    ActivityCompat.requestPermissions(RegisterActivity.this,
+                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                    return;
+                }
+
+
                 Intent intent = new Intent(RegisterActivity.this, MapsActivity.class);
                 startActivityForResult(intent, 2); // Arbitrarily selected 2 as request code
             }
@@ -87,7 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         // check if the request code is same as what is passed, here it is 2
-        if (requestCode == 2) {
+        if (requestCode == 2 && resultCode == RESULT_OK) {
             latitude = data.getDoubleExtra("LATITUDE", 0.0f);
             longitude = data.getDoubleExtra("LONGITUDE", 0.0f);
 

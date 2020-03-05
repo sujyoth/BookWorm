@@ -74,8 +74,8 @@ public final class Util {
         return "Waiting for Location";
     }
 
-    public static float dpToPixels(Context context, float dipValue) {
+    public static float dpToPixels(Context context, float dpValue) {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dipValue, metrics);
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpValue, metrics);
     }
 }

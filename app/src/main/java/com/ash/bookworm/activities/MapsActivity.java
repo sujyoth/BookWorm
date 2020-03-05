@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -68,22 +69,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        if (ContextCompat.checkSelfPermission(MapsActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            // Permission is not granted
-            ActivityCompat.requestPermissions(MapsActivity.this,
-                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
-        }
-
         // Assigning default location
         userLocation = new LatLng(19.4, 72.84);
 
-        // Get location marker bitmap
-        Bitmap marker = BitmapFactory.decodeResource(getResources(), R.drawable.location_marker);
-        int width = (int) Util.dpToPixels(this, 30);
-        int height = (int) Util.dpToPixels(this, 45);
+        // Create location marker bitmap
+        final int width = (int) Util.dpToPixels(this, 30);
+        final int height = (int) Util.dpToPixels(this, 45);
 
-        Bitmap smallMarker = Bitmap.createScaledBitmap(marker, width, height, false);
+        final Bitmap marker = BitmapFactory.decodeResource(getResources(), R.drawable.location_marker);
+        final Bitmap smallMarker = Bitmap.createScaledBitmap(marker, width, height, true);
 
         // Add a marker and move the camera to its location
         locationMarker = mMap.addMarker(new MarkerOptions().position(userLocation).title("User Location Marker").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
@@ -112,7 +106,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             locationMarker.remove();
 
                             // Add a marker and move the camera
-                            locationMarker = mMap.addMarker(new MarkerOptions().position(userLocation).title("User Location Marker").icon(BitmapDescriptorFactory.fromResource(R.drawable.location_marker)));
+                            locationMarker = mMap.addMarker(new MarkerOptions().position(userLocation).title("User Location Marker").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 18f));
                         }
                     }
@@ -131,10 +125,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onCameraIdle() {
                 locationMarker.setPosition(mMap.getCameraPosition().target);
-                markerImg.setVisibility(View.INVISIBLE);
                 locationMarker.setVisible(true);
-                confirmBtn.show();
                 locationNameTV.setText(Util.getLocationName(MapsActivity.this, mMap.getCameraPosition().target.latitude, mMap.getCameraPosition().target.longitude));
+                markerImg.setVisibility(View.INVISIBLE);
+                confirmBtn.show();
             }
         });
 
@@ -147,7 +141,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Intent i = new Intent();
         i.putExtra("LATITUDE", latitude);
         i.putExtra("LONGITUDE", longitude);
-        setResult(2, i);
+        setResult(RESULT_OK, i);
         finish();
     }
 
