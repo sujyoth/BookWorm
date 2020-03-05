@@ -3,10 +3,11 @@ package com.ash.bookworm.activities;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -76,8 +77,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Assigning default location
         userLocation = new LatLng(19.4, 72.84);
-        // Add a marker and move the camera
-        locationMarker = mMap.addMarker(new MarkerOptions().position(userLocation).title("User Location Marker").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_placeholder)));
+
+        // Get location marker bitmap
+        Bitmap marker = BitmapFactory.decodeResource(getResources(), R.drawable.location_marker);
+        int width = (int) Util.dpToPixels(this, 30);
+        int height = (int) Util.dpToPixels(this, 45);
+
+        Bitmap smallMarker = Bitmap.createScaledBitmap(marker, width, height, false);
+
+        // Add a marker and move the camera to its location
+        locationMarker = mMap.addMarker(new MarkerOptions().position(userLocation).title("User Location Marker").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 18f));
 
         findViews();
@@ -103,7 +112,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             locationMarker.remove();
 
                             // Add a marker and move the camera
-                            locationMarker = mMap.addMarker(new MarkerOptions().position(userLocation).title("User Location Marker").icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_placeholder)));
+                            locationMarker = mMap.addMarker(new MarkerOptions().position(userLocation).title("User Location Marker").icon(BitmapDescriptorFactory.fromResource(R.drawable.location_marker)));
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 18f));
                         }
                     }

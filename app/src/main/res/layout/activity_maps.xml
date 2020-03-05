@@ -32,11 +32,11 @@
 
         <ImageView
             android:id="@+id/marker_placeholder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="45dp"
             android:layout_alignBottom="@id/reference"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/marker_placeholder"
+            android:src="@drawable/location_marker"
             android:visibility="invisible" />
 
         <ImageView

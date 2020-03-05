@@ -1,7 +1,10 @@
 package com.ash.bookworm.helpers.utilities;
 
+import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.widget.EditText;
 
 import java.io.IOException;
@@ -10,9 +13,6 @@ import java.util.Locale;
 import java.util.regex.Pattern;
 
 public final class Util {
-    private Util() {
-    }
-
     public static boolean isEmpty(EditText et) {
         return et.getText().toString().trim().length() == 0;
     }
@@ -72,5 +72,10 @@ public final class Util {
             e.printStackTrace();
         }
         return "Waiting for Location";
+    }
+
+    public static float dpToPixels(Context context, float dipValue) {
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dipValue, metrics);
     }
 }
