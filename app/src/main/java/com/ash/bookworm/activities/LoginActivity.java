@@ -15,6 +15,7 @@ import com.ash.bookworm.R;
 import com.ash.bookworm.helpers.utilities.Util;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,6 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText emailEt, passwordEt;
+    private TextInputLayout emailTil, passwordTil;
     private Button loginBtn;
     private Button notRegisteredTv;
 
@@ -93,19 +95,28 @@ public class LoginActivity extends AppCompatActivity {
 
     private boolean allFieldsValid() {
         if (Util.isEmpty(emailEt)) {
-            emailEt.setError("Email cannot be empty");
+            emailTil.setError("Email cannot be empty");
             return false;
+        } else {
+            emailTil.setError(null);
         }
         if (Util.isEmpty(passwordEt)) {
-            passwordEt.setError("Password cannot be empty");
+            passwordTil.setError("Password cannot be empty");
             return false;
+        } else {
+            passwordTil.setError(null);
         }
         if (!Util.isValidEmail(emailEt.getText().toString())) {
-            emailEt.setError("Email must be valid");
+            emailTil.setError("Email must be valid");
             return false;
+        } else {
+            emailTil.setError(null);
         }
         if (passwordEt.getText().toString().length() < 6) {
-            passwordEt.setError("Password must have at least 6 characters");
+            passwordTil.setError("Password must have at least 6 characters");
+            return false;
+        } else {
+            passwordTil.setError(null);
         }
 
         return true;
@@ -115,6 +126,9 @@ public class LoginActivity extends AppCompatActivity {
     private void findViews() {
         emailEt = findViewById(R.id.et_email);
         passwordEt = findViewById(R.id.et_password);
+
+        emailTil = findViewById(R.id.til_email);
+        passwordTil = findViewById(R.id.til_password);
 
         loginBtn = findViewById(R.id.btn_login);
 
