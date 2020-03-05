@@ -58,7 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (ContextCompat.checkSelfPermission(RegisterActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
                         != PackageManager.PERMISSION_GRANTED) {
-                    // Permission is not granted
+                    // Permission is not granted, so asking for it
                     ActivityCompat.requestPermissions(RegisterActivity.this,
                             new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
                     return;
@@ -165,6 +165,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         if (passwordEt.getText().toString().length() < 6) {
             passwordEt.setError("Password must have at least 6 characters");
+            return false;
         }
 
         return true;
