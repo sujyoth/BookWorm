@@ -35,13 +35,15 @@
         android:baselineAligned="false" >
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_fname"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/first_name"
             android:layout_marginTop="@dimen/vertical_margin"
             android:layout_marginStart="@dimen/horizontal_margin"
             android:layout_marginEnd="@dimen/horizontal_margin_half"
-            android:layout_weight="1" >
+            android:layout_weight="1"
+            app:errorEnabled="true" >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_first_name"
@@ -51,13 +53,15 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_lname"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/last_name"
             android:layout_marginTop="@dimen/vertical_margin"
             android:layout_marginStart="@dimen/horizontal_margin_half"
             android:layout_marginEnd="@dimen/horizontal_margin"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            app:errorEnabled="true" >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_last_name"
@@ -69,12 +73,14 @@
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/email"
-        android:layout_marginTop="@dimen/vertical_margin"
+        android:layout_marginTop="@dimen/vertical_margin_half"
         android:layout_marginStart="@dimen/horizontal_margin"
-        android:layout_marginEnd="@dimen/horizontal_margin" >
+        android:layout_marginEnd="@dimen/horizontal_margin"
+        app:errorEnabled="true" >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_email"
@@ -84,12 +90,14 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/password"
-        android:layout_marginTop="@dimen/vertical_margin"
+        android:layout_marginTop="@dimen/vertical_margin_half"
         android:layout_marginStart="@dimen/horizontal_margin"
-        android:layout_marginEnd="@dimen/horizontal_margin" >
+        android:layout_marginEnd="@dimen/horizontal_margin"
+        app:errorEnabled="true" >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_password"
@@ -103,7 +111,7 @@
         style="@style/Widget.MaterialComponents.Button.Icon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/vertical_margin"
+        android:layout_marginTop="@dimen/vertical_margin_half"
         android:layout_marginStart="@dimen/horizontal_margin"
         android:layout_marginEnd="@dimen/horizontal_margin"
         android:text="@string/select_location"

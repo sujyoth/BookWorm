@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,12 +21,14 @@ import com.ash.bookworm.R;
 import com.ash.bookworm.helpers.utilities.FirebaseUtil;
 import com.ash.bookworm.helpers.utilities.Util;
 import com.github.dhaval2404.imagepicker.ImagePicker;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.IOException;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText fNameEt, lNameEt, emailEt, passwordEt;
+    private EditText fnameEt, lnameEt, emailEt, passwordEt;
+    private TextInputLayout fnameTil, lnameTil, emailTil, passwordTil;
     private Button registerBtn, locationBtn, imageBtn;
     private Button hasRegisteredTv;
     private ImageView userImage;
@@ -78,8 +79,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                 final String email = emailEt.getText().toString();
                 final String password = passwordEt.getText().toString();
-                final String fname = fNameEt.getText().toString();
-                final String lname = lNameEt.getText().toString();
+                final String fname = fnameEt.getText().toString();
+                final String lname = lnameEt.getText().toString();
 
                 FirebaseUtil.writeNewUser(RegisterActivity.this, email, password, fname, lname, latitude, longitude, imagePath);
             }
@@ -106,6 +107,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             String locationName = Util.getLocationName(this.getApplicationContext(), latitude, longitude);
             locationBtn.setText(locationName);
+            locationBtn.setError(null);
         }
 
         if (requestCode == ImagePicker.REQUEST_CODE && resultCode == RESULT_OK) {
@@ -121,10 +123,15 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void findViews() {
-        fNameEt = findViewById(R.id.et_first_name);
-        lNameEt = findViewById(R.id.et_last_name);
+        fnameEt = findViewById(R.id.et_first_name);
+        lnameEt = findViewById(R.id.et_last_name);
         emailEt = findViewById(R.id.et_email);
         passwordEt = findViewById(R.id.et_password);
+
+        fnameTil = findViewById(R.id.til_fname);
+        lnameTil = findViewById(R.id.til_lname);
+        emailTil = findViewById(R.id.til_email);
+        passwordTil = findViewById(R.id.til_password);
 
         registerBtn = findViewById(R.id.btn_register);
         locationBtn = findViewById(R.id.btn_location);
@@ -136,36 +143,53 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean allFieldsValid() {
-        if (Util.isEmpty(fNameEt)) {
-            fNameEt.setError("First name cannot be empty");
+        if (Util.isEmpty(fnameEt)) {
+            fnameTil.setError("First name can't be empty");
             return false;
+        } else {
+            fnameTil.setError(null);
         }
-        if (Util.isEmpty(lNameEt)) {
-            lNameEt.setError("Last name cannot be empty");
+
+        if (Util.isEmpty(lnameEt)) {
+            lnameTil.setError("Last name can't be empty");
             return false;
+        } else {
+            lnameTil.setError(null);
         }
+
         if (Util.isEmpty(emailEt)) {
-            emailEt.setError("Email cannot be empty");
+            emailTil.setError("Email can't be empty");
             return false;
+        } else {
+            emailTil.setError(null);
         }
+
         if (Util.isEmpty(passwordEt)) {
-            passwordEt.setError("Password cannot be empty");
+            passwordTil.setError("Password can't be empty");
             return false;
+        } else {
+            passwordTil.setError(null);
         }
 
         if (latitude == null || longitude == null) {
             locationBtn.setError("Select location before proceeding");
             return false;
+        } else {
+            locationBtn.setError(null);
         }
 
         if (!Util.isValidEmail(emailEt.getText().toString())) {
-            emailEt.setError("Email must be valid");
+            emailTil.setError("Email must be valid");
             return false;
+        } else {
+            emailTil.setError(null);
         }
 
         if (passwordEt.getText().toString().length() < 6) {
-            passwordEt.setError("Password must have at least 6 characters");
+            passwordTil.setError("Password must have at least 6 characters");
             return false;
+        } else {
+            passwordTil.setError(null);
         }
 
         return true;
