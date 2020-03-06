@@ -44,7 +44,7 @@ public class BooksUtil {
         // Start the queue
         requestQueue.start();
 
-        String url = String.format("https://www.googleapis.com/books/v1/volumes?q=%s&key=%s&prettyPrint=true", searchTerm, key);
+        String url = String.format("https://www.googleapis.com/books/v1/volumes?q=%s&download=epub&key=%s&prettyPrint=true", searchTerm, key);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {

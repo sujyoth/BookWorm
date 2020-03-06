@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -40,7 +42,7 @@ public class InventoryFragment extends BaseFragment {
     private TextView noBooksTv;
 
     private InventoryListAdapter adapter;
-    private ShimmerFrameLayout listContainer;
+    private ShimmerFrameLayout shimmerContainer;
 
 
     @Override
@@ -49,7 +51,9 @@ public class InventoryFragment extends BaseFragment {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_inventory, container, false);
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Inventory");
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar.setTitle("Inventory");
+
         findViews();
 
         adapter = new InventoryListAdapter(books);
@@ -130,7 +134,7 @@ public class InventoryFragment extends BaseFragment {
 
     @Override
     public void updateUI() {
-        listContainer.setVisibility(View.GONE);
+        shimmerContainer.setVisibility(View.GONE);
         if (!books.isEmpty()) {
             booksRv.setVisibility(View.VISIBLE);
         } else {
@@ -146,7 +150,7 @@ public class InventoryFragment extends BaseFragment {
         fab = root.findViewById(R.id.fab);
         booksRv = root.findViewById(R.id.rv_books);
         noBooksTv = root.findViewById(R.id.tv_no_books);
-        listContainer = root.findViewById(R.id.shimmer_list_container);
+        shimmerContainer = root.findViewById(R.id.shimmer_list_container);
     }
 
 }

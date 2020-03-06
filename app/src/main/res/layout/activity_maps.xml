@@ -16,6 +16,7 @@
         android:paddingBottom="@dimen/vertical_margin_half"
         android:paddingStart="@dimen/horizontal_margin"
         android:paddingEnd="@dimen/horizontal_margin"
+        android:elevation="4dp"
         android:textSize="20sp" />
 
     <RelativeLayout
