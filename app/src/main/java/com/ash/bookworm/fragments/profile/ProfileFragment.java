@@ -52,13 +52,18 @@ public class ProfileFragment extends BaseFragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
                 switch (pos) {
                     case 0:
+                        Fragment fragment1 = new EditProfileFragment();
+                        FragmentTransaction transaction1 = getParentFragmentManager().beginTransaction();
+                        transaction1.replace(R.id.nav_host_fragment, fragment1);
+                        transaction1.addToBackStack("Profile");
+                        transaction1.commit();
                         break;
                     case 1:
-                        Fragment fragment = new InventoryFragment();
-                        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-                        transaction.replace(R.id.nav_host_fragment, fragment);
-                        transaction.addToBackStack("Profile");
-                        transaction.commit();
+                        Fragment fragment2 = new InventoryFragment();
+                        FragmentTransaction transaction2 = getParentFragmentManager().beginTransaction();
+                        transaction2.replace(R.id.nav_host_fragment, fragment2);
+                        transaction2.addToBackStack("Profile");
+                        transaction2.commit();
                         break;
                     case 2:
                         FirebaseAuth.getInstance().signOut();

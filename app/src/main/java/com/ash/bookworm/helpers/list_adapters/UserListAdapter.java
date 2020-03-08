@@ -12,9 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ash.bookworm.R;
 import com.ash.bookworm.helpers.models.User;
-import com.ash.bookworm.helpers.utilities.FirebaseUtil;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -92,7 +90,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ViewHo
             this.userImage = itemView.findViewById(R.id.user_image);
             this.userNameTv = itemView.findViewById(R.id.tv_user_name);
             this.userDistanceTv = itemView.findViewById(R.id.tv_distance);
-            linearLayout = itemView.findViewById(R.id.linear_layout);
+            linearLayout = itemView.findViewById(R.id.coordinator_layout);
         }
     }
 

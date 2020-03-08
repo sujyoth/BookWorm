@@ -30,7 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText fnameEt, lnameEt, emailEt, passwordEt;
     private TextInputLayout fnameTil, lnameTil, emailTil, passwordTil;
     private Button registerBtn, locationBtn, imageBtn;
-    private Button hasRegisteredTv;
+    private Button alreadyRegisteredBtn;
     private ImageView userImage;
 
     private Double latitude, longitude;
@@ -86,7 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        hasRegisteredTv.setOnClickListener(new View.OnClickListener() {
+        alreadyRegisteredBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
@@ -133,13 +133,13 @@ public class RegisterActivity extends AppCompatActivity {
         emailTil = findViewById(R.id.til_email);
         passwordTil = findViewById(R.id.til_password);
 
-        registerBtn = findViewById(R.id.btn_register);
+        registerBtn = findViewById(R.id.btn_confirm);
         locationBtn = findViewById(R.id.btn_location);
         imageBtn = findViewById(R.id.btn_image);
 
         userImage = findViewById(R.id.user_image);
 
-        hasRegisteredTv = findViewById(R.id.tv_has_registered);
+        alreadyRegisteredBtn = findViewById(R.id.btn_already_registered);
     }
 
     private boolean allFieldsValid() {

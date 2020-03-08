@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText emailEt, passwordEt;
     private TextInputLayout emailTil, passwordTil;
     private Button loginBtn;
-    private Button notRegisteredTv;
+    private Button notRegisteredBtn;
 
     private FirebaseAuth mAuth;
 
@@ -71,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        notRegisteredTv.setOnClickListener(new View.OnClickListener() {
+        notRegisteredBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
@@ -132,6 +131,6 @@ public class LoginActivity extends AppCompatActivity {
 
         loginBtn = findViewById(R.id.btn_login);
 
-        notRegisteredTv = findViewById(R.id.tv_not_registered);
+        notRegisteredBtn = findViewById(R.id.btn_not_registered);
     }
 }

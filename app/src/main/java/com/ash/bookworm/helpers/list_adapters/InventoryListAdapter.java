@@ -84,7 +84,7 @@ public class InventoryListAdapter extends RecyclerView.Adapter<InventoryListAdap
             this.bookImage = itemView.findViewById(R.id.book_image);
             this.bookNameTv = itemView.findViewById(R.id.tv_book_name);
             this.authorNameTv = itemView.findViewById(R.id.tv_author_name);
-            linearLayout = itemView.findViewById(R.id.linear_layout);
+            linearLayout = itemView.findViewById(R.id.coordinator_layout);
         }
     }
 

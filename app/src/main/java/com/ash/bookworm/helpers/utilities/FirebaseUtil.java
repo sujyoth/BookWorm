@@ -22,7 +22,9 @@ import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryEventListener;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,6 +35,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.List;
 
@@ -77,6 +80,44 @@ public final class FirebaseUtil {
                 });
     }
 
+    public static void writeUserDetails(final BaseFragment fragment, String uId, final String fname, final String lname, final Double latitude, final Double longitude, final Uri imagePath) {
+
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference userRef = mDatabase.child("users").child(uId);
+
+        userRef.child("fname").setValue(fname);
+        userRef.child("lname").setValue(lname);
+        userRef.child("latitude").setValue(latitude);
+        userRef.child("longitude").setValue(longitude);
+
+        GeoFire geoFire = new GeoFire(mDatabase.child("geofire"));
+        geoFire.setLocation(uId, new GeoLocation(latitude, longitude));
+
+        if (imagePath != null) {
+            // Adding user image to database
+            StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+            StorageReference userImageRef = storageRef.child("images/" + uId);
+
+            userImageRef.putFile(imagePath)
+                    .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                    fragment.updateUI();
+                }
+            })
+                    .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(fragment.getContext(), "Image upload failed.", Toast.LENGTH_SHORT);
+                    fragment.updateUI();
+                }
+            });
+        } else {
+            fragment.updateUI();
+        }
+    }
+
+
     public static void getUserDetails(final BaseFragment fragment, String uId) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         ref.child("users").child(uId).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -92,6 +133,8 @@ public final class FirebaseUtil {
             }
         });
     }
+
+
 
     public static void addBookToInventory(Book book) {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();

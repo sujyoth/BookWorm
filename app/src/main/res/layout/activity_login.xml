@@ -61,7 +61,7 @@
         android:text="@string/login" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/tv_not_registered"
+        android:id="@+id/btn_not_registered"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
