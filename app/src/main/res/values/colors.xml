@@ -4,6 +4,7 @@
     <color name="colorOnPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="windowBackground">#FFFFFF</color>
     <color name="white">#fff</color>
     <color name="green">#F6CF65</color>
 </resources>

@@ -53,9 +53,6 @@ public class BookDetailsFragment extends BaseFragment {
 
         bookId = getArguments().getString("bookId");
 
-        Toast.makeText(getContext(), bookId, Toast.LENGTH_SHORT).show();
-
-
         bundle = new Bundle();
         BooksUtil.getBookDetails(this, bookId, bundle);
 

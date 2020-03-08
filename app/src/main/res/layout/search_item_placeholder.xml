@@ -7,7 +7,7 @@
     android:paddingEnd="16dp" >
 
     <ImageView
-        android:layout_width="@dimen/book_image"
+        android:layout_width="35dp"
         android:layout_height="@dimen/book_image"
         android:layout_gravity="center_vertical"
         android:adjustViewBounds="true"
