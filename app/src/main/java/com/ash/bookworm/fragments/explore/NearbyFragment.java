@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -35,6 +36,8 @@ public class NearbyFragment extends BaseFragment {
     private UserListAdapter adapter;
 
     private List<User> nearbyUsers;
+    private ActionBar actionBar;
+    private String prevTitle;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,7 +52,9 @@ public class NearbyFragment extends BaseFragment {
             imageUrl = bundle.getString("imageUrl");
         }
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Nearby users who have " + bookName);
+        actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        prevTitle = actionBar.getTitle().toString();
+        actionBar.setTitle("Nearby users who have " + bookName);
 
         findViews();
         FirebaseUtil.getUserDetails(this, FirebaseAuth.getInstance().getUid());
@@ -62,6 +67,13 @@ public class NearbyFragment extends BaseFragment {
         nearbyRv.addItemDecoration(mDividerItemDecoration);
 
         return root;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        actionBar.setTitle(prevTitle);
     }
 
     @Override

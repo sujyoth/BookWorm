@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ash.bookworm.R;
 import com.ash.bookworm.fragments.explore.NearbyFragment;
+import com.ash.bookworm.fragments.other.BookDetailsFragment;
 import com.ash.bookworm.helpers.callbacks.BooksDiffCallback;
 import com.ash.bookworm.helpers.models.Book;
 import com.ash.bookworm.helpers.utilities.FirebaseUtil;
@@ -90,6 +91,22 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
             });
         }
 
+        holder.infoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new BookDetailsFragment();
+
+                Bundle args = new Bundle();
+                args.putString("bookId", book.getBookId());
+                fragment.setArguments(args);
+
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.add(R.id.nav_host_fragment, fragment);
+                transaction.addToBackStack("Explore");
+                transaction.commit();
+            }
+        });
+
     }
 
     @Override
@@ -107,13 +124,14 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView bookImage;
+        public ImageView bookImage, infoBtn;
         public TextView bookNameTv, authorNameTv;
         public LinearLayout linearLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
             this.bookImage = itemView.findViewById(R.id.book_image);
+            this.infoBtn = itemView.findViewById(R.id.btn_info);
             this.bookNameTv = itemView.findViewById(R.id.tv_book_name);
             this.authorNameTv = itemView.findViewById(R.id.tv_author_name);
             linearLayout = itemView.findViewById(R.id.coordinator_layout);
