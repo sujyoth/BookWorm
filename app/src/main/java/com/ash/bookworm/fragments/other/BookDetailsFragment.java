@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +35,8 @@ public class BookDetailsFragment extends BaseFragment {
     private ImageView bookImg;
     private TextView bookTitleTv, bookDescTv, authorNameTv;
     private Button addBtn, searchBtn;
+    private ProgressBar progressBar;
+    private ScrollView container;
 
     private String bookId, bookTitle, imageUrl, authorName;
     private String prevTitle;
@@ -112,6 +116,9 @@ public class BookDetailsFragment extends BaseFragment {
                 .load(imageUrl.replace("http", "https"))
                 .placeholder(R.drawable.book_placeholder)
                 .into(bookImg);
+
+        progressBar.setVisibility(View.GONE);
+        container.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -126,5 +133,8 @@ public class BookDetailsFragment extends BaseFragment {
         bookDescTv = root.findViewById(R.id.tv_book_desc);
         addBtn = root.findViewById(R.id.btn_add);
         searchBtn = root.findViewById(R.id.btn_search);
+
+        progressBar = root.findViewById(R.id.progress_bar);
+        container = root.findViewById(R.id.container);
     }
 }
