@@ -1,5 +1,6 @@
 package com.ash.bookworm.fragments.profile;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -56,7 +57,7 @@ public class InventoryFragment extends BaseFragment {
 
         findViews();
 
-        adapter = new InventoryListAdapter(books);
+        adapter = new InventoryListAdapter(books, getParentFragmentManager());
         booksRv.setHasFixedSize(true);
         booksRv.setLayoutManager(new LinearLayoutManager(getContext()));
         booksRv.setAdapter(adapter);
@@ -95,11 +96,6 @@ public class InventoryFragment extends BaseFragment {
             }
         });
         return root;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
     }
 
     private void enableSwipeToDeleteAndUndo() {

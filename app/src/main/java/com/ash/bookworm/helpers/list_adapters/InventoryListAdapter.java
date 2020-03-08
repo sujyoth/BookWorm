@@ -1,5 +1,6 @@
 package com.ash.bookworm.helpers.list_adapters;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,9 +9,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ash.bookworm.R;
+import com.ash.bookworm.fragments.other.BookDetailsFragment;
 import com.ash.bookworm.helpers.models.Book;
 import com.ash.bookworm.helpers.utilities.FirebaseUtil;
 import com.squareup.picasso.Picasso;
@@ -19,10 +24,17 @@ import java.util.List;
 
 public class InventoryListAdapter extends RecyclerView.Adapter<InventoryListAdapter.ViewHolder> {
     private List<Book> books;
+    private FragmentManager fragmentManager;
 
     public InventoryListAdapter(List<Book> books) {
         this.books = books;
     }
+
+    public InventoryListAdapter(List<Book> books, FragmentManager fragmentManager) {
+        this.books = books;
+        this.fragmentManager = fragmentManager;
+    }
+
 
     @Override
     public InventoryListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -49,8 +61,16 @@ public class InventoryListAdapter extends RecyclerView.Adapter<InventoryListAdap
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseUtil.addBookToInventory(book);
-                Toast.makeText(view.getContext(), "click on item: " + book.getBookId(), Toast.LENGTH_SHORT).show();
+                Fragment fragment = new BookDetailsFragment();
+
+                Bundle args = new Bundle();
+                args.putString("bookId", book.getBookId());
+                fragment.setArguments(args);
+
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.add(R.id.nav_host_fragment, fragment);
+                transaction.addToBackStack("Inventory");
+                transaction.commit();
             }
         });
     }

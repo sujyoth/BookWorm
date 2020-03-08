@@ -14,8 +14,11 @@
     <string name="title_explore">Explore</string>
     <string name="title_chats">Chats</string>
     <string name="title_profile">Profile</string>
+    <string name="about_book">About this book</string>
+    <string name="add_book_short">Add</string>
     <string name="add_book">Add a book to your inventory</string>
     <string name="search_books">Search for books nearby</string>
+    <string name="search_books_short">Search nearby</string>
     <string-array name="profile">
         <item>Edit Profile</item>
         <item>Edit Inventory</item>
