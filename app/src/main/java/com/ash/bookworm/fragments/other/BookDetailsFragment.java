@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ash.bookworm.R;
 import com.ash.bookworm.fragments.explore.NearbyFragment;
@@ -51,6 +52,9 @@ public class BookDetailsFragment extends BaseFragment {
         findViews();
 
         bookId = getArguments().getString("bookId");
+
+        Toast.makeText(getContext(), bookId, Toast.LENGTH_SHORT).show();
+
 
         bundle = new Bundle();
         BooksUtil.getBookDetails(this, bookId, bundle);

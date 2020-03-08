@@ -48,7 +48,7 @@ public class InventoryListAdapter extends RecyclerView.Adapter<InventoryListAdap
         final Book book = books.get(position);
         if (books.get(position) == null)
             return;
-        //holder.userNameTv.setTag(R.string.TAG_BOOK_ID, books[position].getBookId());
+
         holder.bookNameTv.setText(books.get(position).getBookName());
         holder.authorNameTv.setText(books.get(position).getAuthorName());
         Picasso.get()
@@ -93,15 +93,16 @@ public class InventoryListAdapter extends RecyclerView.Adapter<InventoryListAdap
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView bookImage;
+        public ImageView bookImage, infoBtn;
         public TextView bookNameTv, authorNameTv;
         public LinearLayout linearLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            this.bookImage = itemView.findViewById(R.id.book_image);
-            this.bookNameTv = itemView.findViewById(R.id.tv_book_name);
-            this.authorNameTv = itemView.findViewById(R.id.tv_author_name);
+            bookImage = itemView.findViewById(R.id.book_image);
+            infoBtn = itemView.findViewById(R.id.btn_info);
+            bookNameTv = itemView.findViewById(R.id.tv_book_name);
+            authorNameTv = itemView.findViewById(R.id.tv_author_name);
             linearLayout = itemView.findViewById(R.id.linear_layout);
         }
     }
