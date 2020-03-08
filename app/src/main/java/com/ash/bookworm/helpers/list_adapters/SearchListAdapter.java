@@ -84,7 +84,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
                     fragment.setArguments(args);
 
                     FragmentTransaction transaction = fragmentManager.beginTransaction();
-                    transaction.replace(R.id.nav_host_fragment, fragment);
+                    transaction.add(R.id.nav_host_fragment, fragment);
                     transaction.addToBackStack("Explore");
                     transaction.commit();
                 }
