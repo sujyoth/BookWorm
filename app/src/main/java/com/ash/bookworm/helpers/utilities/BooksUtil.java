@@ -56,9 +56,13 @@ public class BooksUtil {
                             for (int i = 0; i < data.length(); i++) {
                                 JSONObject book = data.getJSONObject(i);
                                 try {
+                                    String bookId = book.getString("id");
+
+                                    /*
                                     String bookId = book.getJSONObject("volumeInfo")
                                             .getJSONArray("industryIdentifiers")
                                             .getJSONObject(0).getString("identifier");
+                                    */
 
                                     String bookName = book.getJSONObject("volumeInfo")
                                             .getString("title");
