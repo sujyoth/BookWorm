@@ -90,7 +90,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ViewHo
             this.userImage = itemView.findViewById(R.id.user_image);
             this.userNameTv = itemView.findViewById(R.id.tv_user_name);
             this.userDistanceTv = itemView.findViewById(R.id.tv_distance);
-            linearLayout = itemView.findViewById(R.id.coordinator_layout);
+            linearLayout = itemView.findViewById(R.id.linear_layout);
         }
     }
 

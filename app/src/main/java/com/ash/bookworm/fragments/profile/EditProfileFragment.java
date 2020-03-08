@@ -164,7 +164,7 @@ public class EditProfileFragment extends BaseFragment {
     }
 
     private void findViews() {
-        coordinatorLayout = root.findViewById(R.id.coordinator_layout);
+        coordinatorLayout = root.findViewById(R.id.linear_layout);
 
         fnameEt = root.findViewById(R.id.et_first_name);
         lnameEt = root.findViewById(R.id.et_last_name);

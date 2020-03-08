@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -17,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ash.bookworm.R;
 import com.ash.bookworm.fragments.other.BookDetailsFragment;
 import com.ash.bookworm.helpers.models.Book;
-import com.ash.bookworm.helpers.utilities.FirebaseUtil;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -104,7 +102,7 @@ public class InventoryListAdapter extends RecyclerView.Adapter<InventoryListAdap
             this.bookImage = itemView.findViewById(R.id.book_image);
             this.bookNameTv = itemView.findViewById(R.id.tv_book_name);
             this.authorNameTv = itemView.findViewById(R.id.tv_author_name);
-            linearLayout = itemView.findViewById(R.id.coordinator_layout);
+            linearLayout = itemView.findViewById(R.id.linear_layout);
         }
     }
 
