@@ -253,7 +253,7 @@ public class BooksUtil {
                         } catch (JSONException e) {
                             Log.d(TAG, response.toString());
                             e.printStackTrace();
-                            Toast.makeText(fragment.getContext(), "No books were found.", Toast.LENGTH_SHORT);
+                            Toast.makeText(fragment.getContext(), "No books were found.", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -262,7 +262,7 @@ public class BooksUtil {
             public void onErrorResponse(VolleyError error) {
                 Log.d(TAG, error.toString());
                 error.printStackTrace();
-                Toast.makeText(fragment.getContext(), "No books were found.", Toast.LENGTH_SHORT);
+                Toast.makeText(fragment.getContext(), "No books were found.", Toast.LENGTH_SHORT).show();
             }
         }
         );

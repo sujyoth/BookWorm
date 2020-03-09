@@ -5,16 +5,27 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import me.dm7.barcodescanner.zbar.BarcodeFormat;
 import me.dm7.barcodescanner.zbar.Result;
 import me.dm7.barcodescanner.zbar.ZBarScannerView;
 
 public class ScannerActivity extends AppCompatActivity implements ZBarScannerView.ResultHandler {
     private ZBarScannerView mScannerView;
+    private List<BarcodeFormat> formats;
 
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);
         mScannerView = new ZBarScannerView(this);    // Programmatically initialize the scanner view
+
+        formats = new ArrayList<>();
+        formats.add(BarcodeFormat.EAN8);
+        formats.add(BarcodeFormat.EAN13);
+        mScannerView.setFormats(formats);
+
         setContentView(mScannerView);                // Set the scanner view as the content view
     }
 
@@ -34,14 +45,9 @@ public class ScannerActivity extends AppCompatActivity implements ZBarScannerVie
     @Override
     public void handleResult(Result rawResult) {
         // Do something with the result here
-       // Toast.makeText(this, rawResult.getContents(), Toast.LENGTH_SHORT).show();
-        //Log.v(TAG, rawResult.getBarcodeFormat().getName()); // Prints the scan format (qrcode, pdf417 etc.)
         Intent intent = new Intent();
-
         intent.putExtra("ISBN", rawResult.getContents());
         setResult(RESULT_OK,intent);
         finish();
-        // If you would like to resume scanning, call this method below:
-        mScannerView.resumeCameraPreview(this);
     }
 }
