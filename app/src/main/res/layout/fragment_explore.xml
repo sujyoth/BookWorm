@@ -7,30 +7,40 @@
     android:orientation="vertical"
     tools:context=".fragments.profile.AddBookFragment">
 
-
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_bar"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        app:queryHint="@string/search_books" />
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/barcode_button"
-        android:src="@drawable/ic_qr_scan_black_24dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerInParent="true"
-        android:layout_marginRight="22dp"
+        android:orientation="horizontal">
 
-        />
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            app:queryHint="@string/search_books"
+            android:layout_weight="1" />
 
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/barcode_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingEnd="@dimen/horizontal_margin"
+            android:paddingStart="@dimen/horizontal_margin_half"
+            android:src="@drawable/ic_qr_scan_black_24dp"
+            android:tint="?android:attr/colorPrimary"/>
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_results"

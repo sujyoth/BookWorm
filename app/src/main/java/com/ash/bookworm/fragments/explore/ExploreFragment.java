@@ -96,19 +96,18 @@ public class ExploreFragment extends Fragment {
         return root;
     }
 
-    private void findViews() {
-        searchBar = root.findViewById(R.id.search_bar);
-        resultsRv = root.findViewById(R.id.rv_results);
-        scanBarcode = root.findViewById(R.id.barcode_button);
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==32 && resultCode== Activity.RESULT_OK){
             ISBN = data.getStringExtra("ISBN");
             Toast.makeText(getContext(),ISBN, Toast.LENGTH_SHORT).show();
-
         }
+    }
+
+    private void findViews() {
+        searchBar = root.findViewById(R.id.search_bar);
+        resultsRv = root.findViewById(R.id.rv_results);
+        scanBarcode = root.findViewById(R.id.barcode_button);
     }
 }
