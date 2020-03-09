@@ -112,10 +112,16 @@ public class BookDetailsFragment extends BaseFragment {
             bookDescTv.setText(Html.fromHtml(bundle.getString("bookDesc")));
         }
 
-        Picasso.get()
-                .load(imageUrl.replace("http", "https"))
-                .placeholder(R.drawable.book_placeholder)
-                .into(bookImg);
+        if (!imageUrl.equals("")) {
+            Picasso.get()
+                    .load(imageUrl.replace("http", "https"))
+                    .placeholder(R.drawable.book_placeholder)
+                    .into(bookImg);
+        } else {
+            Picasso.get()
+                    .load(R.drawable.book_placeholder)
+                    .into(bookImg);
+        }
 
         progressBar.setVisibility(View.GONE);
         container.setVisibility(View.VISIBLE);

@@ -3,6 +3,7 @@ package com.ash.bookworm.helpers.utilities;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Cache;
 import com.android.volley.Network;
@@ -214,5 +215,58 @@ public class BooksUtil {
         }
         );
         requestQueue.add(jsonObjectRequest);
+    }
+
+    public static void getBookByISBN(final BaseFragment fragment, String ISBN, final Bundle bundle) {
+        RequestQueue requestQueue;
+        final List<Book> newBooks = new ArrayList<>();
+
+        // Instantiate the cache
+        Cache cache = new DiskBasedCache(fragment.getContext().getCacheDir(), 1024 * 1024 * 10); // 10MB cap
+
+        // Set up the network to use HttpURLConnection as the HTTP client.
+        Network network = new BasicNetwork(new HurlStack());
+
+        // Instantiate the RequestQueue with the cache and network.
+        requestQueue = new RequestQueue(cache, network);
+
+        // Start the queue
+        requestQueue.start();
+
+        String url = String.format("https://www.googleapis.com/books/v1/volumes?q=isbn:%s&key=%s&prettyPrint=true", ISBN, key);
+        Log.d(TAG, url);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray data = response.getJSONArray("items");
+
+                            JSONObject book = data.getJSONObject(0);
+
+                            String bookId = book.getString("id");
+
+                            bundle.putString("bookId", bookId);
+                            fragment.updateUI();
+
+                        } catch (JSONException e) {
+                            Log.d(TAG, response.toString());
+                            e.printStackTrace();
+                            Toast.makeText(fragment.getContext(), "No books were found.", Toast.LENGTH_SHORT);
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, error.toString());
+                error.printStackTrace();
+                Toast.makeText(fragment.getContext(), "No books were found.", Toast.LENGTH_SHORT);
+            }
+        }
+        );
+        requestQueue.add(jsonObjectRequest);
+
     }
 }

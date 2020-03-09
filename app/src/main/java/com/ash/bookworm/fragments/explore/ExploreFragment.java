@@ -15,20 +15,24 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ash.bookworm.R;
 import com.ash.bookworm.activities.ScannerActivity;
+import com.ash.bookworm.fragments.other.BookDetailsFragment;
 import com.ash.bookworm.helpers.list_adapters.SearchListAdapter;
+import com.ash.bookworm.helpers.models.BaseFragment;
 import com.ash.bookworm.helpers.models.Book;
+import com.ash.bookworm.helpers.models.User;
 import com.ash.bookworm.helpers.utilities.BooksUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExploreFragment extends Fragment {
+public class ExploreFragment extends BaseFragment {
     private View root;
     private SearchView searchBar;
     private RecyclerView resultsRv;
@@ -36,6 +40,7 @@ public class ExploreFragment extends Fragment {
     private int waitingTime = 200;
     private CountDownTimer timer;
     private String ISBN;
+    private Bundle bundle;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -101,8 +106,31 @@ public class ExploreFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==32 && resultCode== Activity.RESULT_OK){
             ISBN = data.getStringExtra("ISBN");
-            Toast.makeText(getContext(),ISBN, Toast.LENGTH_SHORT).show();
+
+            bundle = new Bundle();
+            BooksUtil.getBookByISBN(this, ISBN, bundle);
         }
+    }
+
+    @Override
+    public void updateUI() {
+        String bookId = bundle.getString("bookId");
+
+        Fragment fragment = new BookDetailsFragment();
+
+        Bundle args = new Bundle();
+        args.putString("bookId", bookId);
+        fragment.setArguments(args);
+
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+        transaction.add(R.id.nav_host_fragment, fragment);
+        transaction.addToBackStack("Explore");
+        transaction.commit();
+    }
+
+    @Override
+    public void updateUI(User user) {
+
     }
 
     private void findViews() {
