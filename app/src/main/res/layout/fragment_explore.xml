@@ -7,13 +7,30 @@
     android:orientation="vertical"
     tools:context=".fragments.profile.AddBookFragment">
 
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_bar"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
         app:queryHint="@string/search_books" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/barcode_button"
+        android:src="@drawable/ic_qr_scan_black_24dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:layout_marginRight="22dp"
+
+        />
+
+</RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_results"
