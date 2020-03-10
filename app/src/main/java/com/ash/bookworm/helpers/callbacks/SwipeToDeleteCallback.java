@@ -66,30 +66,34 @@ abstract public class SwipeToDeleteCallback extends ItemTouchHelper.Callback {
             return;
         }
 
+        int deleteIconTop, deleteIconMargin, deleteIconLeft, deleteIconRight, deleteIconBottom;
+
         mBackground.setColor(backgroundColor);
         if (dX < 0) {
             mBackground.setBounds(itemView.getRight() + (int) dX, itemView.getTop(), itemView.getRight(), itemView.getBottom());
             mBackground.draw(c);
 
-            int deleteIconTop = itemView.getTop() + (itemHeight - intrinsicHeight) / 2;
-            int deleteIconMargin = (itemHeight - intrinsicHeight) / 2;
-            int deleteIconLeft = itemView.getRight() - deleteIconMargin - intrinsicWidth;
-            int deleteIconRight = itemView.getRight() - deleteIconMargin;
-            int deleteIconBottom = deleteIconTop + intrinsicHeight;
+            deleteIconTop = itemView.getTop() + (itemHeight - intrinsicHeight) / 2;
+            deleteIconMargin = (itemHeight - intrinsicHeight) / 2;
+            deleteIconLeft = itemView.getRight() - deleteIconMargin - intrinsicWidth;
+            deleteIconRight = itemView.getRight() - deleteIconMargin;
+            deleteIconBottom = deleteIconTop + intrinsicHeight;
 
             deleteDrawable.setBounds(deleteIconLeft, deleteIconTop, deleteIconRight, deleteIconBottom);
+            deleteDrawable.setTint(Color.WHITE);
             deleteDrawable.draw(c);
         } else {
             mBackground.setBounds(itemView.getLeft(), itemView.getTop(), itemView.getLeft() + (int) dX, itemView.getBottom());
             mBackground.draw(c);
 
-            int deleteIconTop = itemView.getTop() + (itemHeight - intrinsicHeight) / 2;
-            int deleteIconMargin = (itemHeight - intrinsicHeight) / 2;
-            int deleteIconLeft = itemView.getLeft() + deleteIconMargin;
-            int deleteIconRight = itemView.getLeft() + deleteIconMargin + intrinsicWidth;
-            int deleteIconBottom = deleteIconTop + intrinsicHeight;
+            deleteIconTop = itemView.getTop() + (itemHeight - intrinsicHeight) / 2;
+            deleteIconMargin = (itemHeight - intrinsicHeight) / 2;
+            deleteIconLeft = itemView.getLeft() + deleteIconMargin;
+            deleteIconRight = itemView.getLeft() + deleteIconMargin + intrinsicWidth;
+            deleteIconBottom = deleteIconTop + intrinsicHeight;
 
             deleteDrawable.setBounds(deleteIconLeft, deleteIconTop, deleteIconRight, deleteIconBottom);
+            deleteDrawable.setTint(Color.WHITE);
             deleteDrawable.draw(c);
         }
 
