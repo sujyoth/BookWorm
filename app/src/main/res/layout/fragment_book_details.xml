@@ -49,7 +49,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="22sp"
                         android:textStyle="bold"
-                        android:fontFamily="helvetica"/>
+                        android:fontFamily="@font/google_sans" />
 
                     <TextView
                         android:id="@+id/tv_author_name"

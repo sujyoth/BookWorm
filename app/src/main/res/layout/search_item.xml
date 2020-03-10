@@ -45,7 +45,7 @@
 
     <ImageView
         android:id="@+id/btn_info"
-        android:tint="@color/colorPrimary"
+        android:tint="?android:attr/colorControlNormal"
         android:src="@drawable/ic_info_outline_black_24dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

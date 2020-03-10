@@ -29,7 +29,7 @@
             android:paddingEnd="@dimen/horizontal_margin"
             android:paddingStart="@dimen/horizontal_margin_half"
             android:src="@drawable/ic_qr_scan_black_24dp"
-            android:tint="?android:attr/colorPrimary"/>
+            android:tint="?android:attr/colorControlNormal"/>
 
     </LinearLayout>
 
