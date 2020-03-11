@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.other.BookDetailsFragment"
-    android:background="?android:attr/windowBackground" >
+    android:background="?android:attr/windowBackground"
+    tools:context=".fragments.other.BookDetailsFragment">
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -16,7 +16,7 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone" >
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -47,9 +47,9 @@
                         android:id="@+id/tv_book_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/google_sans"
                         android:textSize="22sp"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/google_sans" />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tv_author_name"
@@ -65,11 +65,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginStart="@dimen/horizontal_margin"
-                android:layout_marginEnd="@dimen/horizontal_margin"
                 android:layout_marginTop="@dimen/vertical_margin"
-                android:gravity="center" >
+                android:layout_marginEnd="@dimen/horizontal_margin"
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_add"
@@ -84,8 +84,8 @@
                     style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginStart="@dimen/horizontal_margin_half"
+                    android:layout_weight="1"
                     android:text="@string/search_books_short" />
 
             </LinearLayout>

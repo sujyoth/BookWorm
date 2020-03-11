@@ -3,19 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.explore.NearbyFragment"
-    android:background="?android:attr/windowBackground" >
+    android:background="?android:attr/windowBackground"
+    tools:context=".fragments.explore.NearbyFragment">
 
     <TextView
         android:id="@+id/tv_no_nearby_users"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/horizontal_margin"
         android:layout_gravity="center"
+        android:layout_margin="@dimen/horizontal_margin"
         android:text="@string/no_nearby_users"
+        android:textAlignment="center"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:textAlignment="center"
         android:visibility="gone" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
@@ -26,20 +26,31 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
-            <include layout="@layout/nearby_item_placeholder"/>
-            <include layout="@layout/nearby_item_placeholder"/>
-            <include layout="@layout/nearby_item_placeholder"/>
-            <include layout="@layout/nearby_item_placeholder"/>
-            <include layout="@layout/nearby_item_placeholder"/>
-            <include layout="@layout/nearby_item_placeholder"/>
-            <include layout="@layout/nearby_item_placeholder"/>
-            <include layout="@layout/nearby_item_placeholder"/>
-            <include layout="@layout/nearby_item_placeholder"/>
-            <include layout="@layout/nearby_item_placeholder"/>
-            <include layout="@layout/nearby_item_placeholder"/>
-            <include layout="@layout/nearby_item_placeholder"/>
+            <include layout="@layout/nearby_item_placeholder" />
+
+            <include layout="@layout/nearby_item_placeholder" />
+
+            <include layout="@layout/nearby_item_placeholder" />
+
+            <include layout="@layout/nearby_item_placeholder" />
+
+            <include layout="@layout/nearby_item_placeholder" />
+
+            <include layout="@layout/nearby_item_placeholder" />
+
+            <include layout="@layout/nearby_item_placeholder" />
+
+            <include layout="@layout/nearby_item_placeholder" />
+
+            <include layout="@layout/nearby_item_placeholder" />
+
+            <include layout="@layout/nearby_item_placeholder" />
+
+            <include layout="@layout/nearby_item_placeholder" />
+
+            <include layout="@layout/nearby_item_placeholder" />
 
         </LinearLayout>
 

@@ -2,14 +2,11 @@ package com.ash.bookworm.helpers.utilities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.location.Location;
 import android.net.Uri;
 import android.util.Log;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 
 import com.ash.bookworm.activities.HomeActivity;
 import com.ash.bookworm.helpers.list_adapters.InventoryListAdapter;
@@ -24,7 +21,6 @@ import com.firebase.geofire.GeoQueryEventListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -100,18 +96,18 @@ public final class FirebaseUtil {
 
             userImageRef.putFile(imagePath)
                     .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                    fragment.updateUI();
-                }
-            })
+                        @Override
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                            fragment.updateUI();
+                        }
+                    })
                     .addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(fragment.getContext(), "Image upload failed.", Toast.LENGTH_SHORT);
-                    fragment.updateUI();
-                }
-            });
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(fragment.getContext(), "Image upload failed.", Toast.LENGTH_SHORT);
+                            fragment.updateUI();
+                        }
+                    });
         } else {
             fragment.updateUI();
         }
@@ -133,7 +129,6 @@ public final class FirebaseUtil {
             }
         });
     }
-
 
 
     public static void addBookToInventory(Book book) {

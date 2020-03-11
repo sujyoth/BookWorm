@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
 
     <com.facebook.shimmer.ShimmerFrameLayout
@@ -10,9 +10,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/vertical_margin_half"
         android:layout_marginStart="@dimen/horizontal_margin"
-        android:layout_marginEnd="@dimen/horizontal_margin" >
+        android:layout_marginTop="@dimen/vertical_margin_half"
+        android:layout_marginEnd="@dimen/horizontal_margin">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/user_image"
@@ -27,9 +27,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/vertical_margin"
         android:layout_marginStart="@dimen/horizontal_margin"
-        android:layout_marginEnd="@dimen/horizontal_margin" >
+        android:layout_marginTop="@dimen/vertical_margin"
+        android:layout_marginEnd="@dimen/horizontal_margin">
 
         <include
             layout="@layout/text_placeholder"
@@ -42,12 +42,12 @@
         android:id="@+id/tv_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/horizontal_margin"
+        android:layout_marginTop="@dimen/vertical_margin_half"
+        android:layout_marginEnd="@dimen/horizontal_margin"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/vertical_margin_half"
-        android:layout_marginStart="@dimen/horizontal_margin"
-        android:layout_marginEnd="@dimen/horizontal_margin"
         android:visibility="gone" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
@@ -56,6 +56,7 @@
 
 
     </com.facebook.shimmer.ShimmerFrameLayout>
+
     <ListView
         android:id="@+id/lv_profile"
         android:layout_width="match_parent"

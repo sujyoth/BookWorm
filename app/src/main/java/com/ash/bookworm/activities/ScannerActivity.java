@@ -47,7 +47,7 @@ public class ScannerActivity extends AppCompatActivity implements ZBarScannerVie
         // Do something with the result here
         Intent intent = new Intent();
         intent.putExtra("ISBN", rawResult.getContents());
-        setResult(RESULT_OK,intent);
+        setResult(RESULT_OK, intent);
         finish();
     }
 }

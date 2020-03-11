@@ -9,12 +9,12 @@
         android:id="@+id/tv_no_books"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/horizontal_margin"
         android:layout_gravity="center"
+        android:layout_margin="@dimen/horizontal_margin"
         android:text="@string/no_books"
+        android:textAlignment="center"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:textAlignment="center"
         android:visibility="gone" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
@@ -26,20 +26,31 @@
             android:id="@+id/shimmer_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
-            <include layout="@layout/search_item_placeholder"/>
-            <include layout="@layout/search_item_placeholder"/>
-            <include layout="@layout/search_item_placeholder"/>
-            <include layout="@layout/search_item_placeholder"/>
-            <include layout="@layout/search_item_placeholder"/>
-            <include layout="@layout/search_item_placeholder"/>
-            <include layout="@layout/search_item_placeholder"/>
-            <include layout="@layout/search_item_placeholder"/>
-            <include layout="@layout/search_item_placeholder"/>
-            <include layout="@layout/search_item_placeholder"/>
-            <include layout="@layout/search_item_placeholder"/>
-            <include layout="@layout/search_item_placeholder"/>
+            <include layout="@layout/search_item_placeholder" />
+
+            <include layout="@layout/search_item_placeholder" />
+
+            <include layout="@layout/search_item_placeholder" />
+
+            <include layout="@layout/search_item_placeholder" />
+
+            <include layout="@layout/search_item_placeholder" />
+
+            <include layout="@layout/search_item_placeholder" />
+
+            <include layout="@layout/search_item_placeholder" />
+
+            <include layout="@layout/search_item_placeholder" />
+
+            <include layout="@layout/search_item_placeholder" />
+
+            <include layout="@layout/search_item_placeholder" />
+
+            <include layout="@layout/search_item_placeholder" />
+
+            <include layout="@layout/search_item_placeholder" />
 
         </LinearLayout>
 

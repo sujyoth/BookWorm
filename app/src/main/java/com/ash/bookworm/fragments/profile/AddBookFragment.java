@@ -61,7 +61,7 @@ public class AddBookFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(final String s) {
                 if (!s.trim().equals("") && s.trim().length() > 2) {
-                    if(timer != null){
+                    if (timer != null) {
                         timer.cancel();
                     }
                     timer = new CountDownTimer(waitingTime, 500) {

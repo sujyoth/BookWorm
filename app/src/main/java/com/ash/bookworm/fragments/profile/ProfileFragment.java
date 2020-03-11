@@ -80,7 +80,8 @@ public class ProfileFragment extends BaseFragment {
     }
 
     @Override
-    public void updateUI() { }
+    public void updateUI() {
+    }
 
     @Override
     public void updateUI(User user) {
@@ -89,18 +90,18 @@ public class ProfileFragment extends BaseFragment {
 
         userImageRef.getBytes(2048 * 2048)
                 .addOnSuccessListener(new OnSuccessListener<byte[]>() {
-            @Override
-            public void onSuccess(byte[] bytes) {
-                imageContainer.hideShimmer();
-                userImage.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
-            }
-        })
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        imageContainer.hideShimmer();
+                        userImage.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
+                    }
+                })
                 .addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                imageContainer.hideShimmer();
-            }
-        });
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        imageContainer.hideShimmer();
+                    }
+                });
 
         textContainer.hideShimmer();
         textContainer.setVisibility(View.GONE);

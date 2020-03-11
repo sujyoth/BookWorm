@@ -33,9 +33,11 @@ public class ChatsFragment extends BaseFragment {
         return root;
     }
 
-    public void updateUI() { }
+    public void updateUI() {
+    }
 
-    public void updateUI(User user) { }
+    public void updateUI(User user) {
+    }
 
     private void findViews() {
         chatsRv = root.findViewById(R.id.rv_chats);

@@ -1,12 +1,10 @@
 package com.ash.bookworm.fragments.profile;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -139,7 +137,8 @@ public class InventoryFragment extends BaseFragment {
     }
 
     @Override
-    public void updateUI(User user) { }
+    public void updateUI(User user) {
+    }
 
 
     private void findViews() {

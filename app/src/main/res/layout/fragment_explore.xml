@@ -16,20 +16,20 @@
             android:id="@+id/search_bar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
-            app:queryHint="@string/search_books"
-            android:layout_weight="1" />
+            app:queryHint="@string/search_books" />
 
         <ImageView
             android:id="@+id/barcode_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:paddingEnd="@dimen/horizontal_margin"
             android:paddingStart="@dimen/horizontal_margin_half"
+            android:paddingEnd="@dimen/horizontal_margin"
             android:src="@drawable/ic_scan"
-            android:tint="?android:attr/colorControlNormal"/>
+            android:tint="?android:attr/colorControlNormal" />
 
     </LinearLayout>
 
@@ -37,7 +37,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
 
 
     </RelativeLayout>

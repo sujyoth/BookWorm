@@ -1,12 +1,6 @@
 package com.ash.bookworm.fragments.other;
 
 import android.os.Bundle;
-
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +10,11 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.ash.bookworm.R;
 import com.ash.bookworm.fragments.explore.NearbyFragment;
@@ -49,7 +47,7 @@ public class BookDetailsFragment extends BaseFragment {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_book_details, container, false);
 
-        actionBar =  ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         prevTitle = actionBar.getTitle().toString();
         actionBar.setTitle("Book Details");
 

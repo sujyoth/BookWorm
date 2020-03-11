@@ -177,14 +177,16 @@ public class BooksUtil {
                                             .getJSONObject("imageLinks")
                                             .getString("small");
                                 } catch (JSONException e2) {
-                                    try { imageUrl = book.getJSONObject("volumeInfo")
-                                            .getJSONObject("imageLinks")
-                                            .getString("thumbnail"); }
-                                    catch (JSONException e3) {
-                                        try { imageUrl = book.getJSONObject("volumeInfo")
+                                    try {
+                                        imageUrl = book.getJSONObject("volumeInfo")
                                                 .getJSONObject("imageLinks")
-                                                .getString("smallThumbnail"); }
-                                        catch (JSONException e4) {
+                                                .getString("thumbnail");
+                                    } catch (JSONException e3) {
+                                        try {
+                                            imageUrl = book.getJSONObject("volumeInfo")
+                                                    .getJSONObject("imageLinks")
+                                                    .getString("smallThumbnail");
+                                        } catch (JSONException e4) {
                                             e4.printStackTrace();
                                         }
                                     }

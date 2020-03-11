@@ -72,7 +72,7 @@ public class ExploreFragment extends BaseFragment {
                 }
 
 
-                startActivityForResult(new Intent(getActivity(), ScannerActivity.class),32);
+                startActivityForResult(new Intent(getActivity(), ScannerActivity.class), 32);
             }
         });
 
@@ -91,7 +91,7 @@ public class ExploreFragment extends BaseFragment {
             @Override
             public boolean onQueryTextChange(final String s) {
                 if (!s.trim().equals("") && s.trim().length() > 2) {
-                    if(timer != null){
+                    if (timer != null) {
                         timer.cancel();
                     }
                     timer = new CountDownTimer(waitingTime, 500) {
@@ -115,7 +115,7 @@ public class ExploreFragment extends BaseFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==32 && resultCode== Activity.RESULT_OK){
+        if (requestCode == 32 && resultCode == Activity.RESULT_OK) {
             ISBN = data.getStringExtra("ISBN");
 
             bundle = new Bundle();
