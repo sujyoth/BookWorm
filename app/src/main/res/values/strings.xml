@@ -32,5 +32,6 @@
     <string name="no_books">No books found in inventory. Add books using the Floating Action Button</string>
     <string name="no_chats">No chats found.</string>
     <string name="no_nearby_users">No nearby users have the requested book.</string>
+    <string name="type_message">Type a message</string>
 
 </resources>

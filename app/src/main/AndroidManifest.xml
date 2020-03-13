@@ -19,7 +19,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.ScannerActivity"></activity>
+        <activity android:name=".activities.ChatActivity"></activity>
+        <activity android:name=".activities.ScannerActivity" />
         <activity
             android:name=".activities.HomeActivity"
             android:label="@string/title_activity_home" />
@@ -33,14 +34,10 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key"
-
-            />
-
+            android:value="@string/google_maps_key" />
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode" />
-
 
         <activity
             android:name=".activities.MapsActivity"

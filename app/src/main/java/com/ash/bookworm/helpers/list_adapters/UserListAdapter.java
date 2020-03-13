@@ -1,5 +1,6 @@
 package com.ash.bookworm.helpers.list_adapters;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ash.bookworm.R;
+import com.ash.bookworm.activities.ChatActivity;
 import com.ash.bookworm.helpers.models.User;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -70,6 +72,8 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ViewHo
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent i = new Intent(view.getContext(), ChatActivity.class);
+                view.getContext().startActivity(i);
             }
         });
 
