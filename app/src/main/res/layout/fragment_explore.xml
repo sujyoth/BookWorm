@@ -10,7 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingEnd="@dimen/horizontal_margin_half" >
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search_bar"
@@ -24,22 +25,19 @@
         <ImageView
             android:id="@+id/barcode_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:paddingTop="@dimen/vertical_margin_half"
+            android:paddingBottom="@dimen/vertical_margin_half"
             android:paddingStart="@dimen/horizontal_margin_half"
-            android:paddingEnd="@dimen/horizontal_margin"
+            android:paddingEnd="@dimen/horizontal_margin_half"
             android:src="@drawable/ic_scan"
-            android:tint="?android:attr/colorControlNormal" />
+            android:tint="?android:attr/colorControlNormal"
+            android:background="?attr/selectableItemBackground"
+            android:focusable="true"
+            android:clickable="true" />
 
     </LinearLayout>
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_results"

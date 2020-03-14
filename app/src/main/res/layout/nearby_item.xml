@@ -5,7 +5,10 @@
     android:layout_height="74dp"
     android:orientation="horizontal"
     android:paddingStart="16dp"
-    android:paddingEnd="16dp">
+    android:paddingEnd="16dp"
+    android:background="?attr/selectableItemBackground"
+    android:focusable="true"
+    android:clickable="true" >
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/user_image"

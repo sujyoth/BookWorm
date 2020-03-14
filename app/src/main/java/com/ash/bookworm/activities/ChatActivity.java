@@ -1,18 +1,23 @@
 package com.ash.bookworm.activities;
 
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.ash.bookworm.R;
 
 public class ChatActivity extends AppCompatActivity {
     private CoordinatorLayout sendBtn;
-    private ImageView setImageBtn;
+    private ImageView setImageBtn, backBtn;
     private EditText messageEt;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +25,15 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
 
         findViews();
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
     }
 
@@ -27,5 +41,18 @@ public class ChatActivity extends AppCompatActivity {
         sendBtn = findViewById(R.id.btn_send);
         setImageBtn = findViewById(R.id.btn_set_image);
         messageEt = findViewById(R.id.et_message);
+
+        backBtn = findViewById(R.id.btn_back);
+
+        toolbar = findViewById(R.id.toolbar);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            default:
+                finish();
+                return true;
+        }
     }
 }
