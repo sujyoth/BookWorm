@@ -9,12 +9,12 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.ash.bookworm.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ChatActivity extends AppCompatActivity {
-    private CoordinatorLayout sendBtn;
+    private FloatingActionButton sendBtn;
     private ImageView setImageBtn, backBtn;
     private EditText messageEt;
     private Toolbar toolbar;

@@ -33,7 +33,7 @@
             android:paddingEnd="@dimen/horizontal_margin_half"
             android:src="@drawable/ic_scan"
             android:tint="?android:attr/colorControlNormal"
-            android:background="?attr/selectableItemBackground"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
             android:focusable="true"
             android:clickable="true" />
 
