@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -45,10 +44,6 @@ public class AddBookFragment extends Fragment {
         resultsRv.setHasFixedSize(true);
         resultsRv.setLayoutManager(new LinearLayoutManager(getContext()));
         resultsRv.setAdapter(adapter);
-
-        DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(resultsRv.getContext(),
-                DividerItemDecoration.VERTICAL);
-        resultsRv.addItemDecoration(mDividerItemDecoration);
 
         searchBar.setActivated(true);
         searchBar.onActionViewExpanded();

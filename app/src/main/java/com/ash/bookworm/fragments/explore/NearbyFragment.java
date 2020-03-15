@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -60,10 +59,6 @@ public class NearbyFragment extends BaseFragment {
 
         nearbyRv.setHasFixedSize(true);
         nearbyRv.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(nearbyRv.getContext(),
-                DividerItemDecoration.VERTICAL);
-        nearbyRv.addItemDecoration(mDividerItemDecoration);
 
         return root;
     }

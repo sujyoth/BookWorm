@@ -19,7 +19,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -75,10 +74,6 @@ public class ExploreFragment extends BaseFragment {
                 startActivityForResult(new Intent(getActivity(), ScannerActivity.class), 32);
             }
         });
-
-        DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(resultsRv.getContext(),
-                DividerItemDecoration.VERTICAL);
-        resultsRv.addItemDecoration(mDividerItemDecoration);
 
         searchBar.setActivated(true);
         searchBar.onActionViewExpanded();

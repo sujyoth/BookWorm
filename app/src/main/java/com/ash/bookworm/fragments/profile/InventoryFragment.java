@@ -60,10 +60,6 @@ public class InventoryFragment extends BaseFragment {
         booksRv.setLayoutManager(new LinearLayoutManager(getContext()));
         booksRv.setAdapter(adapter);
 
-        DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(booksRv.getContext(),
-                DividerItemDecoration.VERTICAL);
-        booksRv.addItemDecoration(mDividerItemDecoration);
-
         enableSwipeToDeleteAndUndo();
 
         FirebaseUtil.getBooksFromInventory(FirebaseAuth.getInstance().getUid(), this, adapter, books);
