@@ -27,7 +27,7 @@ import com.ash.bookworm.helpers.list_adapters.SearchListAdapter;
 import com.ash.bookworm.helpers.models.BaseFragment;
 import com.ash.bookworm.helpers.models.Book;
 import com.ash.bookworm.helpers.models.User;
-import com.ash.bookworm.helpers.utilities.BooksUtil;
+import com.ash.bookworm.helpers.utilities.GoogleBooksUtil;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.ArrayList;
@@ -78,7 +78,7 @@ public class ExploreFragment extends BaseFragment {
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                BooksUtil.searchBooks(ExploreFragment.this, adapter, s.trim());
+                GoogleBooksUtil.searchBooks(ExploreFragment.this, adapter, s.trim());
                 shimmerContainer.setVisibility(View.VISIBLE);
                 return false;
             }
@@ -99,7 +99,7 @@ public class ExploreFragment extends BaseFragment {
             ISBN = data.getStringExtra("ISBN");
 
             bundle = new Bundle();
-            BooksUtil.getBookByISBN(this, ISBN, bundle);
+            GoogleBooksUtil.getBookByISBN(this, ISBN, bundle);
         }
     }
 

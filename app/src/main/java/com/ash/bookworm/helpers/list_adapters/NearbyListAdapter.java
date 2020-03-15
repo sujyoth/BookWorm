@@ -22,11 +22,11 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ViewHolder> {
+public class NearbyListAdapter extends RecyclerView.Adapter<NearbyListAdapter.ViewHolder> {
     private List<User> users;
     private Location currentUserLocation;
 
-    public UserListAdapter(Location currentUserLocation, List<User> users) {
+    public NearbyListAdapter(Location currentUserLocation, List<User> users) {
         this.currentUserLocation = currentUserLocation;
         this.users = users;
     }
@@ -37,15 +37,15 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ViewHo
     }
 
     @Override
-    public UserListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public NearbyListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View searchItem = layoutInflater.inflate(R.layout.nearby_item, parent, false);
-        UserListAdapter.ViewHolder viewHolder = new UserListAdapter.ViewHolder(searchItem);
+        NearbyListAdapter.ViewHolder viewHolder = new NearbyListAdapter.ViewHolder(searchItem);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(final UserListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final NearbyListAdapter.ViewHolder holder, int position) {
         if (users.get(position) == null)
             return;
         final User user = users.get(position);

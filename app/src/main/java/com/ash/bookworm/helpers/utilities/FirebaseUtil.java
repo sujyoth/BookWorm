@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 
 import com.ash.bookworm.activities.HomeActivity;
 import com.ash.bookworm.helpers.list_adapters.InventoryListAdapter;
-import com.ash.bookworm.helpers.list_adapters.UserListAdapter;
+import com.ash.bookworm.helpers.list_adapters.NearbyListAdapter;
 import com.ash.bookworm.helpers.models.BaseFragment;
 import com.ash.bookworm.helpers.models.Book;
 import com.ash.bookworm.helpers.models.User;
@@ -166,7 +166,7 @@ public final class FirebaseUtil {
         });
     }
 
-    public static void getNearbyUsersWithBook(final String uId, final String searchedBookId, final BaseFragment fragment, final List<User> nearbyUsers, final UserListAdapter adapter) {
+    public static void getNearbyUsersWithBook(final String uId, final String searchedBookId, final BaseFragment fragment, final List<User> nearbyUsers, final NearbyListAdapter adapter) {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mDatabase.child("users").child(uId).addListenerForSingleValueEvent(new ValueEventListener() {

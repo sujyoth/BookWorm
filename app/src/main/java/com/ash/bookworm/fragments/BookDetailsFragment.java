@@ -20,7 +20,7 @@ import com.ash.bookworm.R;
 import com.ash.bookworm.helpers.models.BaseFragment;
 import com.ash.bookworm.helpers.models.Book;
 import com.ash.bookworm.helpers.models.User;
-import com.ash.bookworm.helpers.utilities.BooksUtil;
+import com.ash.bookworm.helpers.utilities.GoogleBooksUtil;
 import com.ash.bookworm.helpers.utilities.FirebaseUtil;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
@@ -55,7 +55,7 @@ public class BookDetailsFragment extends BaseFragment {
         bookId = getArguments().getString("bookId");
 
         bundle = new Bundle();
-        BooksUtil.getBookDetails(this, bookId, bundle);
+        GoogleBooksUtil.getBookDetails(this, bookId, bundle);
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override

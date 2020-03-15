@@ -15,7 +15,7 @@ import com.ash.bookworm.helpers.list_adapters.SearchListAdapter;
 import com.ash.bookworm.helpers.models.BaseFragment;
 import com.ash.bookworm.helpers.models.Book;
 import com.ash.bookworm.helpers.models.User;
-import com.ash.bookworm.helpers.utilities.BooksUtil;
+import com.ash.bookworm.helpers.utilities.GoogleBooksUtil;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.ArrayList;
@@ -48,7 +48,7 @@ public class AddBookFragment extends BaseFragment {
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                BooksUtil.searchBooks(AddBookFragment.this, adapter, s.trim());
+                GoogleBooksUtil.searchBooks(AddBookFragment.this, adapter, s.trim());
                 shimmerContainer.setVisibility(View.VISIBLE);
                 return false;
             }

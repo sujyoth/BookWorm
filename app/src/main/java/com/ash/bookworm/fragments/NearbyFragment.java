@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ash.bookworm.R;
-import com.ash.bookworm.helpers.list_adapters.UserListAdapter;
+import com.ash.bookworm.helpers.list_adapters.NearbyListAdapter;
 import com.ash.bookworm.helpers.models.BaseFragment;
 import com.ash.bookworm.helpers.models.User;
 import com.ash.bookworm.helpers.utilities.FirebaseUtil;
@@ -31,7 +31,7 @@ public class NearbyFragment extends BaseFragment {
     private TextView noNearbyUsersTv;
     private ShimmerFrameLayout listContainer;
 
-    private UserListAdapter adapter;
+    private NearbyListAdapter adapter;
 
     private List<User> nearbyUsers;
     private ActionBar actionBar;
@@ -96,7 +96,7 @@ public class NearbyFragment extends BaseFragment {
         currentUserLocation.setLongitude(currentUser.getLongitude());
 
         nearbyUsers = new ArrayList<>();
-        adapter = new UserListAdapter(currentUserLocation, nearbyUsers);
+        adapter = new NearbyListAdapter(currentUserLocation, nearbyUsers);
         nearbyRv.setAdapter(adapter);
 
         FirebaseUtil.getNearbyUsersWithBook(FirebaseAuth.getInstance().getUid(), bookId, this, nearbyUsers, adapter);
