@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:attr/windowBackground"
-    tools:context=".fragments.explore.NearbyFragment">
+    tools:context=".fragments.NearbyFragment">
 
     <TextView
         android:id="@+id/tv_no_nearby_users"
@@ -15,7 +15,6 @@
         android:text="@string/no_nearby_users"
         android:textAlignment="center"
         android:textSize="30sp"
-        android:textStyle="bold"
         android:visibility="gone" />
 
     <com.facebook.shimmer.ShimmerFrameLayout

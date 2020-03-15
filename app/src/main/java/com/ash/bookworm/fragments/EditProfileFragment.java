@@ -1,4 +1,4 @@
-package com.ash.bookworm.fragments.profile;
+package com.ash.bookworm.fragments;
 
 import android.Manifest;
 import android.app.Activity;

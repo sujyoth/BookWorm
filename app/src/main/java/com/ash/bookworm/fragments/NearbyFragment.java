@@ -1,4 +1,4 @@
-package com.ash.bookworm.fragments.explore;
+package com.ash.bookworm.fragments;
 
 import android.location.Location;
 import android.os.Bundle;

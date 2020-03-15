@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.profile.InventoryFragment">
+    android:background="?android:attr/windowBackground"
+    android:animateLayoutChanges="true"
+    tools:context=".fragments.InventoryFragment">
 
     <TextView
         android:id="@+id/tv_no_books"
@@ -14,7 +16,6 @@
         android:text="@string/no_books"
         android:textAlignment="center"
         android:textSize="30sp"
-        android:textStyle="bold"
         android:visibility="gone" />
 
     <com.facebook.shimmer.ShimmerFrameLayout

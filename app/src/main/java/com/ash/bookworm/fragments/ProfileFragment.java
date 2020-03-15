@@ -1,4 +1,4 @@
-package com.ash.bookworm.fragments.profile;
+package com.ash.bookworm.fragments;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;

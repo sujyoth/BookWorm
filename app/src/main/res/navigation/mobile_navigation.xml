@@ -6,19 +6,19 @@
 
     <fragment
         android:id="@+id/navigation_explore"
-        android:name="com.ash.bookworm.fragments.explore.ExploreFragment"
+        android:name="com.ash.bookworm.fragments.ExploreFragment"
         android:label="@string/title_explore"
         tools:layout="@layout/fragment_explore" />
 
     <fragment
         android:id="@+id/navigation_chats"
-        android:name="com.ash.bookworm.fragments.chats.ChatsFragment"
+        android:name="com.ash.bookworm.fragments.ChatsFragment"
         android:label="@string/title_chats"
         tools:layout="@layout/fragment_chats" />
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.ash.bookworm.fragments.profile.ProfileFragment"
+        android:name="com.ash.bookworm.fragments.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

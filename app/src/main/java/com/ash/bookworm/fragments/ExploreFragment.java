@@ -1,4 +1,4 @@
-package com.ash.bookworm.fragments.explore;
+package com.ash.bookworm.fragments;
 
 import android.Manifest;
 import android.app.Activity;
@@ -23,7 +23,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ash.bookworm.R;
 import com.ash.bookworm.activities.ScannerActivity;
-import com.ash.bookworm.fragments.other.BookDetailsFragment;
 import com.ash.bookworm.helpers.list_adapters.SearchListAdapter;
 import com.ash.bookworm.helpers.models.BaseFragment;
 import com.ash.bookworm.helpers.models.Book;

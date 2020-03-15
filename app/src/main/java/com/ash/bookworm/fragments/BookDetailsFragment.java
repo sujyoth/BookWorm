@@ -1,4 +1,4 @@
-package com.ash.bookworm.fragments.other;
+package com.ash.bookworm.fragments;
 
 import android.os.Bundle;
 import android.text.Html;
@@ -17,7 +17,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.ash.bookworm.R;
-import com.ash.bookworm.fragments.explore.NearbyFragment;
 import com.ash.bookworm.helpers.models.BaseFragment;
 import com.ash.bookworm.helpers.models.Book;
 import com.ash.bookworm.helpers.models.User;

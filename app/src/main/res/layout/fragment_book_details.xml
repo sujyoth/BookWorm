@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
     android:background="?android:attr/windowBackground"
-    tools:context=".fragments.other.BookDetailsFragment">
+    tools:context=".fragments.BookDetailsFragment">
 
     <ProgressBar
         android:id="@+id/progress_bar"

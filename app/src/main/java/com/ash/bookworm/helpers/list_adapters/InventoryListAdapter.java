@@ -14,7 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ash.bookworm.R;
-import com.ash.bookworm.fragments.other.BookDetailsFragment;
+import com.ash.bookworm.fragments.BookDetailsFragment;
 import com.ash.bookworm.helpers.models.Book;
 import com.squareup.picasso.Picasso;
 
