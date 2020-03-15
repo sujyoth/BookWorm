@@ -54,7 +54,9 @@ public class AddBookFragment extends BaseFragment {
             }
 
             @Override
-            public boolean onQueryTextChange(final String s) { return false; }
+            public boolean onQueryTextChange(final String s) {
+                return false;
+            }
         });
 
         return root;
