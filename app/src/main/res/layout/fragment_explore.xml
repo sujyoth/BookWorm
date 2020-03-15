@@ -39,6 +39,47 @@
 
     </LinearLayout>
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_list_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" >
+
+        <LinearLayout
+            android:id="@+id/shimmer_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/search_item_placeholder" />
+
+            <include layout="@layout/search_item_placeholder" />
+
+            <include layout="@layout/search_item_placeholder" />
+
+            <include layout="@layout/search_item_placeholder" />
+
+            <include layout="@layout/search_item_placeholder" />
+
+            <include layout="@layout/search_item_placeholder" />
+
+            <include layout="@layout/search_item_placeholder" />
+
+            <include layout="@layout/search_item_placeholder" />
+
+            <include layout="@layout/search_item_placeholder" />
+
+            <include layout="@layout/search_item_placeholder" />
+
+            <include layout="@layout/search_item_placeholder" />
+
+            <include layout="@layout/search_item_placeholder" />
+
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_results"
         android:layout_width="match_parent"

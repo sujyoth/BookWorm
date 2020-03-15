@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +29,7 @@ import com.ash.bookworm.helpers.models.BaseFragment;
 import com.ash.bookworm.helpers.models.Book;
 import com.ash.bookworm.helpers.models.User;
 import com.ash.bookworm.helpers.utilities.BooksUtil;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +39,7 @@ public class ExploreFragment extends BaseFragment {
     private SearchView searchBar;
     private RecyclerView resultsRv;
     private ImageView scanBarcode;
-    private int waitingTime = 200;
-    private CountDownTimer timer;
+    private ShimmerFrameLayout shimmerContainer;
     private String ISBN;
     private Bundle bundle;
 
@@ -80,26 +79,13 @@ public class ExploreFragment extends BaseFragment {
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
+                BooksUtil.searchBooks(ExploreFragment.this, adapter, s.trim());
+                shimmerContainer.setVisibility(View.VISIBLE);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(final String s) {
-                if (!s.trim().equals("") && s.trim().length() > 2) {
-                    if (timer != null) {
-                        timer.cancel();
-                    }
-                    timer = new CountDownTimer(waitingTime, 500) {
-
-                        public void onTick(long millisUntilFinished) {
-                        }
-
-                        public void onFinish() {
-                            BooksUtil.searchBooks(getContext(), adapter, s.trim());
-                        }
-                    };
-                    timer.start();
-                }
                 return false;
             }
         });
@@ -136,12 +122,13 @@ public class ExploreFragment extends BaseFragment {
 
     @Override
     public void updateUI(User user) {
-
+        shimmerContainer.setVisibility(View.GONE);
     }
 
     private void findViews() {
         searchBar = root.findViewById(R.id.search_bar);
         resultsRv = root.findViewById(R.id.rv_results);
         scanBarcode = root.findViewById(R.id.barcode_button);
+        shimmerContainer = root.findViewById(R.id.shimmer_list_container);
     }
 }

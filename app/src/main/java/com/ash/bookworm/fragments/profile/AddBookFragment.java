@@ -1,34 +1,32 @@
 package com.ash.bookworm.fragments.profile;
 
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ash.bookworm.R;
 import com.ash.bookworm.helpers.list_adapters.SearchListAdapter;
+import com.ash.bookworm.helpers.models.BaseFragment;
 import com.ash.bookworm.helpers.models.Book;
+import com.ash.bookworm.helpers.models.User;
 import com.ash.bookworm.helpers.utilities.BooksUtil;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddBookFragment extends Fragment {
+public class AddBookFragment extends BaseFragment {
 
     private View root;
     private SearchView searchBar;
     private RecyclerView resultsRv;
-
-    private int waitingTime = 200;
-    private CountDownTimer timer;
-
+    private ShimmerFrameLayout shimmerContainer;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,36 +48,32 @@ public class AddBookFragment extends Fragment {
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
+                BooksUtil.searchBooks(AddBookFragment.this, adapter, s.trim());
+                shimmerContainer.setVisibility(View.VISIBLE);
                 return false;
             }
 
             @Override
-            public boolean onQueryTextChange(final String s) {
-                if (!s.trim().equals("") && s.trim().length() > 2) {
-                    if (timer != null) {
-                        timer.cancel();
-                    }
-                    timer = new CountDownTimer(waitingTime, 500) {
-
-                        public void onTick(long millisUntilFinished) {
-                        }
-
-                        public void onFinish() {
-                            BooksUtil.searchBooks(getContext(), adapter, s.trim());
-                        }
-                    };
-                    timer.start();
-                }
-                return false;
-            }
+            public boolean onQueryTextChange(final String s) { return false; }
         });
 
         return root;
     }
 
+    @Override
+    public void updateUI() {
+
+    }
+
+    @Override
+    public void updateUI(User user) {
+        shimmerContainer.setVisibility(View.GONE);
+    }
+
     private void findViews() {
         searchBar = root.findViewById(R.id.search_bar);
         resultsRv = root.findViewById(R.id.rv_results);
+        shimmerContainer = root.findViewById(R.id.shimmer_list_container);
     }
 
 }

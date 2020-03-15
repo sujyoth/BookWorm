@@ -1,6 +1,5 @@
 package com.ash.bookworm.helpers.utilities;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -18,6 +17,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.ash.bookworm.helpers.list_adapters.SearchListAdapter;
 import com.ash.bookworm.helpers.models.BaseFragment;
 import com.ash.bookworm.helpers.models.Book;
+import com.ash.bookworm.helpers.models.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,12 +31,12 @@ import static com.android.volley.VolleyLog.TAG;
 public class BooksUtil {
     private static String key = "AIzaSyDmfcF65dp6RZGVluwTaPiVR2t2NcR9u-E";
 
-    public static void searchBooks(final Context context, final SearchListAdapter adapter, String searchTerm) {
+    public static void searchBooks(final BaseFragment fragment, final SearchListAdapter adapter, String searchTerm) {
         RequestQueue requestQueue;
         final List<Book> newBooks = new ArrayList<>();
 
         // Instantiate the cache
-        Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024 * 10); // 10MB cap
+        Cache cache = new DiskBasedCache(fragment.getContext().getCacheDir(), 1024 * 1024 * 10); // 10MB cap
 
         // Set up the network to use HttpURLConnection as the HTTP client.
         Network network = new BasicNetwork(new HurlStack());
@@ -47,7 +47,7 @@ public class BooksUtil {
         // Start the queue
         requestQueue.start();
 
-        String url = String.format("https://www.googleapis.com/books/v1/volumes?q=%s&download=epub&key=%s&prettyPrint=true", searchTerm, key);
+        String url = String.format("https://www.googleapis.com/books/v1/volumes?q=%s&download=epub&maxResults=40&key=%s&prettyPrint=true", searchTerm, key);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -61,12 +61,6 @@ public class BooksUtil {
                                 try {
                                     String bookId = book.getString("id");
 
-                                    /*
-                                    String bookId = book.getJSONObject("volumeInfo")
-                                            .getJSONArray("industryIdentifiers")
-                                            .getJSONObject(0).getString("identifier");
-                                    */
-
                                     String bookName = book.getJSONObject("volumeInfo")
                                             .getString("title");
 
@@ -79,12 +73,12 @@ public class BooksUtil {
                                             .getString("thumbnail");
 
                                     newBooks.add(new Book(bookId, bookName, authorName, imageUrl));
-
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
                             }
                             adapter.updateList(newBooks);
+                            fragment.updateUI(new User());
                         } catch (JSONException e) {
                             Log.d(TAG, response.toString());
                             e.printStackTrace();
