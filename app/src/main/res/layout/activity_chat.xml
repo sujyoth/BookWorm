@@ -43,11 +43,11 @@
                 android:src="@drawable/user_placeholder" />
 
             <TextView
+                android:id="@+id/tv_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/horizontal_margin_half"
                 android:paddingEnd="@dimen/horizontal_margin"
-                android:text="Sujyoth Karkera"
                 android:textSize="20sp"
                 android:textColor="#FFFFFF"
                 android:fontFamily="@font/google_sans"

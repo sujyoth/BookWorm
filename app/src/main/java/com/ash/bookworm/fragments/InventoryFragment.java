@@ -101,7 +101,7 @@ public class InventoryFragment extends BaseFragment {
 
                 FirebaseUtil.removeBookFromInventory(adapter.getData().get(position));
                 adapter.removeBook(position);
-                updateUI(new User());
+                updateUI();
 
                 Snackbar snackbar = Snackbar
                         .make(getView(), book.getBookName() + " by " + book.getAuthorName() + " was removed from inventory.", Snackbar.LENGTH_LONG);

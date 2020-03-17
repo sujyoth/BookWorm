@@ -15,7 +15,6 @@
         android:text="@string/no_chats"
         android:textAlignment="center"
         android:textSize="30sp"
-        android:textStyle="bold"
         android:visibility="gone" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
@@ -28,27 +27,27 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <include layout="@layout/chat_item_placeholder" />
+            <include layout="@layout/chats_item_placeholder" />
 
-            <include layout="@layout/chat_item_placeholder" />
+            <include layout="@layout/chats_item_placeholder" />
 
-            <include layout="@layout/chat_item_placeholder" />
+            <include layout="@layout/chats_item_placeholder" />
 
-            <include layout="@layout/chat_item_placeholder" />
+            <include layout="@layout/chats_item_placeholder" />
 
-            <include layout="@layout/chat_item_placeholder" />
+            <include layout="@layout/chats_item_placeholder" />
 
-            <include layout="@layout/chat_item_placeholder" />
+            <include layout="@layout/chats_item_placeholder" />
 
-            <include layout="@layout/chat_item_placeholder" />
+            <include layout="@layout/chats_item_placeholder" />
 
-            <include layout="@layout/chat_item_placeholder" />
+            <include layout="@layout/chats_item_placeholder" />
 
-            <include layout="@layout/chat_item_placeholder" />
+            <include layout="@layout/chats_item_placeholder" />
 
-            <include layout="@layout/chat_item_placeholder" />
+            <include layout="@layout/chats_item_placeholder" />
 
-            <include layout="@layout/chat_item_placeholder" />
+            <include layout="@layout/chats_item_placeholder" />
 
         </LinearLayout>
 

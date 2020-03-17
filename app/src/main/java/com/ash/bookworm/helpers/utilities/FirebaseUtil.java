@@ -3,16 +3,20 @@ package com.ash.bookworm.helpers.utilities;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.ash.bookworm.activities.HomeActivity;
+import com.ash.bookworm.helpers.list_adapters.ChatsListAdapter;
 import com.ash.bookworm.helpers.list_adapters.InventoryListAdapter;
 import com.ash.bookworm.helpers.list_adapters.NearbyListAdapter;
+import com.ash.bookworm.helpers.models.BaseActivity;
 import com.ash.bookworm.helpers.models.BaseFragment;
 import com.ash.bookworm.helpers.models.Book;
+import com.ash.bookworm.helpers.models.Message;
 import com.ash.bookworm.helpers.models.User;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
@@ -130,6 +134,28 @@ public final class FirebaseUtil {
         });
     }
 
+    public static void getUserDetails(final BaseActivity activity, String uId) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        ref.child("users").child(uId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("fname", user.getFname());
+                bundle.putString("lname", user.getLname());
+                bundle.putString("uId", user.getuId());
+                bundle.putDouble("latitude", user.getLatitude());
+                bundle.putDouble("longitude", user.getLongitude());
+                activity.updateUI(bundle, 0);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("getUserDetailsError", databaseError.toString());
+            }
+        });
+    }
+
 
     public static void addBookToInventory(Book book) {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -231,5 +257,58 @@ public final class FirebaseUtil {
                 fragment.updateUI();
             }
         });
+    }
+
+    public static void sendTextMessage(Message message) {
+        int compResult = message.getSender().compareTo(message.getReceiver());
+
+        String chatName = message.getSender() + message.getReceiver();
+        if (compResult > 0) {
+            chatName = message.getReceiver() + message.getSender();
+        }
+
+        FirebaseDatabase.getInstance().getReference().child("chats").child(chatName).push().setValue(message);
+    }
+
+    public static void sendImageMessage(Message message, Uri imagePath) {
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+        StorageReference userImageRef = storageRef.child("images/chats/" + message.imageId);
+
+        userImageRef.putFile(imagePath);
+
+        int compResult = message.getSender().compareTo(message.getReceiver());
+
+        String chatName = message.getSender() + message.getReceiver();
+        if (compResult > 0) {
+            chatName = message.getReceiver() + message.getSender();
+        }
+
+        FirebaseDatabase.getInstance().getReference().child("chats").child(chatName).push().setValue(message);
+    }
+
+    public static void getChatUsers(final BaseFragment fragment, final ChatsListAdapter adapter, final List<String> chatNames, final String currentUserId) {
+        FirebaseDatabase.getInstance().getReference().child("chats").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                chatNames.clear();
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    if (ds.getKey().contains(currentUserId)) {
+                        chatNames.add(ds.getKey());
+                        fragment.updateUI();
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                fragment.updateUI();
+            }
+        });
+        fragment.updateUI();
+    }
+
+    public static void deleteChat(String chatName) {
+        FirebaseDatabase.getInstance().getReference().child("chats").child(chatName).removeValue();
     }
 }

@@ -73,6 +73,9 @@ public class NearbyListAdapter extends RecyclerView.Adapter<NearbyListAdapter.Vi
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(view.getContext(), ChatActivity.class);
+
+                i.putExtra("theirUID", user.getuId());
+
                 view.getContext().startActivity(i);
             }
         });
