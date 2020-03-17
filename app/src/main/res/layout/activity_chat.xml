@@ -77,10 +77,11 @@
         app:layout_constraintBottom_toBottomOf="parent" >
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="56dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/horizontal_margin_half"
             android:layout_weight="2"
+            android:minHeight="56dp"
             android:background="@drawable/rounded_rect" >
 
             <EditText
@@ -89,11 +90,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="9"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
                 android:background="@null"
                 android:hint="@string/type_message"
                 android:inputType="textCapSentences"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp" />
+                android:imeOptions="actionSend"/>
 
             <ImageView
                 android:id="@+id/btn_set_image"

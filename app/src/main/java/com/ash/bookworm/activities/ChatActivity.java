@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -58,6 +60,17 @@ public class ChatActivity extends BaseActivity {
             }
         });
 
+        messageEt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent event) {
+                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (i == EditorInfo.IME_ACTION_DONE)) {
+                    sendBtn.performClick();
+                    return true;
+                }
+                return false;
+            }
+        });
+
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,7 +113,8 @@ public class ChatActivity extends BaseActivity {
     @Override
     public void updateUI(Bundle bundle, int code) {
         if (code == 0) {
-            nameTv.setText(bundle.getString("fname") + " " + bundle.getString("lname"));
+            String name = bundle.getString("fname") + " " + bundle.getString("lname");
+            nameTv.setText(name);
 
             StorageReference storageRef = FirebaseStorage.getInstance().getReference();
             StorageReference userImageRef = storageRef.child("images/" + theirUID);
@@ -136,8 +150,5 @@ public class ChatActivity extends BaseActivity {
 
         toolbar = findViewById(R.id.toolbar);
     }
-
-
-
 
 }
