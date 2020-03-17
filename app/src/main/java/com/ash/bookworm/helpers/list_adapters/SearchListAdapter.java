@@ -130,10 +130,10 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
 
         public ViewHolder(View itemView) {
             super(itemView);
-            this.bookImage = itemView.findViewById(R.id.book_image);
-            this.infoBtn = itemView.findViewById(R.id.btn_info);
-            this.bookNameTv = itemView.findViewById(R.id.tv_book_name);
-            this.authorNameTv = itemView.findViewById(R.id.tv_author_name);
+            bookImage = itemView.findViewById(R.id.book_image);
+            infoBtn = itemView.findViewById(R.id.btn_info);
+            bookNameTv = itemView.findViewById(R.id.tv_book_name);
+            authorNameTv = itemView.findViewById(R.id.tv_author_name);
             linearLayout = itemView.findViewById(R.id.linear_layout);
         }
     }

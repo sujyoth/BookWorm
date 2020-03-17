@@ -31,7 +31,6 @@ public class NearbyListAdapter extends RecyclerView.Adapter<NearbyListAdapter.Vi
         this.users = users;
     }
 
-
     public void setCurrentUserLocation(Location location) {
         this.currentUserLocation = location;
     }

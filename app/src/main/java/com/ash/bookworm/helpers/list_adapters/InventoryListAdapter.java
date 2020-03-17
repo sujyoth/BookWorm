@@ -49,6 +49,7 @@ public class InventoryListAdapter extends RecyclerView.Adapter<InventoryListAdap
         if (books.get(position) == null)
             return;
 
+        holder.infoBtn.setVisibility(View.GONE);
         holder.bookNameTv.setText(books.get(position).getBookName());
         holder.authorNameTv.setText(books.get(position).getAuthorName());
         Picasso.get()

@@ -8,10 +8,12 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.ash.bookworm.activities.HomeActivity;
 import com.ash.bookworm.helpers.list_adapters.ChatsListAdapter;
 import com.ash.bookworm.helpers.list_adapters.InventoryListAdapter;
+import com.ash.bookworm.helpers.list_adapters.MessageListAdapter;
 import com.ash.bookworm.helpers.list_adapters.NearbyListAdapter;
 import com.ash.bookworm.helpers.models.BaseActivity;
 import com.ash.bookworm.helpers.models.BaseFragment;
@@ -24,10 +26,12 @@ import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryEventListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -270,20 +274,57 @@ public final class FirebaseUtil {
         FirebaseDatabase.getInstance().getReference().child("chats").child(chatName).push().setValue(message);
     }
 
-    public static void sendImageMessage(Message message, Uri imagePath) {
+    public static void sendImageMessage(final Message message, Uri imagePath) {
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
         StorageReference userImageRef = storageRef.child("images/chats/" + message.imageId);
 
-        userImageRef.putFile(imagePath);
-
         int compResult = message.getSender().compareTo(message.getReceiver());
 
-        String chatName = message.getSender() + message.getReceiver();
+        String temp = message.getSender() + message.getReceiver();
         if (compResult > 0) {
-            chatName = message.getReceiver() + message.getSender();
+            temp = message.getReceiver() + message.getSender();
         }
+        final String chatName = temp;
 
-        FirebaseDatabase.getInstance().getReference().child("chats").child(chatName).push().setValue(message);
+        userImageRef.putFile(imagePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                FirebaseDatabase.getInstance().getReference().child("chats").child(chatName).push().setValue(message);
+
+            }
+        });
+
+    }
+
+    public static void getMessages(final BaseActivity activity, final MessageListAdapter adapter, final List<Message> messages, String chatName) {
+        FirebaseDatabase.getInstance().getReference().child("chats").child(chatName).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                messages.add(dataSnapshot.getValue(Message.class));
+                adapter.notifyItemChanged(messages.size() - 1);
+                activity.updateUI();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     public static void getChatUsers(final BaseFragment fragment, final ChatsListAdapter adapter, final List<String> chatNames, final String currentUserId) {

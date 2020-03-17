@@ -14,11 +14,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.ash.bookworm.R;
+import com.ash.bookworm.helpers.list_adapters.MessageListAdapter;
 import com.ash.bookworm.helpers.models.BaseActivity;
 import com.ash.bookworm.helpers.models.Message;
-import com.ash.bookworm.helpers.models.User;
 import com.ash.bookworm.helpers.utilities.FirebaseUtil;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,6 +29,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class ChatActivity extends BaseActivity {
@@ -36,8 +40,11 @@ public class ChatActivity extends BaseActivity {
     private Toolbar toolbar;
     private TextView nameTv;
 
-    private String yourUID, theirUID;
-    private User you, them;
+    private RecyclerView messagesRv;
+    private MessageListAdapter adapter;
+    private List<Message> messages;
+
+    private String currentUserId, otherUserId, chatName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +55,27 @@ public class ChatActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
 
-        yourUID = FirebaseAuth.getInstance().getUid();
-        theirUID = getIntent().getStringExtra("theirUID");
+        currentUserId = FirebaseAuth.getInstance().getUid();
+        otherUserId = getIntent().getStringExtra("theirUID");
 
-        FirebaseUtil.getUserDetails(this, theirUID);
+        chatName = currentUserId + otherUserId;
+        int compResult = currentUserId.compareTo(otherUserId);
+        if (compResult > 0) {
+            chatName = otherUserId + currentUserId;
+        }
+
+        FirebaseUtil.getUserDetails(this, otherUserId);
+
+        messages = new ArrayList<>();
+        adapter = new MessageListAdapter(currentUserId, messages, getSupportFragmentManager());
+        messagesRv.setAdapter(adapter);
+        messagesRv.setHasFixedSize(true);
+        messagesRv.setItemViewCacheSize(20);
+        messagesRv.setDrawingCacheEnabled(true);
+        messagesRv.setLayoutManager(new LinearLayoutManager(this));
+
+
+        FirebaseUtil.getMessages(this, adapter, messages, chatName);
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +100,7 @@ public class ChatActivity extends BaseActivity {
             public void onClick(View view) {
                 String messageText = messageEt.getText().toString().trim();
                 if(messageText.length() > 0) {
-                    Message message = new Message(messageText, yourUID, theirUID, null);
+                    Message message = new Message(messageText, currentUserId, otherUserId, null);
                     FirebaseUtil.sendTextMessage(message);
                     messageEt.setText("");
                 }
@@ -107,7 +131,7 @@ public class ChatActivity extends BaseActivity {
 
     @Override
     public void updateUI() {
-
+        messagesRv.scrollToPosition(messages.size() - 1);
     }
 
     @Override
@@ -117,7 +141,7 @@ public class ChatActivity extends BaseActivity {
             nameTv.setText(name);
 
             StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-            StorageReference userImageRef = storageRef.child("images/" + theirUID);
+            StorageReference userImageRef = storageRef.child("images/" + otherUserId);
 
             userImageRef.getBytes(2048 * 2048)
                     .addOnSuccessListener(new OnSuccessListener<byte[]>() {
@@ -135,7 +159,7 @@ public class ChatActivity extends BaseActivity {
 
         if (requestCode == ImagePicker.REQUEST_CODE && resultCode == RESULT_OK) {
             Uri imagePath = data.getData();
-            FirebaseUtil.sendImageMessage(new Message(null, yourUID, theirUID, UUID.randomUUID().toString()), imagePath);
+            FirebaseUtil.sendImageMessage(new Message(null, currentUserId, otherUserId, UUID.randomUUID().toString()), imagePath);
         }
     }
 
@@ -149,6 +173,8 @@ public class ChatActivity extends BaseActivity {
         nameTv = findViewById(R.id.tv_name);
 
         toolbar = findViewById(R.id.toolbar);
+
+        messagesRv = findViewById(R.id.rv_messages);
     }
 
 }
