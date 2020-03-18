@@ -9,4 +9,8 @@
     <color name="colorOnSurface">#656565</color>
     <color name="white">#fff</color>
     <color name="green">#F6CF65</color>
+
+    <!-- Colors for ImagePicker  -->
+    <color name="ucrop_color_toolbar">@color/colorPrimary</color>
+    <color name="ucrop_color_statusbar">@color/colorPrimary</color>
 </resources>

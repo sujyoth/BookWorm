@@ -9,15 +9,26 @@
     android:layout_marginTop="4dp"
     android:layout_marginBottom="4dp">
 
-    <ImageView
-        android:id="@+id/img_message"
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="170dp"
-        android:maxHeight="170dp"
-        android:layout_alignParentEnd="true"
-        android:adjustViewBounds="true"
-        android:padding="12dp"
-        android:background="@drawable/msg_bg_right"
-        android:src="@drawable/book_placeholder"/>
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true" >
+
+        <ImageView
+            android:id="@+id/img_message"
+            android:layout_width="wrap_content"
+            android:layout_height="170dp"
+            android:maxHeight="170dp"
+            android:adjustViewBounds="true"
+            android:padding="12dp"
+            android:background="@drawable/msg_bg_right" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -70,12 +71,14 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             StorageReference userImageRef = storageRef.child("images/chats/" + message.getImageId());
 
             holder.messageImg.setImageBitmap(null);
+            holder.progressBar.setVisibility(View.VISIBLE);
             userImageRef.getBytes(2048 * 2048)
                     .addOnSuccessListener(new OnSuccessListener<byte[]>() {
                         @Override
                         public void onSuccess(final byte[] bytes) {
                             Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                             holder.messageImg.setImageBitmap(bitmap);
+                            holder.progressBar.setVisibility(View.GONE);
 
                             holder.linearLayout.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -112,12 +115,14 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         public TextView messageTv;
         public ImageView messageImg;
         public RelativeLayout linearLayout;
+        public ProgressBar progressBar;
 
         public ViewHolder(View itemView) {
             super(itemView);
             linearLayout = itemView.findViewById(R.id.linear_layout);
             messageTv = itemView.findViewById(R.id.tv_message);
             messageImg = itemView.findViewById(R.id.img_message);
+            progressBar = itemView.findViewById(R.id.progress_bar);
         }
     }
 }
