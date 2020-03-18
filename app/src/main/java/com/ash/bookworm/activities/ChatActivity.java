@@ -1,6 +1,7 @@
 package com.ash.bookworm.activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,6 +48,9 @@ public class ChatActivity extends BaseActivity {
 
     private String currentUserId, otherUserId, chatName;
 
+    private RelativeLayout previewLayout;
+    private ImageView previewImage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +72,7 @@ public class ChatActivity extends BaseActivity {
         FirebaseUtil.getUserDetails(this, otherUserId);
 
         messages = new ArrayList<>();
-        adapter = new MessageListAdapter(currentUserId, messages, getSupportFragmentManager());
+        adapter = new MessageListAdapter(currentUserId, messages, getSupportFragmentManager(), this);
         messagesRv.setAdapter(adapter);
         messagesRv.setHasFixedSize(true);
         messagesRv.setItemViewCacheSize(20);
@@ -118,6 +123,13 @@ public class ChatActivity extends BaseActivity {
             }
         });
 
+        previewLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                previewLayout.setVisibility(View.GONE);
+            }
+        });
+
     }
 
     @Override
@@ -150,6 +162,11 @@ public class ChatActivity extends BaseActivity {
                             userImage.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
                         }
                     });
+        } else if (code == 1) {
+            byte[] bytes = bundle.getByteArray("preview_image");
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            previewImage.setImageBitmap(bitmap);
+            previewLayout.setVisibility(View.VISIBLE);
         }
     }
 
@@ -175,6 +192,17 @@ public class ChatActivity extends BaseActivity {
         toolbar = findViewById(R.id.toolbar);
 
         messagesRv = findViewById(R.id.rv_messages);
+
+        previewLayout = findViewById(R.id.preview_layout);
+        previewImage = findViewById(R.id.img_preview);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (previewLayout.getVisibility() == View.VISIBLE) {
+            previewLayout.setVisibility(View.GONE);
+        } else {
+            super.onBackPressed();
+        }
+    }
 }
