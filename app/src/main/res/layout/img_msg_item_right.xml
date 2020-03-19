@@ -20,7 +20,7 @@
             android:layout_height="170dp"
             android:maxHeight="170dp"
             android:adjustViewBounds="true"
-            android:padding="12dp"
+            android:padding="6dp"
             android:background="@drawable/msg_bg_right" />
 
         <ProgressBar
