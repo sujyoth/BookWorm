@@ -8,28 +8,32 @@
     android:layout_marginEnd="40dp"
     android:layout_marginStart="16dp"
     android:layout_marginTop="4dp"
-    android:layout_marginBottom="4dp"
     app:elevation="20dp">
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true" >
+        android:layout_alignParentStart="true"
+        android:background="@drawable/msg_bg_left" >
 
-        <ImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/img_message"
             android:layout_width="wrap_content"
             android:layout_height="170dp"
             android:maxHeight="170dp"
             android:adjustViewBounds="true"
-            android:padding="6dp"
-            android:background="@drawable/msg_bg_left" />
+            android:padding="4dp"
+            app:riv_corner_radius="5dp"/>
 
         <ProgressBar
             android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"
+            android:paddingStart="100dp"
+            android:paddingEnd="100dp"
+            android:paddingTop="60dp"
+            android:paddingBottom="60dp"/>
 
     </RelativeLayout>
 

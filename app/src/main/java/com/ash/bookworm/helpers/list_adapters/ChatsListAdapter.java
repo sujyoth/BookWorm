@@ -62,6 +62,10 @@ public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.View
 
                 holder.nameTv.setText(name);
 
+                holder.userImage.setVisibility(View.VISIBLE);
+                holder.nameTv.setVisibility(View.VISIBLE);
+                holder.lastMessageTv.setVisibility(View.VISIBLE);
+
                 StorageReference storageRef = FirebaseStorage.getInstance().getReference();
                 StorageReference userImageRef = storageRef.child("images/" + otherUserId);
 

@@ -52,4 +52,5 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
     implementation 'me.dm7.barcodescanner:zbar:1.9.13'
+    compile 'com.makeramen:roundedimageview:2.3.0'
 }
