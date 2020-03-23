@@ -6,6 +6,7 @@ import android.location.Location;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,8 +20,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class NearbyListAdapter extends RecyclerView.Adapter<NearbyListAdapter.ViewHolder> {
     private List<User> users;
@@ -87,7 +86,7 @@ public class NearbyListAdapter extends RecyclerView.Adapter<NearbyListAdapter.Vi
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public CircleImageView userImage;
+        public ImageView userImage;
         public TextView userNameTv, userDistanceTv;
         public LinearLayout linearLayout;
 

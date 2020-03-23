@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -23,8 +24,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.ViewHolder> {
     private String currentUserId;
@@ -125,7 +124,7 @@ public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.View
     public int getItemCount() { return chatNames.size(); }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public CircleImageView userImage;
+        public ImageView userImage;
         public TextView nameTv, lastMessageTv;
         public LinearLayout linearLayout;
 

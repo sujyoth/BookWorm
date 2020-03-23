@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -27,13 +28,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class ProfileFragment extends BaseFragment {
 
     private View root;
     private ListView profileLv;
-    private CircleImageView userImage;
+    private ImageView userImage;
     private TextView userNameTv;
 
     private ShimmerFrameLayout imageContainer, textContainer;

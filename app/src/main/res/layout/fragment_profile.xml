@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?android:attr/windowBackground"
     android:orientation="vertical">
 
@@ -15,11 +16,12 @@
         android:layout_marginTop="@dimen/vertical_margin_half"
         android:layout_marginEnd="@dimen/horizontal_margin">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/user_image"
             android:layout_width="130dp"
             android:layout_height="130dp"
-            android:src="@drawable/user_placeholder" />
+            android:src="@drawable/user_placeholder"
+            app:riv_oval="true" />
 
     </com.facebook.shimmer.ShimmerFrameLayout>
 
