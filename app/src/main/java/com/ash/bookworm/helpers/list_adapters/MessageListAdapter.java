@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ash.bookworm.R;
 import com.ash.bookworm.helpers.models.BaseActivity;
 import com.ash.bookworm.helpers.models.Message;
+import com.ash.bookworm.helpers.utilities.Util;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -68,11 +69,11 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         } else {
             // This means message is a image message
             StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-            StorageReference userImageRef = storageRef.child("images/chats/" + message.getImageId());
+            StorageReference imageRef = storageRef.child("images/chats/" + message.getImageId());
 
             holder.messageImg.setImageBitmap(null);
             holder.progressBar.setVisibility(View.VISIBLE);
-            userImageRef.getBytes(2048 * 2048)
+            imageRef.getBytes(2048 * 2048)
                     .addOnSuccessListener(new OnSuccessListener<byte[]>() {
                         @Override
                         public void onSuccess(final byte[] bytes) {
@@ -83,6 +84,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
                             holder.linearLayout.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    // To show fullscreen preview of image when it is clicked
                                     Bundle bundle = new Bundle();
                                     bundle.putByteArray("preview_image", bytes);
                                     activity.updateUI(bundle, 1);
@@ -90,6 +92,23 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
                             });
                         }
                     });
+        }
+
+        // For setting different margins when the sender for consecutive messages is the same
+        if (position != 0) {
+            Message prevMessage = messages.get(position-1);
+            if (prevMessage.sender.equals(message.sender)) {
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                int verticalMargin = (int) Util.dpToPixels(activity, 16);
+                int horizontalMargin = (int) Util.dpToPixels(activity, 2);
+                if (message.sender.equals(currentUserId)) {
+                    params.setMargins(0,horizontalMargin,verticalMargin,0);
+                } else {
+                    params.setMargins(verticalMargin,horizontalMargin,0,0);
+                }
+                holder.linearLayout.setLayoutParams(params);
+            }
         }
     }
 

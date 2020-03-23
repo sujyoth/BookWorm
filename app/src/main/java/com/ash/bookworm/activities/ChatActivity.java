@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -37,7 +38,8 @@ import java.util.UUID;
 
 public class ChatActivity extends BaseActivity {
     private FloatingActionButton sendBtn;
-    private ImageView setImageBtn, backBtn, userImage;
+    private ImageView userImage;
+    private ImageButton backBtn, setImageBtn;
     private EditText messageEt;
     private Toolbar toolbar;
     private TextView nameTv;
@@ -104,7 +106,7 @@ public class ChatActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 String messageText = messageEt.getText().toString().trim();
-                if(messageText.length() > 0) {
+                if (messageText.length() > 0) {
                     Message message = new Message(messageText, currentUserId, otherUserId, null);
                     FirebaseUtil.sendTextMessage(message);
                     messageEt.setText("");
@@ -158,8 +160,19 @@ public class ChatActivity extends BaseActivity {
             userImageRef.getBytes(2048 * 2048)
                     .addOnSuccessListener(new OnSuccessListener<byte[]>() {
                         @Override
-                        public void onSuccess(byte[] bytes) {
-                            userImage.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
+                        public void onSuccess(final byte[] bytes) {
+                            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                            userImage.setImageBitmap(bitmap);
+
+                            userImage.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    // To show user's profile photo in fullscreen when clicked
+                                    Bundle bundle = new Bundle();
+                                    bundle.putByteArray("preview_image", bytes);
+                                    updateUI(bundle, 1);
+                                }
+                            });
                         }
                     });
         } else if (code == 1) {

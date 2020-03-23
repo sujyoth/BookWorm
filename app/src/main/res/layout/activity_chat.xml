@@ -22,7 +22,7 @@
             android:background="@color/colorPrimary"
             android:gravity="center_horizontal|start">
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/btn_back"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
@@ -32,9 +32,7 @@
                 android:paddingEnd="5dp"
                 android:src="@drawable/ic_back"
                 android:tint="#FFFFFF"
-                android:background="?android:attr/selectableItemBackgroundBorderless"
-                android:focusable="true"
-                android:clickable="true" />
+                android:background="?android:attr/selectableItemBackgroundBorderless" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/user_image"
@@ -81,7 +79,7 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="2"
             android:minHeight="56dp"
@@ -93,35 +91,30 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="9"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
                 android:background="@null"
                 android:hint="@string/type_message"
                 android:inputType="textCapSentences"
-                android:imeOptions="actionSend"/>
+                android:imeOptions="actionSend" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/btn_set_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:paddingStart="12dp"
-                android:paddingEnd="0dp"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp"
                 android:src="@drawable/ic_image"
                 android:tint="#008879"
-                android:background="?android:attr/selectableItemBackgroundBorderless"
-                android:focusable="true"
-                android:clickable="true"/>
+                android:background="?android:attr/selectableItemBackgroundBorderless" />
 
         </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_send"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:fabCustomSize="48dp"
             android:backgroundTint="#008879"
             android:src="@drawable/ic_send"
             app:tint="#FFFFFF"
@@ -145,6 +138,5 @@
             android:layout_height="match_parent" />
 
     </RelativeLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

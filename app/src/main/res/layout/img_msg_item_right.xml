@@ -28,8 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:paddingStart="100dp"
-            android:paddingEnd="100dp"
+            android:paddingStart="90dp"
+            android:paddingEnd="90dp"
             android:paddingTop="60dp"
             android:paddingBottom="60dp"/>
 
