@@ -143,55 +143,49 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean allFieldsValid() {
+        boolean isValid = true;
+
         if (Util.isEmpty(fnameEt)) {
             fnameTil.setError("First name can't be empty");
-            return false;
+            isValid = false;
         } else {
             fnameTil.setError(null);
         }
 
         if (Util.isEmpty(lnameEt)) {
             lnameTil.setError("Last name can't be empty");
-            return false;
+            isValid = false;
         } else {
             lnameTil.setError(null);
         }
 
         if (Util.isEmpty(emailEt)) {
             emailTil.setError("Email can't be empty");
-            return false;
+            isValid = false;
+        } else if (!Util.isValidEmail(emailEt.getText().toString())) {
+            emailTil.setError("Email must be valid");
+            isValid = false;
         } else {
             emailTil.setError(null);
         }
 
         if (Util.isEmpty(passwordEt)) {
             passwordTil.setError("Password can't be empty");
-            return false;
+            isValid = false;
+        } else if (passwordEt.getText().toString().length() < 6) {
+            passwordTil.setError("Password must have at least 6 characters");
+            isValid = false;
         } else {
             passwordTil.setError(null);
         }
 
         if (latitude == null || longitude == null) {
             locationBtn.setError("Select location before proceeding");
-            return false;
+            isValid = false;
         } else {
             locationBtn.setError(null);
         }
 
-        if (!Util.isValidEmail(emailEt.getText().toString())) {
-            emailTil.setError("Email must be valid");
-            return false;
-        } else {
-            emailTil.setError(null);
-        }
-
-        if (passwordEt.getText().toString().length() < 6) {
-            passwordTil.setError("Password must have at least 6 characters");
-            return false;
-        } else {
-            passwordTil.setError(null);
-        }
-
-        return true;
+        return isValid;
     }
 }
