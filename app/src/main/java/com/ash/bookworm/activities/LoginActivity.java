@@ -90,34 +90,30 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean allFieldsValid() {
+        boolean isValid = true;
+
         if (Util.isEmpty(emailEt)) {
             emailTil.setError("Email cannot be empty");
-            return false;
+            isValid = false;
+        } else if (!Util.isValidEmail(emailEt.getText().toString())) {
+            emailTil.setError("Email must be valid");
+            isValid = false;
         } else {
             emailTil.setError(null);
         }
+
         if (Util.isEmpty(passwordEt)) {
             passwordTil.setError("Password cannot be empty");
-            return false;
-        } else {
-            passwordTil.setError(null);
-        }
-        if (!Util.isValidEmail(emailEt.getText().toString())) {
-            emailTil.setError("Email must be valid");
-            return false;
-        } else {
-            emailTil.setError(null);
-        }
-        if (passwordEt.getText().toString().length() < 6) {
+            isValid = false;
+        } else if (passwordEt.getText().toString().length() < 6) {
             passwordTil.setError("Password must have at least 6 characters");
-            return false;
+            isValid = false;
         } else {
             passwordTil.setError(null);
         }
 
-        return true;
+        return isValid;
     }
-
 
     private void findViews() {
         emailEt = findViewById(R.id.et_email);

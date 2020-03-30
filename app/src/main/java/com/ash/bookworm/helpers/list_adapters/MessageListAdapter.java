@@ -100,12 +100,14 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             if (prevMessage.sender.equals(message.sender)) {
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-                int verticalMargin = (int) Util.dpToPixels(activity, 16);
-                int horizontalMargin = (int) Util.dpToPixels(activity, 2);
+                int topMargin = (int) Util.dpToPixels(activity, 2);
+                int nearMargin = (int) Util.dpToPixels(activity, 16);
+                int farMargin = (int) Util.dpToPixels(activity, 40);
+
                 if (message.sender.equals(currentUserId)) {
-                    params.setMargins(0,horizontalMargin,verticalMargin,0);
+                    params.setMargins(farMargin,topMargin,nearMargin,0);
                 } else {
-                    params.setMargins(verticalMargin,horizontalMargin,0,0);
+                    params.setMargins(nearMargin,topMargin,farMargin,0);
                 }
                 holder.linearLayout.setLayoutParams(params);
             }
