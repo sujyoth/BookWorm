@@ -11,9 +11,9 @@
     <color name="green">#F6CF65</color>
 
     <!-- Colors for ImagePicker  -->
-    <color name="ucrop_color_toolbar">@color/colorPrimary</color>
     <color name="ucrop_color_statusbar">@color/colorPrimary</color>
+    <color name="ucrop_color_toolbar">@color/colorPrimary</color>
+    <color name="ucrop_color_toolbar_widget">@color/colorOnPrimary</color>
     <color name="ucrop_color_widget_active">@color/colorPrimary</color>
-    <color name="ucrop_color_toolbar_widget">#FFF</color>
 
 </resources>
