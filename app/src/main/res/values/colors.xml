@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#FF5722</color>
-    <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorOnPrimary">#FFF</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="windowBackground">#FFFFFF</color>
-    <color name="colorSurface">#FFFFFF</color>
+    <color name="windowBackground">#FFF</color>
+    <color name="colorSurface">#FFF</color>
     <color name="colorOnSurface">#656565</color>
-    <color name="white">#fff</color>
+    <color name="white">#FFF</color>
     <color name="green">#F6CF65</color>
 
     <!-- Colors for ImagePicker  -->
     <color name="ucrop_color_toolbar">@color/colorPrimary</color>
     <color name="ucrop_color_statusbar">@color/colorPrimary</color>
+    <color name="ucrop_color_widget_active">@color/colorPrimary</color>
+    <color name="ucrop_color_toolbar_widget">#FFF</color>
+
 </resources>
