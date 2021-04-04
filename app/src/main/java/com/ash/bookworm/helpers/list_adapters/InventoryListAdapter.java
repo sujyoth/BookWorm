@@ -21,7 +21,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class InventoryListAdapter extends RecyclerView.Adapter<InventoryListAdapter.ViewHolder> {
-    private List<Book> books;
+    private final List<Book> books;
     private FragmentManager fragmentManager;
 
     public InventoryListAdapter(List<Book> books) {

@@ -76,9 +76,9 @@ public final class FirebaseUtil {
 
                             context.startActivity(new Intent(context, HomeActivity.class));
                         } else {
+                            ;
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(context, "Registration failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -112,7 +112,7 @@ public final class FirebaseUtil {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(fragment.getContext(), "Image upload failed.", Toast.LENGTH_SHORT);
+                            Toast.makeText(fragment.getContext(), e.getMessage(), Toast.LENGTH_SHORT);
                             fragment.updateUI();
                         }
                     });

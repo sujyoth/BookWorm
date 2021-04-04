@@ -22,7 +22,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.List;
 
 public class NearbyListAdapter extends RecyclerView.Adapter<NearbyListAdapter.ViewHolder> {
-    private List<User> users;
+    private final List<User> users;
     private Location currentUserLocation;
 
     public NearbyListAdapter(Location currentUserLocation, List<User> users) {

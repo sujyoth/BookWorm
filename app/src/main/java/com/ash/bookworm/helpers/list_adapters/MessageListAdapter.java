@@ -29,10 +29,10 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
     private static final int MSG_TYPE_RIGHT_TEXT=1;
     private static final int MSG_TYPE_LEFT_IMG=2;
     private static final int MSG_TYPE_RIGHT_IMG=3;
-    private String currentUserId;
-    private List<Message> messages;
-    private FragmentManager fragmentManager;
-    private BaseActivity activity;
+    private final String currentUserId;
+    private final List<Message> messages;
+    private final FragmentManager fragmentManager;
+    private final BaseActivity activity;
 
     public MessageListAdapter(String currentUserId, List<Message> messages, FragmentManager fragmentManager, BaseActivity activity) {
         this.currentUserId = currentUserId;

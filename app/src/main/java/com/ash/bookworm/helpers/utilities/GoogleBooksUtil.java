@@ -29,7 +29,7 @@ import java.util.List;
 import static com.android.volley.VolleyLog.TAG;
 
 public class GoogleBooksUtil {
-    private static String key = "AIzaSyDmfcF65dp6RZGVluwTaPiVR2t2NcR9u-E";
+    private static final String key = "AIzaSyDmfcF65dp6RZGVluwTaPiVR2t2NcR9u-E";
 
     public static void searchBooks(final BaseFragment fragment, final SearchListAdapter adapter, String searchTerm) {
         RequestQueue requestQueue;

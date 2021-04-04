@@ -36,7 +36,7 @@ public class InventoryFragment extends BaseFragment {
     private View root;
     private FloatingActionButton fab;
     private RecyclerView booksRv;
-    private List<Book> books = new ArrayList<>();
+    private final List<Book> books = new ArrayList<>();
     private TextView noBooksTv;
 
     private InventoryListAdapter adapter;

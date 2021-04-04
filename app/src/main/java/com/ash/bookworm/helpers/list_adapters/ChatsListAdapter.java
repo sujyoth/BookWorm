@@ -26,8 +26,8 @@ import com.google.firebase.storage.StorageReference;
 import java.util.List;
 
 public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.ViewHolder> {
-    private String currentUserId;
-    private List<String> chatNames;
+    private final String currentUserId;
+    private final List<String> chatNames;
 
     public ChatsListAdapter(String currentUserId, List<String> chatNames) {
         this.chatNames = chatNames;

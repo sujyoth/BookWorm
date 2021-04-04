@@ -17,7 +17,7 @@ public final class Util {
         return et.getText().toString().trim().length() == 0;
     }
 
-    public static boolean isValidEmail(String email) {
+    public static boolean isInvalidEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
                 "[a-zA-Z0-9_+&*-]+)*@" +
                 "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
@@ -25,8 +25,8 @@ public final class Util {
 
         Pattern pat = Pattern.compile(emailRegex);
         if (email == null)
-            return false;
-        return pat.matcher(email).matches();
+            return true;
+        return !pat.matcher(email).matches();
     }
 
     public static String getExtension(String string) {

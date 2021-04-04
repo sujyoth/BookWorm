@@ -7,7 +7,8 @@ import com.ash.bookworm.helpers.models.Book;
 import java.util.List;
 
 public class BooksDiffCallback extends DiffUtil.Callback {
-    private List<Book> oldBooks, newBooks;
+    private final List<Book> oldBooks;
+    private final List<Book> newBooks;
 
     public BooksDiffCallback(List<Book> oldBooks, List<Book> newBooks) {
         this.oldBooks = oldBooks;

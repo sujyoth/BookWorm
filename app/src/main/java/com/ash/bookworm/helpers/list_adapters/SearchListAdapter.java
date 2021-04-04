@@ -26,8 +26,8 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolder> {
-    private List<Book> books;
-    private Integer listenerType;
+    private final List<Book> books;
+    private final Integer listenerType;
     private FragmentManager fragmentManager;
 
     public SearchListAdapter(List<Book> books, Integer listenerType) {
